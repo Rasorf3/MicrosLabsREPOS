@@ -9,29 +9,31 @@
 
 void UltraSonicInit()
 {
-	DDRD |= (1 << TRIGGER) | (0 << ECHO);
-	DDRD |= (1 << 6);
+	DDRC |= (1 << TRIGGER);
+	DDRC &= ~(1 << ECHO);
+	DDRC |= (1 << 6);
 }
 
 float GetDistance()
 {
 	int counter = 0;
+	
 	float distance = 0;
-	PORTD |= (1 << TRIGGER);
-	_delay_us(10);
-	PORTD &= ~(1 << TRIGGER);
+	PORTC |= (1 << TRIGGER);
+	_delay_us(15);
+	PORTC &= ~(1 << TRIGGER);
 	// Esperar flanco de subida en Echo
-	while (!(PIND & (1 << ECHO)));
+	while (!(PINC & (1 << ECHO)));
 	
 	// Medir duraci?n del pulso (en us)
-	while (PIND & (1 << ECHO)) {//PIND & (1 << ECHO)
+	while (PINC & (1 << ECHO)) {//PIND & (1 << ECHO)
 		counter++;
-		PORTD |= (1 << 6);
+		PORTC |= (1 << 6);
 		_delay_us(1);  
 	}
-	PORTD &= ~(1 << 6);
+	PORTC &= ~(1 << 6);
 	// Calcular distancia (en cm)
-	distance = ((float)counter / 58.0);  // Formula: (us / 58) = cm
+	distance = (float)counter / 58.0;  // Formula: (us / 58) = cm
 	
 	return distance;
 }

@@ -10,11 +10,10 @@
 #define LCD_MODULE_H_
 #include <avr/io.h>
 #include <util/delay.h>
-
 //PINS LCD
 #define RS_LCD 2
 #define EN_LCD 3
-#define LCD_DATA PORTB
+#define LCD_DATA PORTD
 
 //Commans for LCD
 #define LCD_CLEAR 0x01

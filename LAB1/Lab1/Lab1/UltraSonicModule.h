@@ -10,7 +10,6 @@
 #define ULTRASONICMODULE_H_
 #include <avr/io.h>
 #include <util/delay.h>
-
 #define TRIGGER 4
 #define ECHO 5
 

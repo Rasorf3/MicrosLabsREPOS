@@ -9,8 +9,8 @@
 
 void LCD_Init()
 {
-	DDRB = 0xFF; 
-	DDRD |= (1<<RS_LCD) | (1 << EN_LCD);
+	DDRD = 0xFF; 
+	DDRC |= (1<<RS_LCD) | (1 << EN_LCD);
 	
 	//Comandos Iniciales al encender EL LCD
 	_delay_ms(15);
@@ -29,20 +29,20 @@ void LCD_Init()
 void LCD_Command(unsigned char command)
 {
 	LCD_DATA = command;
-	PORTD &= ~(1 << RS_LCD); //Colocamos RS_LCD en 0
-	PORTD &= ~(1 << EN_LCD); //EN_LCD en 0
+	PORTC &= ~(1 << RS_LCD); //Colocamos RS_LCD en 0
+	PORTC &= ~(1 << EN_LCD); //EN_LCD en 0
 	_delay_us(10);
-	PORTD |= (1 << EN_LCD); //EN_LCD en 1
+	PORTC |= (1 << EN_LCD); //EN_LCD en 1
 	_delay_us(100);
 }
 
 void LCD_Write_Char(unsigned char character)
 {
-	PORTD |= (1 << RS_LCD);
+	PORTC |= (1 << RS_LCD);
 	LCD_DATA = character;
-	PORTD &= ~(1 << EN_LCD); //EN_LCD en 0
+	PORTC &= ~(1 << EN_LCD); //EN_LCD en 0
 	_delay_us(10);
-	PORTD |= (1 << EN_LCD); //EN_LCD en 1
+	PORTC |= (1 << EN_LCD); //EN_LCD en 1
 	_delay_us(100);
 }
 
