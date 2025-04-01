@@ -30,7 +30,7 @@ int main(void)
 		LCD_Write_String(" cm");
 		_delay_ms(2000);
 		LCD_Command(LCD_CLEAR);
-		_delay_ms(2000);
+		_delay_ms(500);
 		
     }
 }

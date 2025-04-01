@@ -24,14 +24,14 @@ float GetDistance()
 	while (!(PIND & (1 << ECHO)));
 	
 	// Medir duraci?n del pulso (en us)
-	while (PIND & (1 << ECHO)) {
-		counter += 1;
+	while (PIND & (1 << ECHO)) {//PIND & (1 << ECHO)
+		counter++;
 		PORTD |= (1 << 6);
 		_delay_us(1);  
 	}
 	PORTD &= ~(1 << 6);
 	// Calcular distancia (en cm)
-	distance = (float)counter / 58.0;  // F?rmula: (us / 58) = cm
+	distance = ((float)counter / 58.0);  // Formula: (us / 58) = cm
 	
 	return distance;
 }
