@@ -9,7 +9,7 @@
 #ifndef TIMER1_H_
 #define TIMER1_H_
 
-
+void Timer1_Init();
 
 
 
