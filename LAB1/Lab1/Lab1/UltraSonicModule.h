@@ -5,11 +5,12 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
+#define F_CPU 16000000UL
 
 #ifndef ULTRASONICMODULE_H_
 #define ULTRASONICMODULE_H_
-#include <avr/io.h>
 #include <util/delay.h>
+#include <avr/io.h>
 #define TRIGGER 4
 #define ECHO 5
 

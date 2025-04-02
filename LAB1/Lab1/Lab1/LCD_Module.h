@@ -5,6 +5,7 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
+#define F_CPU 16000000UL
 
 #ifndef LCD_MODULE_H_
 #define LCD_MODULE_H_

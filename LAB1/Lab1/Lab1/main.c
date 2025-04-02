@@ -4,13 +4,14 @@
  * Created: 3/29/2025 5:31:26 PM
  * Author : Luis Felipe Holchor Virgen
  */ 
+#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include "LCD_Module.h"
 #include "UltraSonicModule.h"
 
-#define F_CPU 8000000UL
+
 
 
 int main(void)
@@ -28,9 +29,9 @@ int main(void)
 		dtostrf(distancia_basura, 5, 2, Datos_LCD);
 		LCD_Write_String(Datos_LCD);
 		LCD_Write_String(" cm");
-		_delay_ms(2000);
+		_delay_ms(500);
 		LCD_Command(LCD_CLEAR);
-		_delay_ms(50);
+		_delay_ms(1);
 		
 
 		

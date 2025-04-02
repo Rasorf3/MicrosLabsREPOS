@@ -6,7 +6,7 @@
  */ 
 
 #include "UltraSonicModule.h"
-#define F_CPU 8000000UL
+
 void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);
@@ -20,7 +20,7 @@ float GetDistance()
 	
 	float distance = 0;
 	PORTC |= (1 << TRIGGER);
-	_delay_us(15);
+	_delay_us(10);
 	PORTC &= ~(1 << TRIGGER);
 	// Esperar flanco de subida en Echo
 	while (!(PINC & (1 << ECHO)));
@@ -28,12 +28,10 @@ float GetDistance()
 	// Medir duraci?n del pulso (en us)
 	while (PINC & (1 << ECHO)) {//PIND & (1 << ECHO)
 		counter++;
-		PORTC |= (1 << 6);
-		_delay_us(1);  
+		_delay_us(12);  
 	}
-	PORTC &= ~(1 << 6);
 	// Calcular distancia (en cm)
-	distance = (float)counter / 58.0;  // Formula: (us / 58) = cm
+	distance = ((float)counter *12) / 58.0f;  // Formula: (us / 58) = cm
 	
 	return distance;
 }
