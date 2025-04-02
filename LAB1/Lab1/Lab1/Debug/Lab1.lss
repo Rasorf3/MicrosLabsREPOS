@@ -250,7 +250,7 @@ void LCD_Command(unsigned char command)
 
 000001b6 <LCD_Init>:
 #include "LCD_Module.h"
-
+#define F_CPU 8000000UL
 
 void LCD_Init()
 {
@@ -496,7 +496,7 @@ int main(void)
 000002d8 <UltraSonicInit>:
 
 #include "UltraSonicModule.h"
-
+#define F_CPU 8000000UL
 void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);

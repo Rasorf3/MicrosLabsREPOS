@@ -5,7 +5,7 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 #include "LCD_Module.h"
-
+#define F_CPU 8000000UL
 
 void LCD_Init()
 {

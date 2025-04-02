@@ -6,7 +6,7 @@
  */ 
 
 #include "UltraSonicModule.h"
-
+#define F_CPU 8000000UL
 void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);
