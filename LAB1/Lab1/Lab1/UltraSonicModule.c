@@ -30,10 +30,10 @@ float GetDistance()
 	while (PINC & (1 << ECHO)) {//PIND & (1 << ECHO)
 		counter++;
 	
-		_delay_us(1);  
+		_delay_us(12);  
 	}
 	// Calcular distancia (en cm)
-	distance = ((float)counter ) / 58.0f;  // Formula: (us / 58) = cm
+	distance = ((float)counter *12) / 58.0f;  // Formula: (us / 58) = cm
 	
 	return distance;
 }

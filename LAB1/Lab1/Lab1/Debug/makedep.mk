@@ -6,5 +6,7 @@ LCD_Module.c
 
 main.c
 
+Timer1.c
+
 UltraSonicModule.c
 
