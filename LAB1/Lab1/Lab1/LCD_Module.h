@@ -5,16 +5,16 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
-#define F_CPU 16000000UL
+#define F_CPU 1000000UL
 
 #ifndef LCD_MODULE_H_
 #define LCD_MODULE_H_
 #include <avr/io.h>
 #include <util/delay.h>
 //PINS LCD
-#define RS_LCD 2
-#define EN_LCD 3
-#define LCD_DATA PORTD
+#define RS_LCD 0
+#define EN_LCD 1
+#define LCD_DATA PORTB
 
 //Commans for LCD
 #define LCD_CLEAR 0x01

@@ -5,15 +5,15 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
-#define F_CPU 16000000UL
+#define F_CPU 1000000UL
 
 #ifndef ULTRASONICMODULE_H_
 #define ULTRASONICMODULE_H_
 #include <util/delay.h>
 #include <avr/io.h>
 
-#define TRIGGER 4
-#define ECHO 5
+#define TRIGGER 2
+#define ECHO 3
 
 void UltraSonicInit();
 float GetDistance();

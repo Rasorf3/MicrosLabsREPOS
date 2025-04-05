@@ -8,7 +8,7 @@
 
 void LCD_Init()
 {
-	DDRD = 0xFF; 
+	DDRB = 0xFF; 
 	DDRC |= (1<<RS_LCD) | (1 << EN_LCD);
 	
 	//Comandos Iniciales al encender EL LCD
