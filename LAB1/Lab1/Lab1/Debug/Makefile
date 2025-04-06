@@ -37,6 +37,7 @@ SUBDIRS :=
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../DHT_22.c \
 ../I2C_Module.c \
 ../LCD_Module.c \
 ../main.c \
@@ -52,6 +53,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+DHT_22.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
@@ -60,6 +62,7 @@ Timer1.o \
 UltraSonicModule.o
 
 OBJS_AS_ARGS +=  \
+DHT_22.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
@@ -68,6 +71,7 @@ Timer1.o \
 UltraSonicModule.o
 
 C_DEPS +=  \
+DHT_22.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
@@ -76,6 +80,7 @@ Timer1.d \
 UltraSonicModule.d
 
 C_DEPS_AS_ARGS +=  \
+DHT_22.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
@@ -97,6 +102,13 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+./DHT_22.o: .././DHT_22.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 ./I2C_Module.o: .././I2C_Module.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0

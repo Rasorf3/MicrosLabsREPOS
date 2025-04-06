@@ -6,7 +6,12 @@
  */ 
 #include "Timer1.h"
 
-void Timer1_Init()
-{
-	
+#include <avr/io.h>
+
+// Función para configurar Timer1
+void Timer1_Init() {
+	TCCR1A = 0;             // Modo normal
+	TCCR1B = (1 << CS11);   // Prescaler 1 (sin prescaler)
+	// Para pulsos más largos usa prescaler 8: TCCR1B = (1 << CS11);
 }
+

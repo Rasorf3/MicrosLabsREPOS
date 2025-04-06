@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+DHT_22.c
+
 I2C_Module.c
 
 LCD_Module.c

@@ -4,7 +4,7 @@
  * Created: 3/29/2025 5:31:26 PM
  * Author : Luis Felipe Holchor Virgen
  */ 
-#define F_CPU 1000000UL
+#define F_CPU 8000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -12,6 +12,7 @@
 #include "LCD_Module.h"
 #include "UltraSonicModule.h"
 #include "RTC_Module.h"
+#include "Timer1.h"
 
 int main(void)
 {
@@ -22,28 +23,57 @@ int main(void)
 	LCD_Init();
 	UltraSonicInit();
 	twi_init();
+	Timer1_Init();
+	DHT22_init();
     while (1) 
     {
-		LCD_Command(LCD_CLEAR);
+		/*LCD_Command(LCD_CLEAR);
 		LCD_SetCursor(0,0);
 		distancia_basura = GetDistance();
 		dtostrf(distancia_basura, 5, 2, Datos_LCD);
+		LCD_Write_String(" ");
 		LCD_Write_String(Datos_LCD);
 		LCD_Write_String(" cm");
-		_delay_ms(2000);
-		LCD_Command(LCD_CLEAR);
+		_delay_ms(1000);*/
+		/*LCD_Command(LCD_CLEAR);
 		_delay_ms(1);
 		LCD_Command(LCD_CLEAR);
 		RTC_displayDate();
-		_delay_ms(2000);
-		
-		for(int i; i < 10; i++)
+		_delay_ms(2000);*/
+		/*
+		for(int i; i < 50; i++)
 		{
 			LCD_Command(LCD_CLEAR);
 			RTC_displayTime();
 			_delay_ms(100);
+		}*/
+		LCD_Command(LCD_CLEAR);
+		unsigned char result = DHT22_read();
+		
+		if (result == 0) 
+		{
+			DHT_Display_Data();
+		} 
+		else
+		{
+			if(result == 1)
+			{
+				LCD_Write_String(" error 1");
+			}
+			if(result == 2)
+			{
+				LCD_Write_String(" error 2");
+			}
+			if(result == 3)
+			{
+				LCD_Write_String(" error 3");
+			}
+			
+			
 		}
 		
+		_delay_ms(2000); // Espera 2 segundos entre lecturas (DHT22 necesita al menos 2s)
+	
 		
 
 		

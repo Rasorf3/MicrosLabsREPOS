@@ -13,7 +13,8 @@ main.d main.o: .././main.c \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- .././LCD_Module.h .././UltraSonicModule.h .././RTC_Module.h
+ .././LCD_Module.h .././UltraSonicModule.h .././RTC_Module.h \
+ .././Timer1.h
 
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -48,3 +49,5 @@ e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 .././UltraSonicModule.h:
 
 .././RTC_Module.h:
+
+.././Timer1.h:

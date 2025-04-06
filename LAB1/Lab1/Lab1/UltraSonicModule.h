@@ -5,7 +5,7 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
-#define F_CPU 1000000UL
+#define F_CPU 8000000UL
 
 #ifndef ULTRASONICMODULE_H_
 #define ULTRASONICMODULE_H_
@@ -17,8 +17,7 @@
 
 void UltraSonicInit();
 float GetDistance();
-
-
+unsigned int measure_pulse_width();
 
 
 #endif /* ULTRASONICMODULE_H_ */

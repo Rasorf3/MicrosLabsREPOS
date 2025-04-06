@@ -13,7 +13,8 @@ UltraSonicModule.d UltraSonicModule.o: .././UltraSonicModule.c \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
+ e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
+ .././Timer1.h
 
 .././UltraSonicModule.h:
 
@@ -44,3 +45,5 @@ e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h:
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
+
+.././Timer1.h:
