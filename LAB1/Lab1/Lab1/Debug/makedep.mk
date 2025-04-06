@@ -10,6 +10,8 @@ LCD_Module.c
 
 main.c
 
+ROLL_Module.c
+
 RTC_Module.c
 
 Timer1.c

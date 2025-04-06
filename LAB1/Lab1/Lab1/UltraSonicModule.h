@@ -18,6 +18,7 @@
 void UltraSonicInit();
 float GetDistance();
 unsigned int measure_pulse_width();
-
+float TrashPercent(float distance);
+void UltraSonic_Display_Data();
 
 #endif /* ULTRASONICMODULE_H_ */

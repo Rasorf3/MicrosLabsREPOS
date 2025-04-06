@@ -109,12 +109,33 @@ char DHT22_read() {
 void DHT_Display_Data()
 {
 	unsigned char buffer[20];
-	sprintf(buffer," Temp: %d,%d C.",temp_int,temp_dec);
 	LCD_Command(LCD_CLEAR);
+	unsigned char result = DHT22_read();
 	LCD_SetCursor(0,0);
-	LCD_Write_String(buffer);
-	sprintf(buffer," Hum: %d,%d %.",humidity_int,humidity_dec);
-	LCD_SetCursor(0,1);
-	LCD_Write_String(buffer);
+	LCD_Write_String(" -------------------");
+	if (result == 0)
+	{
+		LCD_SetCursor(0,1);
+		sprintf(buffer," Temp: %d,%d C.",temp_int,temp_dec);
+		LCD_Write_String(buffer);
+		LCD_SetCursor(0,2);
+		sprintf(buffer," Hum: %d,%d %.",humidity_int,humidity_dec);
+		LCD_Write_String(buffer);
+	}
+	else
+	{
+		switch(result)
+		{
+			case 1: LCD_SetCursor(0,1);
+					LCD_Write_String(" ERROR 1");
+			case 2: LCD_SetCursor(0,1);
+					LCD_Write_String(" ERROR 2");
+			case 3: LCD_SetCursor(0,1);
+					LCD_Write_String(" ERROR 3");
+			
+		}	
+	}
+	LCD_SetCursor(0,3);
+	LCD_Write_String(" -------------------");
 	_delay_ms(2000);
 }

@@ -157,7 +157,6 @@ void RTC_displayTime(void)
 {
   RTC_getTime();
   
-  LCD_SetCursor(0,0);
   LCD_Write_String(time);
 }
 
@@ -166,18 +165,12 @@ void RTC_displayTime(void)
 //****************************************************************** 
 void RTC_displayDate(void)
 {
-  RTC_getDate();
-  LCD_SetCursor(0,0);
-  LCD_Write_String(date);
-  RTC_displayDay();   
+	RTC_getDate();
+	LCD_Write_String(date);
 }
 
-//******************************************************************
-//Function to read 
-//****************************************************************** 
 void RTC_displayDay(void)
 {
-  LCD_SetCursor(0,1);
   switch(DAY)
   {
    case 1:
@@ -204,7 +197,28 @@ void RTC_displayDay(void)
    default:
 		  LCD_Write_String("Unknown ");
   }
-}	  		  
+}	
+void RTC_display_data(void)
+{
+	LCD_Command(LCD_CLEAR);
+	LCD_SetCursor(0,0);
+	LCD_Write_String(" -------------------");
+	LCD_SetCursor(0,1);
+	RTC_displayDate();
+	LCD_Write_String(" ");
+	RTC_displayDay();
+	LCD_SetCursor(0,2);
+	RTC_displayTime();
+	LCD_SetCursor(0,3);
+	LCD_Write_String(" -------------------");
+	for(int i = 0; i < 10; i++)
+	{
+		LCD_SetCursor(0,2);
+		RTC_displayTime();
+		_delay_ms(500);
+	}
+	
+}
 		  		     	  
 //******************************************************************
 //Function to format registers 

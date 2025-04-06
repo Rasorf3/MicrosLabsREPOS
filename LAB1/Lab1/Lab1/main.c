@@ -13,13 +13,14 @@
 #include "UltraSonicModule.h"
 #include "RTC_Module.h"
 #include "Timer1.h"
+#include "ROLL_Module.h"
 
 int main(void)
 {
 	float distancia_basura = 0;
 	unsigned char Datos_LCD[15];
 	DDRC |= 0x30;
-    /* Replace with your application code */
+  
 	LCD_Init();
 	UltraSonicInit();
 	twi_init();
@@ -27,49 +28,27 @@ int main(void)
 	DHT22_init();
     while (1) 
     {
-		LCD_Command(LCD_CLEAR);
-		LCD_SetCursor(0,0);
-		distancia_basura = GetDistance();
-		dtostrf(distancia_basura, 5, 2, Datos_LCD);
-		LCD_Write_String(" ");
-		LCD_Write_String(Datos_LCD);
-		LCD_Write_String(" cm");
-		_delay_ms(1000);
-		LCD_Command(LCD_CLEAR);
-		_delay_ms(1);
-		LCD_Command(LCD_CLEAR);
-		RTC_displayDate();
-		_delay_ms(2000);
 		
-		for(int i; i < 50; i++)
+
+		RTC_display_data();
+		
+		if(ReadRollPin())
 		{
 			LCD_Command(LCD_CLEAR);
-			RTC_displayTime();
-			_delay_ms(100);
+			LCD_SetCursor(0,0);
+			LCD_Write_String(" -------------------");
+			LCD_SetCursor(0,1);
+			LCD_Write_String("****Bote Abierto****");
+			LCD_SetCursor(0,2);
+			LCD_Write_String("**Esperando Cierre***");
+			LCD_SetCursor(0,3);
+			LCD_Write_String(" -------------------");
+			_delay_ms(2000);
 		}
-		LCD_Command(LCD_CLEAR);
-		unsigned char result = DHT22_read();
-		
-		if (result == 0) 
-		{
-			DHT_Display_Data();
-		} 
 		else
 		{
-			if(result == 1)
-			{
-				LCD_Write_String(" error 1");
-			}
-			if(result == 2)
-			{
-				LCD_Write_String(" error 2");
-			}
-			if(result == 3)
-			{
-				LCD_Write_String(" error 3");
-			}
-			
-			
+			UltraSonic_Display_Data();
+			DHT_Display_Data();
 		}
 		
 		_delay_ms(2000); // Espera 2 segundos entre lecturas (DHT22 necesita al menos 2s)

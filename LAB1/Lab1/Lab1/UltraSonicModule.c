@@ -7,6 +7,10 @@
 
 #include "UltraSonicModule.h"
 #include "Timer1.h"
+#include "LCD_Module.h"
+#include <stdint.h>
+#include <stdio.h>
+
 void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);
@@ -45,4 +49,35 @@ unsigned int measure_pulse_width()
 	end_time = TCNT1;
 	// Calcular ancho del pulso
 	return end_time - start_time;
+}
+float TrashPercent(float distance)
+{
+	return 103.0928 - 1.0309*distance;
+	
+}
+void UltraSonic_Display_Data()
+{
+	float distancia_basura = 0;
+	float FillingPercentage = 0;
+	unsigned char buffer[20];
+	
+	distancia_basura = GetDistance();
+	FillingPercentage = TrashPercent(distancia_basura);
+	 
+	LCD_Command(LCD_CLEAR);
+	LCD_SetCursor(0,0);
+	LCD_Write_String(" -------------------");
+	dtostrf(distancia_basura, 5, 2, buffer);
+	LCD_SetCursor(0,1);
+	LCD_Write_String(" Distance: ");
+	LCD_Write_String(buffer);
+	LCD_Write_String(" cm");
+	dtostrf(FillingPercentage, 5, 2, buffer);
+	LCD_SetCursor(0,2);
+	LCD_Write_String(" Filling: ");
+	LCD_Write_String(buffer);
+	LCD_Write_String(" %");
+	LCD_SetCursor(0,3);
+	LCD_Write_String(" -------------------");
+	_delay_ms(4000);
 }

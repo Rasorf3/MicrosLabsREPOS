@@ -41,6 +41,7 @@ C_SRCS +=  \
 ../I2C_Module.c \
 ../LCD_Module.c \
 ../main.c \
+../ROLL_Module.c \
 ../RTC_Module.c \
 ../Timer1.c \
 ../UltraSonicModule.c
@@ -57,6 +58,7 @@ DHT_22.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
+ROLL_Module.o \
 RTC_Module.o \
 Timer1.o \
 UltraSonicModule.o
@@ -66,6 +68,7 @@ DHT_22.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
+ROLL_Module.o \
 RTC_Module.o \
 Timer1.o \
 UltraSonicModule.o
@@ -75,6 +78,7 @@ DHT_22.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
+ROLL_Module.d \
 RTC_Module.d \
 Timer1.d \
 UltraSonicModule.d
@@ -84,6 +88,7 @@ DHT_22.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
+ROLL_Module.d \
 RTC_Module.d \
 Timer1.d \
 UltraSonicModule.d
@@ -124,6 +129,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./main.o: .././main.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./ROLL_Module.o: .././ROLL_Module.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)E:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

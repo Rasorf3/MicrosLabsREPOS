@@ -33,6 +33,7 @@ unsigned char RTC_writeTime(void);
 unsigned char RTC_writeDate(void);
 void RTC_updateTime(unsigned char *strTime);
 void RTC_updateDate(unsigned char *strDate);
+void RTC_display_data(void);
 
 
 #endif /* RTC_MODULE_H_ */
