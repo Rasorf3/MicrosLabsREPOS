@@ -27,26 +27,26 @@ int main(void)
 	DHT22_init();
     while (1) 
     {
-		/*LCD_Command(LCD_CLEAR);
+		LCD_Command(LCD_CLEAR);
 		LCD_SetCursor(0,0);
 		distancia_basura = GetDistance();
 		dtostrf(distancia_basura, 5, 2, Datos_LCD);
 		LCD_Write_String(" ");
 		LCD_Write_String(Datos_LCD);
 		LCD_Write_String(" cm");
-		_delay_ms(1000);*/
-		/*LCD_Command(LCD_CLEAR);
+		_delay_ms(1000);
+		LCD_Command(LCD_CLEAR);
 		_delay_ms(1);
 		LCD_Command(LCD_CLEAR);
 		RTC_displayDate();
-		_delay_ms(2000);*/
-		/*
+		_delay_ms(2000);
+		
 		for(int i; i < 50; i++)
 		{
 			LCD_Command(LCD_CLEAR);
 			RTC_displayTime();
 			_delay_ms(100);
-		}*/
+		}
 		LCD_Command(LCD_CLEAR);
 		unsigned char result = DHT22_read();
 		
