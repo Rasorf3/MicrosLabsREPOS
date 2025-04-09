@@ -5,7 +5,7 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
-#define F_CPU 8000000UL
+#define F_CPU 16000000UL
 
 #ifndef ULTRASONICMODULE_H_
 #define ULTRASONICMODULE_H_

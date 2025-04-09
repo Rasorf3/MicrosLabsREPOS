@@ -5,7 +5,7 @@
  *  Author: Luis Felipe Holchor Virgen
  */ 
 
-#define F_CPU 8000000UL
+#define F_CPU 16000000UL
 
 #ifndef LCD_MODULE_H_
 #define LCD_MODULE_H_
@@ -14,7 +14,6 @@
 //PINS LCD
 #define RS_LCD 0
 #define EN_LCD 1
-#define LCD_DATA PORTB
 
 //Commans for LCD
 #define LCD_CLEAR 0x01

@@ -9,7 +9,7 @@
 #ifndef DHT_22_H_
 #define DHT_22_H_
 
-#define F_CPU 8000000UL
+#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <util/delay.h>

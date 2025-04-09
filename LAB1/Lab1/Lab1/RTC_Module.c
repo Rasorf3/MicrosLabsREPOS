@@ -202,15 +202,16 @@ void RTC_display_data(void)
 {
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
-	LCD_Write_String(" -------------------");
+	LCD_Write_String(" --------------------------------------");
 	LCD_SetCursor(0,1);
 	RTC_displayDate();
-	LCD_Write_String(" ");
+	LCD_SetCursor(10,1);
+	LCD_Write_String("  ");
 	RTC_displayDay();
 	LCD_SetCursor(0,2);
 	RTC_displayTime();
 	LCD_SetCursor(0,3);
-	LCD_Write_String(" -------------------");
+	LCD_Write_String("--------------------");
 	for(int i = 0; i < 10; i++)
 	{
 		LCD_SetCursor(0,2);
@@ -333,7 +334,7 @@ void RTC_updateTime(unsigned char *strTime)
   
   time[2] = ':';
   time[5] = ':';
-  
+  data = 0x31;
   if(data < 0x30 || data > 0x32)	//Hours.
 	timeError = 1;
   else
@@ -376,17 +377,16 @@ void RTC_updateTime(unsigned char *strTime)
 	
   return;
 }  
-  
-  
 //******************************************************************
 //Function to update date into the DS1307
 // Format: dd/mm/yy-WeekDay
 //******************************************************************   
+//RTC_updateDate(unsigned char *strDate);
 void RTC_updateDate(unsigned char *strDate)
 {
   unsigned char  data;
   int dateError = 0;
-  
+  data = 0x31;
   date[2] = '/';
   date[5] = '/';
   

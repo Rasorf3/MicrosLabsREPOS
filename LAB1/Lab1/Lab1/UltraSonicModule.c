@@ -29,7 +29,7 @@ float GetDistance()
 
 	counter = measure_pulse_width();
 	// Calcular distancia (en cm)
-	distance = ((float)counter ) / 58.0f;  // Formula: (us / 58) = cm
+	distance = ((float)counter *0.5 ) / 58.0f;  // Formula: (us / 58) = cm
 	
 	return distance;
 }
