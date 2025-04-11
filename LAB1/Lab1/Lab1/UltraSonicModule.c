@@ -15,7 +15,6 @@ void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);
 	DDRC &= ~(1 << ECHO);
-	DDRD = 0xFF;
 }
 
 float GetDistance()
@@ -66,7 +65,7 @@ void UltraSonic_Display_Data()
 	 
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
-	LCD_Write_String(" -------------------");
+	LCD_Write_String("---------------------------------------");
 	dtostrf(distancia_basura, 5, 2, buffer);
 	LCD_SetCursor(0,1);
 	LCD_Write_String(" Distance: ");
