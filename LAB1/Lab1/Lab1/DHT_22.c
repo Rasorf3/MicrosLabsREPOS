@@ -112,7 +112,7 @@ void DHT_Display_Data()
 	LCD_Command(LCD_CLEAR);
 	unsigned char result = DHT22_read();
 	LCD_SetCursor(0,0);
-	LCD_Write_String(" -------------------");
+	LCD_Write_String("--------------------");
 	if (result == 0)
 	{
 		LCD_SetCursor(0,1);
@@ -136,6 +136,6 @@ void DHT_Display_Data()
 		}	
 	}
 	LCD_SetCursor(0,3);
-	LCD_Write_String(" -------------------");
+	LCD_Write_String("--------------------");
 	_delay_ms(2000);
 }
