@@ -17,11 +17,13 @@
 #include "ROLL_Module.h"
 #include "Timer2.h"
 #include "Timer0.h"
+#include "USART_Module.h"
 
-#define ONE_SECOND 1000000UL
+#define ONE_SECOND 500000UL
 int main(void)
 {
 	DDRC |= 0x30; //I2C PORTS
+	DDRD |= (1 << 4);
 	twi_init();
 	LCD_Init();
 	UltraSonicInit();
@@ -30,6 +32,7 @@ int main(void)
 	Roll_Init();
 	Timer2_Init();
 	Timer0_Init();
+	USART_Init();
 	//RTC_updateTime("19:54:00");
 	//RTC_updateDate("10/04/2025-5");
 	_delay_ms(100);
@@ -39,8 +42,10 @@ int main(void)
 		unsigned char flag_check = 0;
 		unsigned char counter = 0;
 		float AverageUltraSonic  = 0;
+		unsigned int AverageTemp = 0;
+		unsigned int AverageHum= 0;
 		unsigned char buffer[20];
-		
+		unsigned char result = 0;
 		
 		Timer1_reset();
 		while(flag_check == 0)
@@ -50,39 +55,29 @@ int main(void)
 			{
 				counter++;
 				AverageUltraSonic = UltraSonic_AvarageData(counter);
+				result = DHT22_read();
+				AverageTemp = DHT_Average_Temp(counter);
+				AverageHum = DHT_Average_Hum(counter);
 				Timer1_reset();
+				sprintf(buffer,"temp: %d",AverageTemp);
+				sendStringUSART(buffer);
 			}
 			if(counter >= 10)
 			{
 				UltraSonic_Display_Data(AverageUltraSonic);
+				DHT_Display_Data((unsigned char)AverageTemp,(unsigned char)AverageHum);
 				flag_check = 1;
 			}
-			LCD_SetCursor(0,2);
-			sprintf(buffer,"time: %ul",Timer1_getTime());
-			LCD_Write_String(buffer);
+			if(getUSARTdata() == 'e')
+			{
+				PORTD |= (1 << 4);
+			}
+			if(getUSARTdata() == 'a')
+			{
+				PORTD &= ~(1 << 4);
+			}
 			_delay_ms(100);
 		}
-		//RTC_display_data();
-		/*if(!ReadRollPin())
-		{
-			LCD_Command(LCD_CLEAR);
-			LCD_SetCursor(0,0);
-			LCD_Write_String("---------------------------------------");
-			LCD_SetCursor(0,1);
-			LCD_Write_String("****Bote Abierto****");
-			LCD_SetCursor(0,2);
-			LCD_Write_String("**Esperando Cierre***");
-			LCD_SetCursor(0,3);
-			LCD_Write_String("--------------------");
-			_delay_ms(2000);
-		}
-		else
-		{
-			UltraSonic_Display_Data();
-			//DHT_Display_Data();
-			_delay_ms(100);
-		}*/
-		
 	}
 }
 

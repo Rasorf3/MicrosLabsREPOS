@@ -22,3 +22,5 @@ Timer2.c
 
 UltraSonicModule.c
 
+USART_Module.c
+

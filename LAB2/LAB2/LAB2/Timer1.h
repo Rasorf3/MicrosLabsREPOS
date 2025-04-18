@@ -13,7 +13,7 @@ void Timer1_Init();
 
 unsigned long int  Timer1_getTime();
 
-unsigned char Timer1_getCount();
+unsigned int Timer1_getCount();
 
 void Timer1_reset();
 

@@ -24,7 +24,7 @@ unsigned long int  Timer0_getTime()
 		overflow_count0++;
 		TIFR0 |= (1 << TOV0);
 	}
-	unsigned long int tiempo_us = (overflow_count0 * 16320) + (Timer0_getCount() * 64);
+	unsigned long int tiempo_us = ((unsigned long int)overflow_count0 * 16320UL) + ((unsigned long int)Timer0_getCount() * 64UL);
 	return tiempo_us;
 }
 

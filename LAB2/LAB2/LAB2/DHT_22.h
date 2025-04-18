@@ -31,6 +31,10 @@ void DHT22_init();
 // Funci?n para leer datos del DHT22
 char DHT22_read();
 
-void DHT_Display_Data();
+void DHT_Display_Data(unsigned char Temp,unsigned char Hum);
+
+unsigned int DHT_Average_Temp(unsigned char count);
+
+unsigned int DHT_Average_Hum(unsigned char count);
 
 #endif /* DHT_22_H_ */

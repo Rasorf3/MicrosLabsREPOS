@@ -20,11 +20,11 @@ void Timer1_Init() {
 
 unsigned long int  Timer1_getTime()
 {
-	unsigned long int tiempo_us = Timer1_getCount() * 64;
+	unsigned long int tiempo_us = (unsigned long int)Timer1_getCount() * 64;
 	return tiempo_us;
 }
 
-unsigned char Timer1_getCount()
+unsigned int Timer1_getCount()
 {
 	return TCNT1;
 }

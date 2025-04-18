@@ -46,7 +46,8 @@ C_SRCS +=  \
 ../Timer0.c \
 ../Timer1.c \
 ../Timer2.c \
-../UltraSonicModule.c
+../UltraSonicModule.c \
+../USART_Module.c
 
 
 PREPROCESSING_SRCS += 
@@ -65,7 +66,8 @@ RTC_Module.o \
 Timer0.o \
 Timer1.o \
 Timer2.o \
-UltraSonicModule.o
+UltraSonicModule.o \
+USART_Module.o
 
 OBJS_AS_ARGS +=  \
 DHT_22.o \
@@ -77,7 +79,8 @@ RTC_Module.o \
 Timer0.o \
 Timer1.o \
 Timer2.o \
-UltraSonicModule.o
+UltraSonicModule.o \
+USART_Module.o
 
 C_DEPS +=  \
 DHT_22.d \
@@ -89,7 +92,8 @@ RTC_Module.d \
 Timer0.d \
 Timer1.d \
 Timer2.d \
-UltraSonicModule.d
+UltraSonicModule.d \
+USART_Module.d
 
 C_DEPS_AS_ARGS +=  \
 DHT_22.d \
@@ -101,7 +105,8 @@ RTC_Module.d \
 Timer0.d \
 Timer1.d \
 Timer2.d \
-UltraSonicModule.d
+UltraSonicModule.d \
+USART_Module.d
 
 OUTPUT_FILE_PATH +=LAB2.elf
 
@@ -181,6 +186,13 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./UltraSonicModule.o: .././UltraSonicModule.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)E:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./USART_Module.o: .././USART_Module.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)E:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "E:\atmel\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

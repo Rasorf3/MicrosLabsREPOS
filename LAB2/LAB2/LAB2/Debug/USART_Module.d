@@ -1,4 +1,4 @@
-main.d main.o: .././main.c \
+USART_Module.d USART_Module.o: .././USART_Module.c .././USART_Module.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -9,16 +9,9 @@ main.d main.o: .././main.c \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\common.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
- e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- .././LCD_Module.h .././UltraSonicModule.h .././RTC_Module.h \
- .././Timer1.h .././ROLL_Module.h .././Timer2.h .././Timer0.h \
- .././USART_Module.h
+ e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h
+
+.././USART_Module.h:
 
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h:
 
@@ -41,31 +34,3 @@ e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h:
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h:
 
 e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
-
-e:\atmel\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
-
-.././LCD_Module.h:
-
-.././UltraSonicModule.h:
-
-.././RTC_Module.h:
-
-.././Timer1.h:
-
-.././ROLL_Module.h:
-
-.././Timer2.h:
-
-.././Timer0.h:
-
-.././USART_Module.h:

@@ -7,6 +7,10 @@
 #include "DHT_22.h"
 #include "LCD_Module.h"
 
+volatile unsigned int AveTemp = 0;
+
+volatile unsigned int AveHum = 0;
+
 // Funci?n para configurar el pin del DHT22
 void DHT22_init() {
 	DDRD |= (1 << DHT22_PIN);   // Configura el pin como salida
@@ -106,36 +110,35 @@ char DHT22_read() {
 	
 	return 0; // Lectura exitosa
 }
-void DHT_Display_Data()
+void DHT_Display_Data(unsigned char Temp,unsigned char Hum)
 {
 	unsigned char buffer[20];
 	LCD_Command(LCD_CLEAR);
-	unsigned char result = DHT22_read();
 	LCD_SetCursor(0,0);
 	LCD_Write_String("--------------------");
-	if (result == 0)
-	{
-		LCD_SetCursor(0,1);
-		sprintf(buffer," Temp: %d,%d C.",temp_int,temp_dec);
-		LCD_Write_String(buffer);
-		LCD_SetCursor(0,2);
-		sprintf(buffer," Hum: %d,%d %.",humidity_int,humidity_dec);
-		LCD_Write_String(buffer);
-	}
-	else
-	{
-		switch(result)
-		{
-			case 1: LCD_SetCursor(0,1);
-					LCD_Write_String(" ERROR 1");
-			case 2: LCD_SetCursor(0,1);
-					LCD_Write_String(" ERROR 2");
-			case 3: LCD_SetCursor(0,1);
-					LCD_Write_String(" ERROR 3");
-			
-		}	
-	}
+
+	LCD_SetCursor(0,1);
+	sprintf(buffer," Temp: %d,%d C.",Temp,temp_dec);
+	LCD_Write_String(buffer);
+	LCD_SetCursor(0,2);
+	sprintf(buffer," Hum: %d,%d %.",Hum,humidity_dec);
+	LCD_Write_String(buffer);
+
 	LCD_SetCursor(0,3);
 	LCD_Write_String("--------------------");
 	_delay_ms(2000);
+	AveHum = 0;
+	AveTemp = 0;
+}
+
+unsigned int DHT_Average_Temp(unsigned char count)
+{
+	AveTemp+= (unsigned int)temp_int;
+	return AveTemp /(unsigned int)count;
+}
+
+unsigned int DHT_Average_Hum(unsigned char count)
+{
+	AveHum += (unsigned int)humidity_int;
+	return AveHum / (unsigned int)count;
 }
