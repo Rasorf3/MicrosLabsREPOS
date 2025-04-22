@@ -14,6 +14,8 @@
 #define TX_PORT 1
 #define RX_PORT 0
 
+#define BUFFER_SIZE 64 // Tama?o m?ximo del buffer
+char buffer[BUFFER_SIZE]; // Buffer para almacenar la cadena
 
 void USART_Init();
 int isUSARTudrEmpty();
@@ -22,5 +24,6 @@ void sendStringUSART(char *str);
 unsigned char getUSARTdata();
 int isUSARTerror();
 int isUSARTrxComplete();
+void UART_receive_string();
 
 #endif /* USART_MODULE_H_ */

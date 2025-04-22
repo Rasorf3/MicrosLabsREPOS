@@ -6,6 +6,8 @@
  */ 
 #include "USART_Module.h"
 
+unsigned char buffer_pos = 0;   // Posici?n actual en el buffer
+
 void USART_Init()
 {
 	DDRD |= (1 << TX_PORT);
@@ -69,6 +71,20 @@ int isUSARTerror()
 unsigned char getUSARTdata()
 {
 	while (!isUSARTrxComplete());
-	while(!isUSARTerror());
+	//while(!isUSARTerror());
 	return UDR0;
+}
+void UART_receive_string() {
+	char received_char;
+	buffer_pos = 0;
+	memset(buffer, 0, BUFFER_SIZE); // Limpiar buffer
+
+	do {
+		received_char = getUSARTdata(); // Lee car?cter
+		if (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1) {
+			buffer[buffer_pos++] = received_char; // Almacena en buffer
+		}
+	} while (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1);
+
+	buffer[buffer_pos] = '\0'; // Terminador nulo (para que sea string v?lido en C)
 }

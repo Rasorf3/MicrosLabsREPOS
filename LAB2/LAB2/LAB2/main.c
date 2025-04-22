@@ -24,22 +24,23 @@ int main(void)
 {
 	DDRC |= 0x30; //I2C PORTS
 	DDRD |= (1 << 4);
-	twi_init();
+	/*twi_init();
 	LCD_Init();
 	UltraSonicInit();
 	Timer1_Init();
 	DHT22_init();
 	Roll_Init();
 	Timer2_Init();
-	Timer0_Init();
+	Timer0_Init();*/
 	USART_Init();
 	//RTC_updateTime("19:54:00");
 	//RTC_updateDate("10/04/2025-5");
 	_delay_ms(100);
-	
+	//sendStringUSART("AT+NAME=TRASH BIN 1\r\n");
+	unsigned char  c [20];
 	while (1)
 	{
-		unsigned char flag_check = 0;
+		/*unsigned char flag_check = 0;
 		unsigned char counter = 0;
 		float AverageUltraSonic  = 0;
 		unsigned int AverageTemp = 0;
@@ -47,8 +48,8 @@ int main(void)
 		unsigned char buffer[20];
 		unsigned char result = 0;
 		
-		Timer1_reset();
-		while(flag_check == 0)
+		Timer1_reset();*/
+		/*while(flag_check == 0)
 		{
 			RTC_display_data();
 			if(Timer1_getTime() >= ONE_SECOND)
@@ -77,7 +78,22 @@ int main(void)
 				PORTD &= ~(1 << 4);
 			}
 			_delay_ms(100);
-		}
+		}*/
+	
+
+			sendStringUSART("AT+NAME?\r\n");
+			UART_receive_string();
+			sendStringUSART(buffer);
+			sendStringUSART("AT+PSWD?\r\n");
+			UART_receive_string();
+			sendStringUSART(buffer);
+			sendStringUSART("AT+UART?\r\n");
+			UART_receive_string();
+			sendStringUSART(buffer);
+
+
+
+		
 	}
 }
 
