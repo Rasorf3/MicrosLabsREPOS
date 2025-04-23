@@ -84,7 +84,7 @@ void UART_receive_string() {
 		if (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1) {
 			buffer[buffer_pos++] = received_char; // Almacena en buffer
 		}
-	} while (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1);
+	} while (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1 && received_char != 'O');
 
 	buffer[buffer_pos] = '\0'; // Terminador nulo (para que sea string v?lido en C)
 }

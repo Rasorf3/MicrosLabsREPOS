@@ -13,10 +13,10 @@
 #include "LCD_Module.h"
 #include "UltraSonicModule.h"
 #include "RTC_Module.h"
-#include "Timer1.h"
+//#include "Timer1.h"
 #include "ROLL_Module.h"
-#include "Timer2.h"
-#include "Timer0.h"
+//#include "Timer2.h"
+//#include "Timer0.h"
 #include "USART_Module.h"
 
 #define ONE_SECOND 500000UL
@@ -25,21 +25,65 @@ int main(void)
 	DDRC |= 0x30; //I2C PORTS
 	DDRD |= (1 << 4);
 	/*twi_init();
-	LCD_Init();
-	UltraSonicInit();
+	
+	
 	Timer1_Init();
-	DHT22_init();
-	Roll_Init();
+	
+	
 	Timer2_Init();
 	Timer0_Init();*/
+	DHT22_init();
+	UltraSonicInit();
+	LCD_Init();
+	Roll_Init();
 	USART_Init();
 	//RTC_updateTime("19:54:00");
 	//RTC_updateDate("10/04/2025-5");
-	_delay_ms(100);
 	//sendStringUSART("AT+NAME=TRASH BIN 1\r\n");
-	unsigned char  c [20];
 	while (1)
 	{
+		LCD_Command(LCD_CLEAR);
+		LCD_SetCursor(0,0);
+		LCD_Write_String("--------------------------------");
+		LCD_SetCursor(0,1);
+		LCD_Write_String("AT+NAME?\r\n");
+		_delay_ms(6000);
+		sendStringUSART("AT+NAME=TRASH BIN 1\r\n");
+		sendStringUSART("AT+NAME?\r\n");
+		UART_receive_string();
+		LCD_Command(LCD_CLEAR);
+		LCD_SetCursor(0,0);
+		LCD_Write_String("--------------------------------");
+		LCD_SetCursor(0,1);
+		LCD_Write_String(buffer);
+		_delay_ms(2000);
+		if(!ReadRollPin())
+		{
+			sendStringUSART("AT+NAME?\r\n");
+			UART_receive_string();
+			LCD_Command(LCD_CLEAR);
+			LCD_SetCursor(0,0);
+			LCD_Write_String("--------------------------------");
+			LCD_SetCursor(0,1);
+			LCD_Write_String(buffer);
+			_delay_ms(2000);
+			/*sendStringUSART(buffer);
+			sendStringUSART("AT+PSWD?\r\n");
+			UART_receive_string();
+			sendStringUSART(buffer);
+			sendStringUSART("AT+UART?\r\n");
+			UART_receive_string();
+			sendStringUSART(buffer);*/
+		}
+		else
+		{
+			LCD_Command(LCD_CLEAR);
+			LCD_SetCursor(0,0);
+			LCD_Write_String("--------------------------------");
+			LCD_SetCursor(0,1);
+			LCD_Write_String("hola");
+			_delay_ms(2000);
+		}
 		/*unsigned char flag_check = 0;
 		unsigned char counter = 0;
 		float AverageUltraSonic  = 0;
@@ -80,16 +124,8 @@ int main(void)
 			_delay_ms(100);
 		}*/
 	
-
-			sendStringUSART("AT+NAME?\r\n");
-			UART_receive_string();
-			sendStringUSART(buffer);
-			sendStringUSART("AT+PSWD?\r\n");
-			UART_receive_string();
-			sendStringUSART(buffer);
-			sendStringUSART("AT+UART?\r\n");
-			UART_receive_string();
-			sendStringUSART(buffer);
+		
+			
 
 
 
