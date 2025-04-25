@@ -24,6 +24,7 @@ void UltraSonicInit()
 	start_time = 0;
 	end_time = 0;
 	current_state = STATE_IDLE;
+	distance_cm = 0;
 }
 
 void SendTrigger()
@@ -98,6 +99,6 @@ ISR(PCINT1_vect)
 	else if(current_state == STATE_MEASURING && !(PINC & (1 << ECHO)))
 	{
 		end_time = Timer2_getTime();
-		distance_cm = measure_pulse_width()
+		distance_cm = (float)measure_pulse_width() / 58.0f;
 	}
 }

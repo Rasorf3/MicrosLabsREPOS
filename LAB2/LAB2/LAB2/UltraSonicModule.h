@@ -28,6 +28,7 @@ typedef enum
 volatile uint16_t start_time; 
 volatile uint16_t end_time;
 volatile UltraState current_state;
+volatile float distance_cm;
 
 void UltraSonicInit();
 
