@@ -10,20 +10,20 @@
 #define USART_MODULE_H_
 
 #include <avr/io.h>
+#include <avr/interrupt.h>
 
 #define TX_PORT 1
 #define RX_PORT 0
 
-#define BUFFER_SIZE 64 // Tama?o m?ximo del buffer
-char buffer[BUFFER_SIZE]; // Buffer para almacenar la cadena
+volatile unsigned char txFlag;
+volatile unsigned char rxFlag;
+volatile unsigned char dataRX;
+volatile unsigned char indexBuffer;
 
 void USART_Init();
-int isUSARTudrEmpty();
 void setUSARTudr(unsigned char dataTX);
 void sendStringUSART(char *str);
 unsigned char getUSARTdata();
-int isUSARTerror();
-int isUSARTrxComplete();
-void UART_receive_string();
+
 
 #endif /* USART_MODULE_H_ */

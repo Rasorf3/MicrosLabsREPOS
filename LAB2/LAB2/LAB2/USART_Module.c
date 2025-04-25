@@ -6,16 +6,14 @@
  */ 
 #include "USART_Module.h"
 
-unsigned char buffer_pos = 0;   // Posici?n actual en el buffer
-
 void USART_Init()
 {
 	DDRD |= (1 << TX_PORT);
 	DDRD &= ~(1 << RX_PORT);
 	
 	//CONTROL AND STATUS REGISTER UCSRB
-	//UCSRB |= (1 << RXCIE); // RX Interrupt enable
-	//UCSRB |= (1 << TXCIE); // TX Interrupt enable
+	UCSR0B |= (1 << RXCIE0); // RX Interrupt enable
+	UCSR0B |= (1 << TXCIE0); // TX Interrupt enable
 	//UCSRB |= (1 << UDRIE); // USART Data Register Empty Interrupt Enable
 	
 	UCSR0B |= (1 << TXEN0); // Enable TX
@@ -27,64 +25,44 @@ void USART_Init()
 	// 9600 Baud Rate 16MHZ clock
 	UBRR0H = 0x00;
 	UBRR0L = 0x67;
-	
-	//Control & Status Register UCSRA
-	UCSR0A = 0x00;
 }
-int isUSARTudrEmpty()
-{
-	if((UCSR0A & (1 << UDRE0))){
-		return 1;
-	}
-	else{
-		return 0;
-	}
-}
+
 void setUSARTudr(unsigned char dataTX)
 {
-	while(!isUSARTudrEmpty());
 	UDR0 = dataTX;
 }
 void sendStringUSART(char *str)
 {
-	while (*str) {
-		setUSARTudr(*str);
-		str++;
+	if(txFlag)
+	{
+		txFlag = 0;
+		if(str[indexBuffer] != '\0')
+		{
+			setUSARTudr(str[indexBuffer]);
+			indexBuffer++;
+		}
+		else
+		{
+			indexBuffer = 0;
+			txFlag = 1;
+		}
+		
+		
 	}
-}
-int isUSARTrxComplete()
-{
-	if ((UCSR0A & (1 << RXC0)))
-	return 1;
-	else
-	return 0;
-}
-
-int isUSARTerror()
-{
-	if (((UCSR0A & (1 << FE0)) | (UCSR0A & (1 << DOR0)) | (UCSR0A & (1 << UPE0))))
-	return 1;
-	else
-	return 0;
 }
 
 unsigned char getUSARTdata()
 {
-	while (!isUSARTrxComplete());
-	//while(!isUSARTerror());
 	return UDR0;
 }
-void UART_receive_string() {
-	char received_char;
-	buffer_pos = 0;
-	memset(buffer, 0, BUFFER_SIZE); // Limpiar buffer
 
-	do {
-		received_char = getUSARTdata(); // Lee car?cter
-		if (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1) {
-			buffer[buffer_pos++] = received_char; // Almacena en buffer
-		}
-	} while (received_char != '\n' && received_char != '\r' && buffer_pos < BUFFER_SIZE - 1 && received_char != 'O');
-
-	buffer[buffer_pos] = '\0'; // Terminador nulo (para que sea string v?lido en C)
+ISR(USART_RX_vect)
+{
+	rxFlag = 1;
+	dataRX = getUSARTdata();
+	
+}
+ISR(USART_TX_vect)
+{
+	txFlag = 1;
 }

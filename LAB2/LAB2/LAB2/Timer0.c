@@ -5,27 +5,41 @@
  *  Author: rasor
  */ 
 #include "Timer0.h"
+#include <avr/io.h>
+#include <stdint.h>
+#include <avr/interrupt.h>
 
-volatile unsigned int overflow_count0 = 0;
 
 void Timer0_Init()
 {
 	TCCR0A = 0; //Modo normal
+	TCCR0B = 0; //Stop Timer
+	
+	TIMSK0 |= (1 << TOIE0);
+	
 	TCCR0B |= (1 << CS02) | (0 << CS01) | (1<< CS00); //preescaler 1024 Cada TICK 64us
-	TCCR0B &= ~(1 << WGM02);
 	TCNT0 = 0; //Reiniciar Contador
-	TIFR0 |= (1 << TOV0); //Reiniciar OVERFLOW FLAG
+	overflow_count0 = 0; //Reiniciar OverFlow
 }
-
+ISR(TIMER0_OVF_vect)
+{
+	overflow_count0++;
+}
 unsigned long int  Timer0_getTime()
 {
-	if(TIFR0 & (1 << TOV0))
-	{
-		overflow_count0++;
-		TIFR0 |= (1 << TOV0);
-	}
 	unsigned long int tiempo_us = ((unsigned long int)overflow_count0 * 16320UL) + ((unsigned long int)Timer0_getCount() * 64UL);
 	return tiempo_us;
+}
+unsigned char Timer0_milis(unsigned short int TimeMilis)
+{
+	if(TimeMilis <= (unsigned short int)(Timer0_getTime()/1000))
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 unsigned char Timer0_getCount()

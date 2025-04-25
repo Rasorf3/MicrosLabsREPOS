@@ -9,10 +9,7 @@
 #ifndef TIMER0_H_
 #define TIMER0_H_
 
-
-#include <avr/io.h>
-#include <stdint.h>
-
+volatile unsigned char overflow_count0;
 
 void Timer0_Init();
 
@@ -22,5 +19,6 @@ unsigned char Timer0_getCount();
 
 void Timer0_reset();
 
+unsigned char Timer0_milis(unsigned short int TimeMilis);
 
 #endif /* TIMER0_H_ */

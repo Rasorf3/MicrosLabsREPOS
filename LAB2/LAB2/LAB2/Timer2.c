@@ -5,26 +5,30 @@
  *  Author: rasor
  */ 
 #include "Timer2.h"
-
-volatile unsigned int overflow_count2 = 0;
+#include <avr/io.h>
+#include <stdint.h>
+#include <avr/interrupt.h>
 
 void Timer2_Init()
 {
 	TCCR2A = 0; //Modo normal
+	
+	
+	TIMSK2 |= (1 << TOIE2);
 	TCCR2B = (0 << CS22) | (1 << CS21) | (0<< CS20); //preescaler 8 Cada TICK 0.5us
-	TCNT2 = 0; //Reiniciar Contador
-	TIFR2 |= (1 << TOV2); //Reiniciar OVERFLOW FLAG
+	TCNT2 = 0; //Reiniciar Timer
+	overflow_count2 = 0; //Reiniciar Overflow
 }
 
 unsigned int Timer2_getTime()
 {
-	if(TIFR2 & (1 << TOV2))
-	{
-		overflow_count2++;
-		TIFR2 |= (1 << TOV2);
-	}
-	unsigned long int tiempo_us = (overflow_count2 * 128) + (Timer2_getCount() * 0.5);
+
+	unsigned int tiempo_us = (overflow_count2 * 128) + (unsigned int)(Timer2_getCount() * 0.5);
 	return tiempo_us;
+}
+ISR(TIMER2_OVF_vect)
+{
+	overflow_count2++;
 }
 
 unsigned char Timer2_getCount()
