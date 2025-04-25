@@ -52,3 +52,12 @@ void Timer0_reset()
 	TCNT0 = 0;
 	overflow_count0 = 0;
 }
+void Timer0_Stop()
+{
+	TCCR0B = 0;
+}
+
+void Timer0_Start()
+{
+	TCCR0B = (0 << CS02) | (1 << CS01) | (0<< CS00);
+}

@@ -8,24 +8,35 @@
 #include "UltraSonicModule.h"
 #include "Timer2.h"
 #include "LCD_Module.h"
-#include <stdint.h>
-#include <stdio.h>
 
-volatile float dataCounter = 0;
+#include <avr/interrupt.h>
+
 void UltraSonicInit()
 {
 	DDRC |= (1 << TRIGGER);
 	DDRC &= ~(1 << ECHO);
+	
+	//Habilitar Interrupcion ECHO
+	PCICR |= (1 << PCIE1);  // Habilita PCI1 
+	PCMSK1 |= (1 << PCINT11); // Habilita mascara para PCINT11
+	
+	
+	start_time = 0;
+	end_time = 0;
+	current_state = STATE_IDLE;
 }
 
+void SendTrigger()
+{
+	PORTC |= (1 << TRIGGER);
+	_delay_us(12);
+	PORTC &= ~(1 << TRIGGER);
+	current_state = STATE_TRIGGER_SENT;
+}
 float GetDistance()
 {
 	unsigned short int counter = 0;
-	
-	float distance = 0;
-	PORTC |= (1 << TRIGGER);
-	_delay_us(15);
-	PORTC &= ~(1 << TRIGGER);
+
 
 	counter = measure_pulse_width();
 	// Calcular distancia (en cm)
@@ -33,32 +44,24 @@ float GetDistance()
 	
 	return distance;
 }
-unsigned int measure_pulse_width() 
+uint16_t  measure_pulse_width() 
 {
-	unsigned int start_time, end_time;
-	// Esperar flanco bajo (estado inicial alto)
-	while (!(PINC & (1 << ECHO)));
-	
-	// Guardar tiempo de inicio
-	Timer2_reset();              // Reiniciar contador
-	start_time = Timer2_getTime();     // Leer timer (casi cero)
-		
-	while (PINC & (1 << ECHO)) //PIND & (1 << ECHO)
-	{
-		end_time = Timer2_getTime();
-	}
-	end_time = Timer2_getTime();
-	// Guardar tiempo de finalizaci?n
-	
-	// Calcular ancho del pulso
 	return end_time - start_time;
 }
 
-float UltraSonic_AvarageData(unsigned char counter)
+float UltraSonic_AvarageData(unsigned char counter,float dataUltra)
 {
-	dataCounter+= GetDistance();
-	float AvarageData = dataCounter / counter;
-	return AvarageData;
+	dataUltra+= GetDistance();
+	float AverageData = 0;
+	if(counter < 10)
+	{
+		AverageData = dataUltra;	
+	}
+	else
+	{
+		AverageData = dataUltra / 10;
+	}
+	return AverageData;
 }
 
 void UltraSonic_Display_Data(float average)
@@ -81,5 +84,20 @@ void UltraSonic_Display_Data(float average)
 	LCD_SetCursor(0,3);
 	LCD_Write_String("--------------------");
 	_delay_ms(4000);
-	dataCounter = 0;
+	average = 0;
+}
+ISR(PCINT1_vect)
+{
+	if(PINC & (1 << ECHO) && current_state == STATE_TRIGGER_SENT)
+	{
+		
+		Timer2_reset();              // Reiniciar contador
+		start_time = Timer2_getTime();     // Leer timer (casi cero)
+		current_state = STATE_MEASURING;
+	}
+	else if(current_state == STATE_MEASURING && !(PINC & (1 << ECHO)))
+	{
+		end_time = Timer2_getTime();
+		distance_cm = measure_pulse_width()
+	}
 }

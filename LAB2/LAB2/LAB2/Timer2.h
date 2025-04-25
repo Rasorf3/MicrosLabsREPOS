@@ -19,5 +19,8 @@ unsigned char Timer2_getCount();
 
 void Timer2_reset(); 
 
+void Timer2_Stop();
+
+void Timer2_Start();
 
 #endif /* TIMER2_H_ */

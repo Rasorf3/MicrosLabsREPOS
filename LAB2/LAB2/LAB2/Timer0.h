@@ -21,4 +21,8 @@ void Timer0_reset();
 
 unsigned char Timer0_milis(unsigned short int TimeMilis);
 
+void Timer0_Stop();
+
+void Timer0_Start();
+
 #endif /* TIMER0_H_ */
