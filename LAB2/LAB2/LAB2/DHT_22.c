@@ -11,7 +11,7 @@ volatile unsigned int AveTemp = 0;
 
 volatile unsigned int AveHum = 0;
 
-// Funci?n para configurar el pin del DHT22
+// Funcion para configurar el pin del DHT22
 void DHT22_init() {
 	DDRD |= (1 << DHT22_PIN);   // Configura el pin como salida
 	PORTD |= (1 << DHT22_PIN);  // Pone el pin en alto
@@ -21,15 +21,15 @@ void DHT22_init() {
 	¯¯¯¯|_______|¯¯¯¯¯¯¯¯|_______|¯¯¯¯¯¯¯|....datos....
 	
 	---------PUC---------|----------dht22-------------|      */	
-// Funci?n para leer datos del DHT22
+// Funcion para leer datos del DHT22
 char DHT22_read() {
 	char bits[5] = {0, 0, 0, 0, 0};
 	char i, j = 0;
 	
-	// Inicio de la comunicaci?n
+	// Inicio de la comunicacion
 	DDRD |= (1 << DHT22_PIN);   // Configura el pin como salida
 	PORTD &= ~(1 << DHT22_PIN); // Pone el pin en bajo
-	_delay_ms(18);               // Espera al menos 1ms (m?nimo 1ms seg?n datasheet)
+	_delay_ms(18);               // Espera al menos 1ms (minimo 1ms segun datasheet)
 	
 	PORTD|= (1 << DHT22_PIN);  // Pone el pin en alto
 	DDRD &= ~(1 << DHT22_PIN);

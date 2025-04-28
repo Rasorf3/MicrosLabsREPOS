@@ -46,97 +46,67 @@ int main(void)
 	unsigned char flag_check = 0;
 	unsigned char counterTime = 0;
 	unsigned char counter = 0;
-	float AverageUltraSonic  = 0;
+	float AverageUltraSonicData = 0;
+	float UltraSonicData[10];
 	unsigned int AverageTemp = 0;
 	unsigned int AverageHum= 0;
 	unsigned char buffer[20];
 	unsigned char result = 0;
 	Timer2_reset();
 	Timer2_Stop();
+	
+	LCD_Command(LCD_CLEAR);
+	LCD_SetCursor(0,0);
+	LCD_Write_String("---------------------------------------");
+	LCD_SetCursor(0,1);
+	LCD_Write_String("      WAIT FOR     ");
+	LCD_SetCursor(0,2);
+	LCD_Write_String("        DATA        ");
+	LCD_SetCursor(0,3);
+	LCD_Write_String("--------------------");
+	
 	Timer0_reset();
+	Timer0_Stop();
 	while (1)
 	{
-		if(Timer0_milis(TIME_CONSTANT_MS))
+		PORTD ^= (1 << 4);
+		/*if(Timer0_milis(TIME_CONSTANT_MS))
 		{
 			Timer0_reset();
 			counterTime++;
+			
 		}
 		if(counterTime == 3)
 		{
 			counterTime = 0;
 			counter++;
-			AverageUltraSonic = UltraSonic_AvarageData(counter,AverageUltraSonic);
-		}
-		if(counter >= 10)
-		{
-			UltraSonic_Display_Data(AverageUltraSonic);
-			counter = 0;
-		}
-				/*LCD_Command(LCD_CLEAR);
-		LCD_SetCursor(0,0);
-		LCD_Write_String("--------------------------------");
-		LCD_SetCursor(0,1);
-		LCD_Write_String("AT+NAME?\r\n");
-		_delay_ms(6000);
-		sendStringUSART("AT+NAME=TRASH BIN 1\r\n");
-		sendStringUSART("AT+NAME?\r\n");
-		UART_receive_string();
-		LCD_Command(LCD_CLEAR);
-		LCD_SetCursor(0,0);
-		LCD_Write_String("--------------------------------");
-		LCD_SetCursor(0,1);
-		LCD_Write_String(buffer);
-		_delay_ms(2000);
-		if(!ReadRollPin())
-		{
-			sendStringUSART("AT+NAME?\r\n");
-			UART_receive_string();
-			LCD_Command(LCD_CLEAR);
-			LCD_SetCursor(0,0);
-			LCD_Write_String("--------------------------------");
-			LCD_SetCursor(0,1);
-			LCD_Write_String(buffer);
-			_delay_ms(2000);
-			sendStringUSART(buffer);
-			sendStringUSART("AT+PSWD?\r\n");
-			UART_receive_string();
-			sendStringUSART(buffer);
-			sendStringUSART("AT+UART?\r\n");
-			UART_receive_string();
-			sendStringUSART(buffer);
-		}*/
-		/*else
-		{
-			LCD_Command(LCD_CLEAR);
-			LCD_SetCursor(0,0);
-			LCD_Write_String("--------------------------------");
-			LCD_SetCursor(0,1);
-			LCD_Write_String("hola");
-			_delay_ms(2000);
-		}*/
-
-		
-		//Timer1_reset();
-		//RTC_display_data();
-		/*if(Timer1_getTime() >= ONE_SECOND)
-		{
-			counter++;
+			SendTrigger();
 			
-			result = DHT22_read();
-			AverageTemp = DHT_Average_Temp(counter);
-			AverageHum = DHT_Average_Hum(counter);
-			Timer1_reset();
-			sprintf(buffer,"temp: %d",AverageTemp);
-			sendStringUSART(buffer);
 		}
 		if(counter >= 10)
 		{
-			UltraSonic_Display_Data(AverageUltraSonic);
-			DHT_Display_Data((unsigned char)AverageTemp,(unsigned char)AverageHum);
-			flag_check = 1;
+			counter = 0;
+			
+			/////////////////////////////////////////////////////////////////
+			//Bloque Que calcula El promedio del Ultrasonico
+			for(uint8_t i = 0; i < 10; i++)
+			{
+				AverageUltraSonicData+= UltraSonicData[i];
+			}
+			AverageUltraSonicData = AverageUltraSonicData / 10;
+			UltraSonic_Display_Data(AverageUltraSonicData);
+			/////////////////////////////////////////////////////////////////
+			
+			/////////////////////////////////////////////////////////////////
+			//Bloque Para Calcular DHT
+			/////////////////////////////////////////////////////////////////
 		}
-		_delay_ms(100);*/
-	
+		if(current_state == STATE_READY)
+		{
+			distance_cm = (float)measure_pulse_width() / 58.0f;
+			UltraSonicData[counter-1] = distance_cm;
+			current_state = STATE_IDLE;
+		}*/
 	}
 }
 

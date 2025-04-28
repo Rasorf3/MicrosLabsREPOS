@@ -25,8 +25,8 @@ typedef enum
 	STATE_READY,
 }UltraState;
 
-volatile uint16_t start_time; 
-volatile uint16_t end_time;
+static uint16_t start_time; 
+static uint16_t end_time;
 volatile UltraState current_state;
 volatile float distance_cm;
 
@@ -34,10 +34,8 @@ void UltraSonicInit();
 
 void SendTrigger();
 
-
-float GetDistance();
 uint16_t  measure_pulse_width();
-float TrashPercent(float distance);
+
 void UltraSonic_Display_Data(float average);
-float UltraSonic_AvarageData(uint8_t counter,float dataUltra);
+
 #endif /* ULTRASONICMODULE_H_ */

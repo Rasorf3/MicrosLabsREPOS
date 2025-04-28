@@ -34,35 +34,10 @@ void SendTrigger()
 	PORTC &= ~(1 << TRIGGER);
 	current_state = STATE_TRIGGER_SENT;
 }
-float GetDistance()
-{
-	unsigned short int counter = 0;
 
-
-	counter = measure_pulse_width();
-	// Calcular distancia (en cm)
-	distance = ((float)counter) / 58.0f;  // Formula: (us / 58) = cm
-	
-	return distance;
-}
 uint16_t  measure_pulse_width() 
 {
 	return end_time - start_time;
-}
-
-float UltraSonic_AvarageData(unsigned char counter,float dataUltra)
-{
-	dataUltra+= GetDistance();
-	float AverageData = 0;
-	if(counter < 10)
-	{
-		AverageData = dataUltra;	
-	}
-	else
-	{
-		AverageData = dataUltra / 10;
-	}
-	return AverageData;
 }
 
 void UltraSonic_Display_Data(float average)
@@ -71,7 +46,7 @@ void UltraSonic_Display_Data(float average)
 	unsigned char buffer[20];
 	
 	distancia_basura = average;
-	 
+	
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
 	LCD_Write_String("---------------------------------------");
@@ -85,13 +60,12 @@ void UltraSonic_Display_Data(float average)
 	LCD_SetCursor(0,3);
 	LCD_Write_String("--------------------");
 	_delay_ms(4000);
-	average = 0;
 }
 ISR(PCINT1_vect)
 {
 	if(PINC & (1 << ECHO) && current_state == STATE_TRIGGER_SENT)
 	{
-		
+		Timer2_Start();
 		Timer2_reset();              // Reiniciar contador
 		start_time = Timer2_getTime();     // Leer timer (casi cero)
 		current_state = STATE_MEASURING;
@@ -99,6 +73,7 @@ ISR(PCINT1_vect)
 	else if(current_state == STATE_MEASURING && !(PINC & (1 << ECHO)))
 	{
 		end_time = Timer2_getTime();
-		distance_cm = (float)measure_pulse_width() / 58.0f;
+		Timer2_Stop();
+		current_state = STATE_READY;
 	}
 }
