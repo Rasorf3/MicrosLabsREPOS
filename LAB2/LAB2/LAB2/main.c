@@ -69,8 +69,8 @@ int main(void)
 	Timer0_Stop();
 	while (1)
 	{
-		PORTD ^= (1 << 4);
-		/*if(Timer0_milis(TIME_CONSTANT_MS))
+		
+		if(Timer0_milis(TIME_CONSTANT_MS))
 		{
 			Timer0_reset();
 			counterTime++;
@@ -106,7 +106,7 @@ int main(void)
 			distance_cm = (float)measure_pulse_width() / 58.0f;
 			UltraSonicData[counter-1] = distance_cm;
 			current_state = STATE_IDLE;
-		}*/
+		}
 	}
 }
 
