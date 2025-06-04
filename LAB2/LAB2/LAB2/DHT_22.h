@@ -25,10 +25,10 @@ volatile char temp_dec = 0;
 volatile char checksum = 0;
 volatile char dht22_data[5] = {0, 0, 0, 0, 0};
 
-// Funci?n para configurar el pin del DHT22
+// Funcion para configurar el pin del DHT22
 void DHT22_init();
 
-// Funci?n para leer datos del DHT22
+// Funcion para leer datos del DHT22
 char DHT22_read();
 
 void DHT_Display_Data(unsigned char Temp,unsigned char Hum);

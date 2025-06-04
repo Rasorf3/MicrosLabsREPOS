@@ -12,12 +12,13 @@
 
 void Timer0_Init()
 {
+	DDRD |= (1 << 4);
 	TCCR0A = 0; //Modo normal
 	TCCR0B = 0; //Stop Timer
 	
 	TIMSK0 |= (1 << TOIE0);
 	
-	TCCR0B |= (1 << CS02) | (0 << CS01) | (1<< CS00); //preescaler 1024 Cada TICK 64us
+	TCCR0B = (1 << CS02) | (0 << CS01) | (1<< CS00); //preescaler 1024 Cada TICK 64us
 	TCNT0 = 0; //Reiniciar Contador
 	overflow_count0 = 0; //Reiniciar OverFlow
 }
@@ -59,5 +60,5 @@ void Timer0_Stop()
 
 void Timer0_Start()
 {
-	TCCR0B = (0 << CS02) | (1 << CS01) | (0<< CS00);
+	TCCR0B = (1 << CS02) | (0 << CS01) | (1<< CS00);
 }

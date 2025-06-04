@@ -30,7 +30,7 @@ void UltraSonicInit()
 void SendTrigger()
 {
 	PORTC |= (1 << TRIGGER);
-	_delay_us(12);
+	_delay_us(15);
 	PORTC &= ~(1 << TRIGGER);
 	current_state = STATE_TRIGGER_SENT;
 }

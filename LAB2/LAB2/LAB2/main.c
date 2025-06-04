@@ -25,10 +25,11 @@
 int main(void)
 {
 	DDRC |= 0x30; //I2C PORTS
-	DDRD |= (1 << 4);
-	/*twi_init();
+	//DDRD |= (1 << 4);//LED DEBUGER
+	/*
 	Timer1_Init();
 	*/
+	twi_init();
 	DHT22_init();
 	UltraSonicInit();
 	LCD_Init();
@@ -50,6 +51,7 @@ int main(void)
 	float UltraSonicData[10];
 	unsigned int AverageTemp = 0;
 	unsigned int AverageHum= 0;
+	unsigned char DHTreadCheck = 0;
 	unsigned char buffer[20];
 	unsigned char result = 0;
 	Timer2_reset();
@@ -64,22 +66,28 @@ int main(void)
 	LCD_Write_String("        DATA        ");
 	LCD_SetCursor(0,3);
 	LCD_Write_String("--------------------");
+	_delay_ms(2000);
 	
-	Timer0_reset();
 	Timer0_Stop();
+	Timer0_Start();
+	Timer0_reset();
 	while (1)
 	{
-		
+		RTC_display_data();
 		if(Timer0_milis(TIME_CONSTANT_MS))
 		{
 			Timer0_reset();
 			counterTime++;
+			
 			
 		}
 		if(counterTime == 3)
 		{
 			counterTime = 0;
 			counter++;
+			DHTreadCheck = DHT22_read();
+			AverageHum = DHT_Average_Temp(counter);
+			AverageTemp = DHT_Average_Hum(counter);
 			SendTrigger();
 			
 		}
@@ -98,7 +106,7 @@ int main(void)
 			/////////////////////////////////////////////////////////////////
 			
 			/////////////////////////////////////////////////////////////////
-			//Bloque Para Calcular DHT
+			DHT_Display_Data(AverageTemp,AverageHum);
 			/////////////////////////////////////////////////////////////////
 		}
 		if(current_state == STATE_READY)
