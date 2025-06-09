@@ -4,6 +4,8 @@
 
 DHT_22.c
 
+HC06Module.c
+
 I2C_Module.c
 
 LCD_Module.c

@@ -24,29 +24,31 @@
 #define TIME_CONSTANT_MS 200
 int main(void)
 {
-	DDRC |= 0x30; //I2C PORTS
+	//DDRC |= 0x30; //I2C PORTS
 	//DDRD |= (1 << 4);//LED DEBUGER
 	/*
 	Timer1_Init();
-	*/
 	twi_init();
 	DHT22_init();
 	UltraSonicInit();
 	LCD_Init();
 	Roll_Init();
-	USART_Init();
+	
 	Timer0_Init();
 	Timer2_Init();
+	*/
+	USART_Init();
 	//RTC_updateTime("19:54:00");
 	//RTC_updateDate("10/04/2025-5");
 	
-	txFlag = 0;
+	/*txFlag = 0;
 	rxFlag = 0;
 	indexBuffer = 0;
 	sei();
 	unsigned char flag_check = 0;
 	unsigned char counterTime = 0;
 	unsigned char counter = 0;
+	unsigned char RollAverage = 0;
 	float AverageUltraSonicData = 0;
 	float UltraSonicData[10];
 	unsigned int AverageTemp = 0;
@@ -56,18 +58,7 @@ int main(void)
 	unsigned char result = 0;
 	Timer2_reset();
 	Timer2_Stop();
-	
-	LCD_Command(LCD_CLEAR);
-	LCD_SetCursor(0,0);
-	LCD_Write_String("---------------------------------------");
-	LCD_SetCursor(0,1);
-	LCD_Write_String("      WAIT FOR     ");
-	LCD_SetCursor(0,2);
-	LCD_Write_String("        DATA        ");
-	LCD_SetCursor(0,3);
-	LCD_Write_String("--------------------");
-	_delay_ms(2000);
-	
+		
 	Timer0_Stop();
 	Timer0_Start();
 	Timer0_reset();
@@ -77,20 +68,45 @@ int main(void)
 		if(Timer0_milis(TIME_CONSTANT_MS))
 		{
 			Timer0_reset();
+			if(ReadRollPin())
+			{
+				RollAverage++;
+			}
 			counterTime++;
 			
 			
 		}
-		if(counterTime == 3)
+		if(counterTime == 5)
 		{
-			counterTime = 0;
-			counter++;
-			DHTreadCheck = DHT22_read();
-			AverageHum = DHT_Average_Temp(counter);
-			AverageTemp = DHT_Average_Hum(counter);
-			SendTrigger();
+			if(RollAverage <= 5)
+			{
+				counterTime = 0;
+				counter++;
+				DHTreadCheck = DHT22_read();
+				AverageHum = DHT_Average_Temp(counter);
+				AverageTemp = DHT_Average_Hum(counter);
+				SendTrigger();	
+				RollAverage = 0;	
+			}
+			else
+			{
+				counterTime = 0;
+				counter = 0;
+				RollAverage = 0;
+				LCD_Command(LCD_CLEAR);
+				LCD_SetCursor(0,0);
+				LCD_Write_String("---------------------------------------");
+				LCD_SetCursor(0,1);
+				LCD_Write_String("****Bote Abierto****");
+				LCD_SetCursor(0,2);
+				LCD_Write_String("**Esperando Cierre***");
+				LCD_SetCursor(0,3);
+				LCD_Write_String("--------------------");
+				_delay_ms(2000);
+			}
 			
 		}
+
 		if(counter >= 10)
 		{
 			counter = 0;
@@ -115,6 +131,10 @@ int main(void)
 			UltraSonicData[counter-1] = distance_cm;
 			current_state = STATE_IDLE;
 		}
+	}*/
+	while(1)
+	{
+		
 	}
 }
 

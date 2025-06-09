@@ -38,6 +38,7 @@ SUBDIRS :=
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../DHT_22.c \
+../HC06Module.c \
 ../I2C_Module.c \
 ../LCD_Module.c \
 ../main.c \
@@ -58,6 +59,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 DHT_22.o \
+HC06Module.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
@@ -71,6 +73,7 @@ USART_Module.o
 
 OBJS_AS_ARGS +=  \
 DHT_22.o \
+HC06Module.o \
 I2C_Module.o \
 LCD_Module.o \
 main.o \
@@ -84,6 +87,7 @@ USART_Module.o
 
 C_DEPS +=  \
 DHT_22.d \
+HC06Module.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
@@ -97,6 +101,7 @@ USART_Module.d
 
 C_DEPS_AS_ARGS +=  \
 DHT_22.d \
+HC06Module.d \
 I2C_Module.d \
 LCD_Module.d \
 main.d \
@@ -123,6 +128,13 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 ./DHT_22.o: .././DHT_22.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./HC06Module.o: .././HC06Module.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

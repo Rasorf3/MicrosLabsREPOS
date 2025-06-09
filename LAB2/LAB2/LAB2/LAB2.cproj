@@ -126,6 +126,12 @@
     <Compile Include="DHT_22.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HC06Module.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HC06Module.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="I2C_Module.c">
       <SubType>compile</SubType>
     </Compile>

@@ -33,6 +33,11 @@ void setUSARTudr(unsigned char dataTX)
 }
 void sendStringUSART(char *str)
 {
+	if(indexBuffer == 0)
+	{
+		setUSARTudr(str[indexBuffer]);
+		indexBuffer++;
+	}
 	if(txFlag)
 	{
 		txFlag = 0;

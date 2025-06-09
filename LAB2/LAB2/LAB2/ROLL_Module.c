@@ -6,7 +6,7 @@
  */ 
 #include "ROLL_Module.h"
 
-int ReadRollPin()
+unsigned char ReadRollPin()
 {
 	if(PIND & (1 << ROLL_PIN))
 	{

@@ -13,7 +13,7 @@
 
 #include <avr/io.h>
 
-int ReadRollPin();
+unsigned char ReadRollPin();
 void Roll_Init();
 
 
