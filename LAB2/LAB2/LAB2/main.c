@@ -26,7 +26,7 @@ int main(void)
 {
 	//DDRC |= 0x30; //I2C PORTS
 	//DDRD |= (1 << 4);//LED DEBUGER
-	/*
+	
 	Timer1_Init();
 	twi_init();
 	DHT22_init();
@@ -36,12 +36,12 @@ int main(void)
 	
 	Timer0_Init();
 	Timer2_Init();
-	*/
+	
 	USART_Init();
 	//RTC_updateTime("19:54:00");
 	//RTC_updateDate("10/04/2025-5");
 	
-	/*txFlag = 0;
+	txFlag = 0;
 	rxFlag = 0;
 	indexBuffer = 0;
 	sei();
@@ -55,6 +55,7 @@ int main(void)
 	unsigned int AverageHum= 0;
 	unsigned char DHTreadCheck = 0;
 	unsigned char buffer[20];
+	unsigned char bufferUSART[6] = "HOLAss";
 	unsigned char result = 0;
 	Timer2_reset();
 	Timer2_Stop();
@@ -62,76 +63,103 @@ int main(void)
 	Timer0_Stop();
 	Timer0_Start();
 	Timer0_reset();
+	txFlag = 1;
 	while (1)
 	{
-		RTC_display_data();
-		if(Timer0_milis(TIME_CONSTANT_MS))
+		if(rxFlag != 1)
 		{
-			Timer0_reset();
-			if(ReadRollPin())
+			RTC_display_data();
+			if(Timer0_milis(TIME_CONSTANT_MS))
 			{
-				RollAverage++;
+				Timer0_reset();
+				if(ReadRollPin())
+				{
+					RollAverage++;
+				}
+				counterTime++;
+				
+				
 			}
-			counterTime++;
-			
-			
-		}
-		if(counterTime == 5)
-		{
-			if(RollAverage <= 5)
+			if(counterTime == 5)
 			{
-				counterTime = 0;
-				counter++;
-				DHTreadCheck = DHT22_read();
-				AverageHum = DHT_Average_Temp(counter);
-				AverageTemp = DHT_Average_Hum(counter);
-				SendTrigger();	
-				RollAverage = 0;	
+				if(RollAverage <= 5)
+				{
+					counterTime = 0;
+					counter++;
+					DHTreadCheck = DHT22_read();
+					AverageHum = DHT_Average_Temp(counter);
+					AverageTemp = DHT_Average_Hum(counter);
+					SendTrigger();
+					RollAverage = 0;
+				}
+				else
+				{
+					counterTime = 0;
+					counter = 0;
+					RollAverage = 0;
+					LCD_Command(LCD_CLEAR);
+					LCD_SetCursor(0,0);
+					LCD_Write_String("---------------------------------------");
+					LCD_SetCursor(0,1);
+					LCD_Write_String("****Bote Abierto****");
+					LCD_SetCursor(0,2);
+					LCD_Write_String("**Esperando Cierre***");
+					LCD_SetCursor(0,3);
+					LCD_Write_String("--------------------");
+					_delay_ms(2000);
+				}
+				
 			}
-			else
-			{
-				counterTime = 0;
-				counter = 0;
-				RollAverage = 0;
-				LCD_Command(LCD_CLEAR);
-				LCD_SetCursor(0,0);
-				LCD_Write_String("---------------------------------------");
-				LCD_SetCursor(0,1);
-				LCD_Write_String("****Bote Abierto****");
-				LCD_SetCursor(0,2);
-				LCD_Write_String("**Esperando Cierre***");
-				LCD_SetCursor(0,3);
-				LCD_Write_String("--------------------");
-				_delay_ms(2000);
-			}
-			
-		}
 
-		if(counter >= 10)
-		{
-			counter = 0;
-			
-			/////////////////////////////////////////////////////////////////
-			//Bloque Que calcula El promedio del Ultrasonico
-			for(uint8_t i = 0; i < 10; i++)
+			if(counter >= 10)
 			{
-				AverageUltraSonicData+= UltraSonicData[i];
+				counter = 0;
+				
+				/////////////////////////////////////////////////////////////////
+				//Bloque Que calcula El promedio del Ultrasonico
+				for(uint8_t i = 0; i < 10; i++)
+				{
+					AverageUltraSonicData+= UltraSonicData[i];
+				}
+				AverageUltraSonicData = AverageUltraSonicData / 10;
+				UltraSonic_Display_Data(AverageUltraSonicData);
+				/////////////////////////////////////////////////////////////////
+				dtostrf(AverageUltraSonicData, 5, 2, bufferUSART);
+				/////////////////////////////////////////////////////////////////
+				DHT_Display_Data(AverageTemp,AverageHum);
+				
+				/////////////////////////////////////////////////////////////////
+				//SEND DATA BLUETOOTH
+				txFlag = 1;
+				/////////////////////////////////////////////////////////////////
 			}
-			AverageUltraSonicData = AverageUltraSonicData / 10;
-			UltraSonic_Display_Data(AverageUltraSonicData);
-			/////////////////////////////////////////////////////////////////
-			
-			/////////////////////////////////////////////////////////////////
-			DHT_Display_Data(AverageTemp,AverageHum);
-			/////////////////////////////////////////////////////////////////
+			if(current_state == STATE_READY)
+			{
+				distance_cm = (float)measure_pulse_width() / 58.0f;
+				UltraSonicData[counter-1] = distance_cm;
+				current_state = STATE_IDLE;
+			}
+
+			sendStringUSART(bufferUSART);
 		}
-		if(current_state == STATE_READY)
+		else
 		{
-			distance_cm = (float)measure_pulse_width() / 58.0f;
-			UltraSonicData[counter-1] = distance_cm;
-			current_state = STATE_IDLE;
+			LCD_Command(LCD_CLEAR);
+			LCD_SetCursor(0,0);
+			LCD_Write_String("---------------------------------------");
+			LCD_SetCursor(0,1);
+			LCD_Write_String("***Dato Recibido***");
+			LCD_SetCursor(0,2);
+			LCD_Write_String("Dato: ");
+			LCD_Write_Char(dataRX);
+			LCD_Write_Char("             ");
+			LCD_SetCursor(0,3);
+			LCD_Write_String("--------------------");
+			_delay_ms(8000);
+			rxFlag = 0;
 		}
-	}*/
+		
+	}
 	while(1)
 	{
 		
