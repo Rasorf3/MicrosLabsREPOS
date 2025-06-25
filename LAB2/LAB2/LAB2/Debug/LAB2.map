@@ -895,7 +895,7 @@ END GROUP
                                  0x91 (size before relaxing)
  .rodata.str1.1
                 0x008001a2       0x72 RTC_Module.o
-                                 0x98 (size before relaxing)
+                                 0x97 (size before relaxing)
  .rodata.str1.1
                 0x00800214       0x10 UltraSonicModule.o
                                  0x5a (size before relaxing)

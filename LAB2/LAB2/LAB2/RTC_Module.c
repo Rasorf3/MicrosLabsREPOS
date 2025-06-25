@@ -205,8 +205,8 @@ void RTC_display_data(void)
 	LCD_Write_String(" --------------------------------------");
 	LCD_SetCursor(0,1);
 	RTC_displayDate();
-	LCD_SetCursor(9,1);
-	LCD_Write_String("  ");
+	LCD_SetCursor(10,1);
+	LCD_Write_String(" ");
 	RTC_displayDay();
 	LCD_SetCursor(0,2);
 	RTC_displayTime();

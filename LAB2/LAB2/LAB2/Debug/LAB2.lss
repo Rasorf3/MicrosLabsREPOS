@@ -2255,12 +2255,12 @@ void RTC_display_data(void)
      c1c:	0e 94 91 03 	call	0x722	; 0x722 <LCD_SetCursor>
 	RTC_displayDate();
      c20:	0e 94 c5 05 	call	0xb8a	; 0xb8a <RTC_displayDate>
-	LCD_SetCursor(9,1);
+	LCD_SetCursor(10,1);
      c24:	61 e0       	ldi	r22, 0x01	; 1
-     c26:	89 e0       	ldi	r24, 0x09	; 9
+     c26:	8a e0       	ldi	r24, 0x0A	; 10
      c28:	0e 94 91 03 	call	0x722	; 0x722 <LCD_SetCursor>
-	LCD_Write_String("  ");
-     c2c:	8f e9       	ldi	r24, 0x9F	; 159
+	LCD_Write_String(" ");
+     c2c:	80 ea       	ldi	r24, 0xA0	; 160
      c2e:	91 e0       	ldi	r25, 0x01	; 1
      c30:	0e 94 84 03 	call	0x708	; 0x708 <LCD_Write_String>
 	RTC_displayDay();
