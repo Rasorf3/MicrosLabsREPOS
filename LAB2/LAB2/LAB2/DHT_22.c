@@ -115,13 +115,13 @@ void DHT_Display_Data(unsigned char Temp,unsigned char Hum)
 	unsigned char buffer[20];
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
-	LCD_Write_String("--------------------");
+	LCD_Write_String("----------------------------------------");
 
 	LCD_SetCursor(0,1);
-	sprintf(buffer," Temp: %d,%d C.",Temp,temp_dec);
+	sprintf(buffer," Hum: %d,%d C.",Temp,temp_dec);
 	LCD_Write_String(buffer);
 	LCD_SetCursor(0,2);
-	sprintf(buffer," Hum: %d,%d %.",Hum,humidity_dec);
+	sprintf(buffer," Temp: %d,%d %.",Hum,humidity_dec);
 	LCD_Write_String(buffer);
 
 	LCD_SetCursor(0,3);

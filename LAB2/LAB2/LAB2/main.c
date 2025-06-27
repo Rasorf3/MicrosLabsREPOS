@@ -55,8 +55,10 @@ int main(void)
 	unsigned int AverageHum= 0;
 	unsigned char DHTreadCheck = 0;
 	unsigned char buffer[20];
-	unsigned char bufferUSART[6] = "HOLAss";
+	unsigned char bufferUSART[6];
 	unsigned char result = 0;
+	unsigned char dataRXLCD;
+	dataRX = "a";
 	Timer2_reset();
 	Timer2_Stop();
 		
@@ -66,6 +68,7 @@ int main(void)
 	txFlag = 1;
 	while (1)
 	{
+		
 		if(rxFlag != 1)
 		{
 			RTC_display_data();
@@ -144,6 +147,8 @@ int main(void)
 		}
 		else
 		{
+			rxFlag = 0;
+			
 			LCD_Command(LCD_CLEAR);
 			LCD_SetCursor(0,0);
 			LCD_Write_String("---------------------------------------");
@@ -151,18 +156,14 @@ int main(void)
 			LCD_Write_String("***Dato Recibido***");
 			LCD_SetCursor(0,2);
 			LCD_Write_String("Dato: ");
+			
 			LCD_Write_Char(dataRX);
-			LCD_Write_Char("             ");
+			LCD_Write_String("             ");
 			LCD_SetCursor(0,3);
 			LCD_Write_String("--------------------");
-			_delay_ms(8000);
+			_delay_ms(4000);
 			rxFlag = 0;
 		}
-		
-	}
-	while(1)
-	{
-		
 	}
 }
 
