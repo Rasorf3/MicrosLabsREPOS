@@ -9,8 +9,7 @@
 #ifndef USART_MODULE_H_
 #define USART_MODULE_H_
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
+
 
 #define TX_PORT 1
 #define RX_PORT 0

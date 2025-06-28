@@ -203,14 +203,14 @@ void RTC_display_data(void)
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
 	LCD_Write_String(" --------------------------------------");
-	LCD_SetCursor(0,1);
+	LCD_SetCursor(1,1);
 	RTC_displayDate();
-	LCD_SetCursor(9,1);
-	LCD_Write_String("  ");
+	LCD_SetCursor(11,1);
+	LCD_Write_String(" ");
 	RTC_displayDay();
 	LCD_SetCursor(0,2);
+	LCD_Write_String(" ");
 	RTC_displayTime();
-	LCD_Write_String("             ");
 	LCD_SetCursor(0,3);
 	LCD_Write_String("--------------------");
 	_delay_ms(100);

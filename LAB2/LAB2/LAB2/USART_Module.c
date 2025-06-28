@@ -5,7 +5,8 @@
  *  Author: rasor
  */ 
 #include "USART_Module.h"
-
+#include <avr/io.h>
+#include <avr/interrupt.h>
 void USART_Init()
 {
 	DDRD |= (1 << TX_PORT);
@@ -55,8 +56,10 @@ unsigned char getUSARTdata()
 
 ISR(USART_RX_vect)
 {
+	
 	rxFlag = 1;
 	dataRX = getUSARTdata();
+	
 	
 }
 ISR(USART_TX_vect)
