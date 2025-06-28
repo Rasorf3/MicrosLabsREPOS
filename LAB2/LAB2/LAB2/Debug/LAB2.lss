@@ -15,19 +15,19 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   5 .debug_aranges 00000308  00000000  00000000  00002288  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002d0a  00000000  00000000  00002590  2**0
+  6 .debug_info   00002d0c  00000000  00000000  00002590  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 0000135d  00000000  00000000  0000529a  2**0
+  7 .debug_abbrev 00001378  00000000  00000000  0000529c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001be6  00000000  00000000  000065f7  2**0
+  8 .debug_line   00001a34  00000000  00000000  00006614  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000694  00000000  00000000  000081e0  2**2
+  9 .debug_frame  00000694  00000000  00000000  00008048  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000a6b  00000000  00000000  00008874  2**0
+ 10 .debug_str    00000a6e  00000000  00000000  000086dc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001307  00000000  00000000  000092df  2**0
+ 11 .debug_loc    000012bf  00000000  00000000  0000914a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000002a0  00000000  00000000  0000a5e6  2**0
+ 12 .debug_ranges 000002a0  00000000  00000000  0000a409  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1790,21 +1790,20 @@ int main(void)
      9ba:	8f ef       	ldi	r24, 0xFF	; 255
      9bc:	91 e0       	ldi	r25, 0x01	; 1
      9be:	0e 94 84 03 	call	0x708	; 0x708 <LCD_Write_String>
-     9c2:	34 e5       	ldi	r19, 0x54	; 84
-     9c4:	85 e8       	ldi	r24, 0x85	; 133
-     9c6:	95 e4       	ldi	r25, 0x45	; 69
-     9c8:	21 e0       	ldi	r18, 0x01	; 1
-     9ca:	31 50       	subi	r19, 0x01	; 1
-     9cc:	80 40       	sbci	r24, 0x00	; 0
-     9ce:	90 40       	sbci	r25, 0x00	; 0
-     9d0:	20 40       	sbci	r18, 0x00	; 0
-     9d2:	d9 f7       	brne	.-10     	; 0x9ca <__stack+0xcb>
-     9d4:	00 c0       	rjmp	.+0      	; 0x9d6 <__stack+0xd7>
-     9d6:	00 c0       	rjmp	.+0      	; 0x9d8 <__stack+0xd9>
-     9d8:	00 00       	nop
-			_delay_ms(8000);
 			rxFlag = 0;
-     9da:	10 92 3c 02 	sts	0x023C, r1	; 0x80023c <rxFlag>
+     9c2:	10 92 3c 02 	sts	0x023C, r1	; 0x80023c <rxFlag>
+     9c6:	34 e5       	ldi	r19, 0x54	; 84
+     9c8:	85 e8       	ldi	r24, 0x85	; 133
+     9ca:	95 e4       	ldi	r25, 0x45	; 69
+     9cc:	21 e0       	ldi	r18, 0x01	; 1
+     9ce:	31 50       	subi	r19, 0x01	; 1
+     9d0:	80 40       	sbci	r24, 0x00	; 0
+     9d2:	90 40       	sbci	r25, 0x00	; 0
+     9d4:	20 40       	sbci	r18, 0x00	; 0
+     9d6:	d9 f7       	brne	.-10     	; 0x9ce <__stack+0xcf>
+     9d8:	00 c0       	rjmp	.+0      	; 0x9da <__stack+0xdb>
+     9da:	00 c0       	rjmp	.+0      	; 0x9dc <__stack+0xdd>
+     9dc:	00 00       	nop
      9de:	f6 ce       	rjmp	.-532    	; 0x7cc <main+0x86>
 
 000009e0 <ReadRollPin>:

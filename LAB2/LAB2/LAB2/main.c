@@ -155,8 +155,9 @@ int main(void)
 			LCD_Write_Char("             ");
 			LCD_SetCursor(0,3);
 			LCD_Write_String("--------------------");
-			_delay_ms(8000);
 			rxFlag = 0;
+			_delay_ms(8000);
+			
 		}
 		
 	}
