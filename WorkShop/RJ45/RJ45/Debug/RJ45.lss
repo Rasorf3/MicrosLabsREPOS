@@ -1,0 +1,1711 @@
+
+RJ45.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000cbe  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         0000001e  00800060  00000cbe  00000d52  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000039b  0080007e  0080007e  00000d70  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  00000d70  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000da0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000180  00000000  00000000  00000ddc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000200f  00000000  00000000  00000f5c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000096c  00000000  00000000  00002f6b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00001037  00000000  00000000  000038d7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  000003d4  00000000  00000000  00004910  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000068f  00000000  00000000  00004ce4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00001146  00000000  00000000  00005373  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000150  00000000  00000000  000064b9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 57 00 	jmp	0xae	; 0xae <__ctors_end>
+   4:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+   8:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+   c:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  10:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  14:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  18:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  1c:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  20:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  24:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  28:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  2c:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  30:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  34:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  38:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  3c:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  40:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  44:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  48:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  4c:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+  50:	0c 94 74 00 	jmp	0xe8	; 0xe8 <__bad_interrupt>
+
+00000054 <__trampolines_end>:
+  54:	3c 68       	ori	r19, 0x8C	; 140
+  56:	74 6d       	ori	r23, 0xD4	; 212
+  58:	6c 3e       	cpi	r22, 0xEC	; 236
+  5a:	3c 62       	ori	r19, 0x2C	; 44
+  5c:	6f 64       	ori	r22, 0x4F	; 79
+  5e:	79 3e       	cpi	r23, 0xE9	; 233
+  60:	3c 68       	ori	r19, 0x8C	; 140
+  62:	31 3e       	cpi	r19, 0xE1	; 225
+  64:	49 74       	andi	r20, 0x49	; 73
+  66:	20 57       	subi	r18, 0x70	; 112
+  68:	6f 72       	andi	r22, 0x2F	; 47
+  6a:	6b 73       	andi	r22, 0x3B	; 59
+  6c:	21 3c       	cpi	r18, 0xC1	; 193
+  6e:	2f 68       	ori	r18, 0x8F	; 143
+  70:	31 3e       	cpi	r19, 0xE1	; 225
+  72:	3c 2f       	mov	r19, r28
+  74:	62 6f       	ori	r22, 0xF2	; 242
+  76:	64 79       	andi	r22, 0x94	; 148
+  78:	3e 3c       	cpi	r19, 0xCE	; 206
+  7a:	2f 68       	ori	r18, 0x8F	; 143
+  7c:	74 6d       	ori	r23, 0xD4	; 212
+  7e:	6c 3e       	cpi	r22, 0xEC	; 236
+	...
+
+00000081 <__c.2256>:
+  81:	48 54 54 50 2f 31 2e 30 20 32 30 30 20 4f 4b 0d     HTTP/1.0 200 OK.
+  91:	0a 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74     .Content-Type: t
+  a1:	65 78 74 2f 68 74 6d 6c 0d 0a 0d 0a 00              ext/html.....
+
+000000ae <__ctors_end>:
+  ae:	11 24       	eor	r1, r1
+  b0:	1f be       	out	0x3f, r1	; 63
+  b2:	cf e5       	ldi	r28, 0x5F	; 95
+  b4:	d8 e0       	ldi	r29, 0x08	; 8
+  b6:	de bf       	out	0x3e, r29	; 62
+  b8:	cd bf       	out	0x3d, r28	; 61
+
+000000ba <__do_copy_data>:
+  ba:	10 e0       	ldi	r17, 0x00	; 0
+  bc:	a0 e6       	ldi	r26, 0x60	; 96
+  be:	b0 e0       	ldi	r27, 0x00	; 0
+  c0:	ee eb       	ldi	r30, 0xBE	; 190
+  c2:	fc e0       	ldi	r31, 0x0C	; 12
+  c4:	02 c0       	rjmp	.+4      	; 0xca <__do_copy_data+0x10>
+  c6:	05 90       	lpm	r0, Z+
+  c8:	0d 92       	st	X+, r0
+  ca:	ae 37       	cpi	r26, 0x7E	; 126
+  cc:	b1 07       	cpc	r27, r17
+  ce:	d9 f7       	brne	.-10     	; 0xc6 <__do_copy_data+0xc>
+
+000000d0 <__do_clear_bss>:
+  d0:	24 e0       	ldi	r18, 0x04	; 4
+  d2:	ae e7       	ldi	r26, 0x7E	; 126
+  d4:	b0 e0       	ldi	r27, 0x00	; 0
+  d6:	01 c0       	rjmp	.+2      	; 0xda <.do_clear_bss_start>
+
+000000d8 <.do_clear_bss_loop>:
+  d8:	1d 92       	st	X+, r1
+
+000000da <.do_clear_bss_start>:
+  da:	a9 31       	cpi	r26, 0x19	; 25
+  dc:	b2 07       	cpc	r27, r18
+  de:	e1 f7       	brne	.-8      	; 0xd8 <.do_clear_bss_loop>
+  e0:	0e 94 05 03 	call	0x60a	; 0x60a <main>
+  e4:	0c 94 5d 06 	jmp	0xcba	; 0xcba <_exit>
+
+000000e8 <__bad_interrupt>:
+  e8:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000ec <csactive>:
+}
+
+uint8_t ENC28J60_HasRxPkt(void) {
+    if(ENC28J60_Read(EPKTCNT)==0) return(0);
+    return(1);
+}
+  ec:	88 b3       	in	r24, 0x18	; 24
+  ee:	8f 7e       	andi	r24, 0xEF	; 239
+  f0:	88 bb       	out	0x18, r24	; 24
+  f2:	08 95       	ret
+
+000000f4 <cspassive>:
+  f4:	88 b3       	in	r24, 0x18	; 24
+  f6:	80 61       	ori	r24, 0x10	; 16
+  f8:	88 bb       	out	0x18, r24	; 24
+  fa:	08 95       	ret
+
+000000fc <waitspi>:
+  fc:	77 9b       	sbis	0x0e, 7	; 14
+  fe:	fe cf       	rjmp	.-4      	; 0xfc <waitspi>
+ 100:	08 95       	ret
+
+00000102 <ENC28J60_ReadOp>:
+ 102:	cf 93       	push	r28
+ 104:	df 93       	push	r29
+ 106:	c8 2f       	mov	r28, r24
+ 108:	d6 2f       	mov	r29, r22
+ 10a:	0e 94 76 00 	call	0xec	; 0xec <csactive>
+ 10e:	8d 2f       	mov	r24, r29
+ 110:	8f 71       	andi	r24, 0x1F	; 31
+ 112:	c8 2b       	or	r28, r24
+ 114:	cf b9       	out	0x0f, r28	; 15
+ 116:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 11a:	1f b8       	out	0x0f, r1	; 15
+ 11c:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 120:	dd 23       	and	r29, r29
+ 122:	1c f4       	brge	.+6      	; 0x12a <ENC28J60_ReadOp+0x28>
+ 124:	1f b8       	out	0x0f, r1	; 15
+ 126:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 12a:	0e 94 7a 00 	call	0xf4	; 0xf4 <cspassive>
+ 12e:	8f b1       	in	r24, 0x0f	; 15
+ 130:	df 91       	pop	r29
+ 132:	cf 91       	pop	r28
+ 134:	08 95       	ret
+
+00000136 <ENC28J60_WriteOp>:
+ 136:	1f 93       	push	r17
+ 138:	cf 93       	push	r28
+ 13a:	df 93       	push	r29
+ 13c:	c8 2f       	mov	r28, r24
+ 13e:	d6 2f       	mov	r29, r22
+ 140:	14 2f       	mov	r17, r20
+ 142:	0e 94 76 00 	call	0xec	; 0xec <csactive>
+ 146:	df 71       	andi	r29, 0x1F	; 31
+ 148:	cd 2b       	or	r28, r29
+ 14a:	cf b9       	out	0x0f, r28	; 15
+ 14c:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 150:	1f b9       	out	0x0f, r17	; 15
+ 152:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 156:	0e 94 7a 00 	call	0xf4	; 0xf4 <cspassive>
+ 15a:	df 91       	pop	r29
+ 15c:	cf 91       	pop	r28
+ 15e:	1f 91       	pop	r17
+ 160:	08 95       	ret
+
+00000162 <ENC28J60_ReadBuffer>:
+ 162:	0f 93       	push	r16
+ 164:	1f 93       	push	r17
+ 166:	cf 93       	push	r28
+ 168:	df 93       	push	r29
+ 16a:	ec 01       	movw	r28, r24
+ 16c:	8b 01       	movw	r16, r22
+ 16e:	0e 94 76 00 	call	0xec	; 0xec <csactive>
+ 172:	8a e3       	ldi	r24, 0x3A	; 58
+ 174:	8f b9       	out	0x0f, r24	; 15
+ 176:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 17a:	08 c0       	rjmp	.+16     	; 0x18c <ENC28J60_ReadBuffer+0x2a>
+ 17c:	21 97       	sbiw	r28, 0x01	; 1
+ 17e:	1f b8       	out	0x0f, r1	; 15
+ 180:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 184:	8f b1       	in	r24, 0x0f	; 15
+ 186:	f8 01       	movw	r30, r16
+ 188:	81 93       	st	Z+, r24
+ 18a:	8f 01       	movw	r16, r30
+ 18c:	20 97       	sbiw	r28, 0x00	; 0
+ 18e:	b1 f7       	brne	.-20     	; 0x17c <ENC28J60_ReadBuffer+0x1a>
+ 190:	f8 01       	movw	r30, r16
+ 192:	10 82       	st	Z, r1
+ 194:	0e 94 7a 00 	call	0xf4	; 0xf4 <cspassive>
+ 198:	df 91       	pop	r29
+ 19a:	cf 91       	pop	r28
+ 19c:	1f 91       	pop	r17
+ 19e:	0f 91       	pop	r16
+ 1a0:	08 95       	ret
+
+000001a2 <ENC28J60_WriteBuffer>:
+ 1a2:	0f 93       	push	r16
+ 1a4:	1f 93       	push	r17
+ 1a6:	cf 93       	push	r28
+ 1a8:	df 93       	push	r29
+ 1aa:	ec 01       	movw	r28, r24
+ 1ac:	8b 01       	movw	r16, r22
+ 1ae:	0e 94 76 00 	call	0xec	; 0xec <csactive>
+ 1b2:	8a e7       	ldi	r24, 0x7A	; 122
+ 1b4:	8f b9       	out	0x0f, r24	; 15
+ 1b6:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 1ba:	07 c0       	rjmp	.+14     	; 0x1ca <ENC28J60_WriteBuffer+0x28>
+ 1bc:	21 97       	sbiw	r28, 0x01	; 1
+ 1be:	f8 01       	movw	r30, r16
+ 1c0:	81 91       	ld	r24, Z+
+ 1c2:	8f 01       	movw	r16, r30
+ 1c4:	8f b9       	out	0x0f, r24	; 15
+ 1c6:	0e 94 7e 00 	call	0xfc	; 0xfc <waitspi>
+ 1ca:	20 97       	sbiw	r28, 0x00	; 0
+ 1cc:	b9 f7       	brne	.-18     	; 0x1bc <ENC28J60_WriteBuffer+0x1a>
+ 1ce:	0e 94 7a 00 	call	0xf4	; 0xf4 <cspassive>
+ 1d2:	df 91       	pop	r29
+ 1d4:	cf 91       	pop	r28
+ 1d6:	1f 91       	pop	r17
+ 1d8:	0f 91       	pop	r16
+ 1da:	08 95       	ret
+
+000001dc <ENC28J60_SetBank>:
+ 1dc:	1f 93       	push	r17
+ 1de:	cf 93       	push	r28
+ 1e0:	df 93       	push	r29
+ 1e2:	18 2f       	mov	r17, r24
+ 1e4:	10 76       	andi	r17, 0x60	; 96
+ 1e6:	c1 2f       	mov	r28, r17
+ 1e8:	d0 e0       	ldi	r29, 0x00	; 0
+ 1ea:	80 91 80 00 	lds	r24, 0x0080	; 0x800080 <ENC28J60_Bank>
+ 1ee:	90 e0       	ldi	r25, 0x00	; 0
+ 1f0:	c8 17       	cp	r28, r24
+ 1f2:	d9 07       	cpc	r29, r25
+ 1f4:	b1 f0       	breq	.+44     	; 0x222 <ENC28J60_SetBank+0x46>
+ 1f6:	43 e0       	ldi	r20, 0x03	; 3
+ 1f8:	6f e1       	ldi	r22, 0x1F	; 31
+ 1fa:	80 ea       	ldi	r24, 0xA0	; 160
+ 1fc:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 200:	ae 01       	movw	r20, r28
+ 202:	55 95       	asr	r21
+ 204:	47 95       	ror	r20
+ 206:	55 95       	asr	r21
+ 208:	47 95       	ror	r20
+ 20a:	55 95       	asr	r21
+ 20c:	47 95       	ror	r20
+ 20e:	55 95       	asr	r21
+ 210:	47 95       	ror	r20
+ 212:	55 95       	asr	r21
+ 214:	47 95       	ror	r20
+ 216:	6f e1       	ldi	r22, 0x1F	; 31
+ 218:	80 e8       	ldi	r24, 0x80	; 128
+ 21a:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 21e:	10 93 80 00 	sts	0x0080, r17	; 0x800080 <ENC28J60_Bank>
+ 222:	df 91       	pop	r29
+ 224:	cf 91       	pop	r28
+ 226:	1f 91       	pop	r17
+ 228:	08 95       	ret
+
+0000022a <ENC28J60_Read>:
+ 22a:	cf 93       	push	r28
+ 22c:	c8 2f       	mov	r28, r24
+ 22e:	0e 94 ee 00 	call	0x1dc	; 0x1dc <ENC28J60_SetBank>
+ 232:	6c 2f       	mov	r22, r28
+ 234:	80 e0       	ldi	r24, 0x00	; 0
+ 236:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 23a:	cf 91       	pop	r28
+ 23c:	08 95       	ret
+
+0000023e <ENC28J60_Write>:
+ 23e:	cf 93       	push	r28
+ 240:	df 93       	push	r29
+ 242:	c8 2f       	mov	r28, r24
+ 244:	d6 2f       	mov	r29, r22
+ 246:	0e 94 ee 00 	call	0x1dc	; 0x1dc <ENC28J60_SetBank>
+ 24a:	4d 2f       	mov	r20, r29
+ 24c:	6c 2f       	mov	r22, r28
+ 24e:	80 e4       	ldi	r24, 0x40	; 64
+ 250:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 254:	df 91       	pop	r29
+ 256:	cf 91       	pop	r28
+ 258:	08 95       	ret
+
+0000025a <ENC28J60_PhyWrite>:
+ 25a:	cf 93       	push	r28
+ 25c:	df 93       	push	r29
+ 25e:	d6 2f       	mov	r29, r22
+ 260:	c7 2f       	mov	r28, r23
+ 262:	68 2f       	mov	r22, r24
+ 264:	84 ed       	ldi	r24, 0xD4	; 212
+ 266:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 26a:	6d 2f       	mov	r22, r29
+ 26c:	86 ed       	ldi	r24, 0xD6	; 214
+ 26e:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 272:	6c 2f       	mov	r22, r28
+ 274:	87 ed       	ldi	r24, 0xD7	; 215
+ 276:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 27a:	03 c0       	rjmp	.+6      	; 0x282 <ENC28J60_PhyWrite+0x28>
+ 27c:	85 e0       	ldi	r24, 0x05	; 5
+ 27e:	8a 95       	dec	r24
+ 280:	f1 f7       	brne	.-4      	; 0x27e <ENC28J60_PhyWrite+0x24>
+ 282:	8a ee       	ldi	r24, 0xEA	; 234
+ 284:	0e 94 15 01 	call	0x22a	; 0x22a <ENC28J60_Read>
+ 288:	80 fd       	sbrc	r24, 0
+ 28a:	f8 cf       	rjmp	.-16     	; 0x27c <ENC28J60_PhyWrite+0x22>
+ 28c:	df 91       	pop	r29
+ 28e:	cf 91       	pop	r28
+ 290:	08 95       	ret
+
+00000292 <ENC28J60_ClkOut>:
+ 292:	68 2f       	mov	r22, r24
+ 294:	67 70       	andi	r22, 0x07	; 7
+ 296:	85 e7       	ldi	r24, 0x75	; 117
+ 298:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 29c:	08 95       	ret
+
+0000029e <ENC28J60_Init>:
+ 29e:	cf 93       	push	r28
+ 2a0:	df 93       	push	r29
+ 2a2:	ec 01       	movw	r28, r24
+ 2a4:	87 b3       	in	r24, 0x17	; 23
+ 2a6:	80 61       	ori	r24, 0x10	; 16
+ 2a8:	87 bb       	out	0x17, r24	; 23
+ 2aa:	0e 94 7a 00 	call	0xf4	; 0xf4 <cspassive>
+ 2ae:	87 b3       	in	r24, 0x17	; 23
+ 2b0:	80 6a       	ori	r24, 0xA0	; 160
+ 2b2:	87 bb       	out	0x17, r24	; 23
+ 2b4:	87 b3       	in	r24, 0x17	; 23
+ 2b6:	8f 7b       	andi	r24, 0xBF	; 191
+ 2b8:	87 bb       	out	0x17, r24	; 23
+ 2ba:	88 b3       	in	r24, 0x18	; 24
+ 2bc:	8f 7d       	andi	r24, 0xDF	; 223
+ 2be:	88 bb       	out	0x18, r24	; 24
+ 2c0:	88 b3       	in	r24, 0x18	; 24
+ 2c2:	8f 77       	andi	r24, 0x7F	; 127
+ 2c4:	88 bb       	out	0x18, r24	; 24
+ 2c6:	80 e5       	ldi	r24, 0x50	; 80
+ 2c8:	8d b9       	out	0x0d, r24	; 13
+ 2ca:	8e b1       	in	r24, 0x0e	; 14
+ 2cc:	81 60       	ori	r24, 0x01	; 1
+ 2ce:	8e b9       	out	0x0e, r24	; 14
+ 2d0:	4f ef       	ldi	r20, 0xFF	; 255
+ 2d2:	60 e0       	ldi	r22, 0x00	; 0
+ 2d4:	8f ef       	ldi	r24, 0xFF	; 255
+ 2d6:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 2da:	8d ec       	ldi	r24, 0xCD	; 205
+ 2dc:	8a 95       	dec	r24
+ 2de:	f1 f7       	brne	.-4      	; 0x2dc <ENC28J60_Init+0x3e>
+ 2e0:	10 92 7f 00 	sts	0x007F, r1	; 0x80007f <__data_end+0x1>
+ 2e4:	10 92 7e 00 	sts	0x007E, r1	; 0x80007e <__data_end>
+ 2e8:	60 e0       	ldi	r22, 0x00	; 0
+ 2ea:	88 e0       	ldi	r24, 0x08	; 8
+ 2ec:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 2f0:	60 e0       	ldi	r22, 0x00	; 0
+ 2f2:	89 e0       	ldi	r24, 0x09	; 9
+ 2f4:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 2f8:	60 e0       	ldi	r22, 0x00	; 0
+ 2fa:	8c e0       	ldi	r24, 0x0C	; 12
+ 2fc:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 300:	60 e0       	ldi	r22, 0x00	; 0
+ 302:	8d e0       	ldi	r24, 0x0D	; 13
+ 304:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 308:	6e ef       	ldi	r22, 0xFE	; 254
+ 30a:	8a e0       	ldi	r24, 0x0A	; 10
+ 30c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 310:	69 e1       	ldi	r22, 0x19	; 25
+ 312:	8b e0       	ldi	r24, 0x0B	; 11
+ 314:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 318:	6f ef       	ldi	r22, 0xFF	; 255
+ 31a:	84 e0       	ldi	r24, 0x04	; 4
+ 31c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 320:	69 e1       	ldi	r22, 0x19	; 25
+ 322:	85 e0       	ldi	r24, 0x05	; 5
+ 324:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 328:	6f ef       	ldi	r22, 0xFF	; 255
+ 32a:	86 e0       	ldi	r24, 0x06	; 6
+ 32c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 330:	6f e1       	ldi	r22, 0x1F	; 31
+ 332:	87 e0       	ldi	r24, 0x07	; 7
+ 334:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 338:	60 eb       	ldi	r22, 0xB0	; 176
+ 33a:	88 e3       	ldi	r24, 0x38	; 56
+ 33c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 340:	6f e3       	ldi	r22, 0x3F	; 63
+ 342:	88 e2       	ldi	r24, 0x28	; 40
+ 344:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 348:	60 e3       	ldi	r22, 0x30	; 48
+ 34a:	89 e2       	ldi	r24, 0x29	; 41
+ 34c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 350:	69 ef       	ldi	r22, 0xF9	; 249
+ 352:	80 e3       	ldi	r24, 0x30	; 48
+ 354:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 358:	67 ef       	ldi	r22, 0xF7	; 247
+ 35a:	81 e3       	ldi	r24, 0x31	; 49
+ 35c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 360:	6d e0       	ldi	r22, 0x0D	; 13
+ 362:	80 ec       	ldi	r24, 0xC0	; 192
+ 364:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 368:	60 e0       	ldi	r22, 0x00	; 0
+ 36a:	81 ec       	ldi	r24, 0xC1	; 193
+ 36c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 370:	42 e3       	ldi	r20, 0x32	; 50
+ 372:	62 ec       	ldi	r22, 0xC2	; 194
+ 374:	80 e8       	ldi	r24, 0x80	; 128
+ 376:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 37a:	62 e1       	ldi	r22, 0x12	; 18
+ 37c:	86 ec       	ldi	r24, 0xC6	; 198
+ 37e:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 382:	6c e0       	ldi	r22, 0x0C	; 12
+ 384:	87 ec       	ldi	r24, 0xC7	; 199
+ 386:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 38a:	62 e1       	ldi	r22, 0x12	; 18
+ 38c:	84 ec       	ldi	r24, 0xC4	; 196
+ 38e:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 392:	6c ed       	ldi	r22, 0xDC	; 220
+ 394:	8a ec       	ldi	r24, 0xCA	; 202
+ 396:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 39a:	65 e0       	ldi	r22, 0x05	; 5
+ 39c:	8b ec       	ldi	r24, 0xCB	; 203
+ 39e:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3a2:	68 81       	ld	r22, Y
+ 3a4:	84 ee       	ldi	r24, 0xE4	; 228
+ 3a6:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3aa:	69 81       	ldd	r22, Y+1	; 0x01
+ 3ac:	85 ee       	ldi	r24, 0xE5	; 229
+ 3ae:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3b2:	6a 81       	ldd	r22, Y+2	; 0x02
+ 3b4:	82 ee       	ldi	r24, 0xE2	; 226
+ 3b6:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3ba:	6b 81       	ldd	r22, Y+3	; 0x03
+ 3bc:	83 ee       	ldi	r24, 0xE3	; 227
+ 3be:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3c2:	6c 81       	ldd	r22, Y+4	; 0x04
+ 3c4:	80 ee       	ldi	r24, 0xE0	; 224
+ 3c6:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3ca:	6d 81       	ldd	r22, Y+5	; 0x05
+ 3cc:	81 ee       	ldi	r24, 0xE1	; 225
+ 3ce:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 3d2:	60 e0       	ldi	r22, 0x00	; 0
+ 3d4:	71 e0       	ldi	r23, 0x01	; 1
+ 3d6:	80 e1       	ldi	r24, 0x10	; 16
+ 3d8:	0e 94 2d 01 	call	0x25a	; 0x25a <ENC28J60_PhyWrite>
+ 3dc:	8f e1       	ldi	r24, 0x1F	; 31
+ 3de:	0e 94 ee 00 	call	0x1dc	; 0x1dc <ENC28J60_SetBank>
+ 3e2:	40 ec       	ldi	r20, 0xC0	; 192
+ 3e4:	6b e1       	ldi	r22, 0x1B	; 27
+ 3e6:	80 e8       	ldi	r24, 0x80	; 128
+ 3e8:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 3ec:	44 e0       	ldi	r20, 0x04	; 4
+ 3ee:	6f e1       	ldi	r22, 0x1F	; 31
+ 3f0:	80 e8       	ldi	r24, 0x80	; 128
+ 3f2:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+ 3f6:	df 91       	pop	r29
+ 3f8:	cf 91       	pop	r28
+ 3fa:	08 95       	ret
+
+000003fc <ENC28J60_PacketReceive>:
+
+uint16_t ENC28J60_PacketReceive(uint16_t maxlen,uint8_t* packet) {
+ 3fc:	cf 92       	push	r12
+ 3fe:	df 92       	push	r13
+ 400:	ef 92       	push	r14
+ 402:	ff 92       	push	r15
+ 404:	0f 93       	push	r16
+ 406:	1f 93       	push	r17
+ 408:	cf 93       	push	r28
+ 40a:	df 93       	push	r29
+ 40c:	ec 01       	movw	r28, r24
+ 40e:	7b 01       	movw	r14, r22
+    uint16_t rxstat;
+    uint16_t len;
+    if(ENC28J60_Read(EPKTCNT)==0) return(0);
+ 410:	89 e3       	ldi	r24, 0x39	; 57
+ 412:	0e 94 15 01 	call	0x22a	; 0x22a <ENC28J60_Read>
+ 416:	88 23       	and	r24, r24
+ 418:	09 f4       	brne	.+2      	; 0x41c <__EEPROM_REGION_LENGTH__+0x1c>
+ 41a:	84 c0       	rjmp	.+264    	; 0x524 <__EEPROM_REGION_LENGTH__+0x124>
+    ENC28J60_Write(ERDPTL,(gNextPacketPtr & 0xFF));
+ 41c:	60 91 7e 00 	lds	r22, 0x007E	; 0x80007e <__data_end>
+ 420:	80 e0       	ldi	r24, 0x00	; 0
+ 422:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_Write(ERDPTH,(gNextPacketPtr)>>8);
+ 426:	60 91 7f 00 	lds	r22, 0x007F	; 0x80007f <__data_end+0x1>
+ 42a:	81 e0       	ldi	r24, 0x01	; 1
+ 42c:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    gNextPacketPtr  = ENC28J60_ReadOp(RBM,0);
+ 430:	60 e0       	ldi	r22, 0x00	; 0
+ 432:	8a e3       	ldi	r24, 0x3A	; 58
+ 434:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 438:	90 e0       	ldi	r25, 0x00	; 0
+ 43a:	90 93 7f 00 	sts	0x007F, r25	; 0x80007f <__data_end+0x1>
+ 43e:	80 93 7e 00 	sts	0x007E, r24	; 0x80007e <__data_end>
+    gNextPacketPtr |= ENC28J60_ReadOp(RBM,0)<<8;
+ 442:	60 e0       	ldi	r22, 0x00	; 0
+ 444:	8a e3       	ldi	r24, 0x3A	; 58
+ 446:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 44a:	90 e0       	ldi	r25, 0x00	; 0
+ 44c:	98 2f       	mov	r25, r24
+ 44e:	88 27       	eor	r24, r24
+ 450:	20 91 7e 00 	lds	r18, 0x007E	; 0x80007e <__data_end>
+ 454:	30 91 7f 00 	lds	r19, 0x007F	; 0x80007f <__data_end+0x1>
+ 458:	82 2b       	or	r24, r18
+ 45a:	93 2b       	or	r25, r19
+ 45c:	90 93 7f 00 	sts	0x007F, r25	; 0x80007f <__data_end+0x1>
+ 460:	80 93 7e 00 	sts	0x007E, r24	; 0x80007e <__data_end>
+    len  = ENC28J60_ReadOp(RBM,0);
+ 464:	60 e0       	ldi	r22, 0x00	; 0
+ 466:	8a e3       	ldi	r24, 0x3A	; 58
+ 468:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 46c:	c8 2e       	mov	r12, r24
+ 46e:	d1 2c       	mov	r13, r1
+    len |= ENC28J60_ReadOp(RBM,0)<<8;
+ 470:	60 e0       	ldi	r22, 0x00	; 0
+ 472:	8a e3       	ldi	r24, 0x3A	; 58
+ 474:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 478:	08 2f       	mov	r16, r24
+ 47a:	10 e0       	ldi	r17, 0x00	; 0
+ 47c:	10 2f       	mov	r17, r16
+ 47e:	00 27       	eor	r16, r16
+ 480:	0c 29       	or	r16, r12
+ 482:	1d 29       	or	r17, r13
+    len-=4;
+ 484:	04 50       	subi	r16, 0x04	; 4
+ 486:	11 09       	sbc	r17, r1
+    rxstat  = ENC28J60_ReadOp(RBM,0);
+ 488:	60 e0       	ldi	r22, 0x00	; 0
+ 48a:	8a e3       	ldi	r24, 0x3A	; 58
+ 48c:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 490:	c8 2e       	mov	r12, r24
+ 492:	d1 2c       	mov	r13, r1
+    rxstat |= ((uint16_t)ENC28J60_ReadOp(RBM,0))<<8;
+ 494:	60 e0       	ldi	r22, 0x00	; 0
+ 496:	8a e3       	ldi	r24, 0x3A	; 58
+ 498:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 49c:	90 e0       	ldi	r25, 0x00	; 0
+ 49e:	98 2f       	mov	r25, r24
+ 4a0:	88 27       	eor	r24, r24
+ 4a2:	8c 29       	or	r24, r12
+ 4a4:	9d 29       	or	r25, r13
+    if (len>maxlen-1) len=maxlen-1;
+ 4a6:	21 97       	sbiw	r28, 0x01	; 1
+ 4a8:	c0 17       	cp	r28, r16
+ 4aa:	d1 07       	cpc	r29, r17
+ 4ac:	08 f0       	brcs	.+2      	; 0x4b0 <__EEPROM_REGION_LENGTH__+0xb0>
+    ENC28J60_Write(ERDPTH,(gNextPacketPtr)>>8);
+    gNextPacketPtr  = ENC28J60_ReadOp(RBM,0);
+    gNextPacketPtr |= ENC28J60_ReadOp(RBM,0)<<8;
+    len  = ENC28J60_ReadOp(RBM,0);
+    len |= ENC28J60_ReadOp(RBM,0)<<8;
+    len-=4;
+ 4ae:	e8 01       	movw	r28, r16
+    rxstat  = ENC28J60_ReadOp(RBM,0);
+    rxstat |= ((uint16_t)ENC28J60_ReadOp(RBM,0))<<8;
+    if (len>maxlen-1) len=maxlen-1;
+    if ((rxstat & 0x80)==0) len=0;
+ 4b0:	87 ff       	sbrs	r24, 7
+ 4b2:	05 c0       	rjmp	.+10     	; 0x4be <__EEPROM_REGION_LENGTH__+0xbe>
+    else ENC28J60_ReadBuffer(len,packet);
+ 4b4:	b7 01       	movw	r22, r14
+ 4b6:	ce 01       	movw	r24, r28
+ 4b8:	0e 94 b1 00 	call	0x162	; 0x162 <ENC28J60_ReadBuffer>
+ 4bc:	02 c0       	rjmp	.+4      	; 0x4c2 <__EEPROM_REGION_LENGTH__+0xc2>
+    len |= ENC28J60_ReadOp(RBM,0)<<8;
+    len-=4;
+    rxstat  = ENC28J60_ReadOp(RBM,0);
+    rxstat |= ((uint16_t)ENC28J60_ReadOp(RBM,0))<<8;
+    if (len>maxlen-1) len=maxlen-1;
+    if ((rxstat & 0x80)==0) len=0;
+ 4be:	c0 e0       	ldi	r28, 0x00	; 0
+ 4c0:	d0 e0       	ldi	r29, 0x00	; 0
+    else ENC28J60_ReadBuffer(len,packet);
+    ENC28J60_Write(ERXRDPTL,(gNextPacketPtr &0xFF));
+ 4c2:	60 91 7e 00 	lds	r22, 0x007E	; 0x80007e <__data_end>
+ 4c6:	8c e0       	ldi	r24, 0x0C	; 12
+ 4c8:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_Write(ERXRDPTH,(gNextPacketPtr)>>8);
+ 4cc:	60 91 7f 00 	lds	r22, 0x007F	; 0x80007f <__data_end+0x1>
+ 4d0:	8d e0       	ldi	r24, 0x0D	; 13
+ 4d2:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    if ((gNextPacketPtr-1 < RXSTART_INIT)||(gNextPacketPtr-1 > RXSTOP_INIT)) {
+ 4d6:	60 91 7e 00 	lds	r22, 0x007E	; 0x80007e <__data_end>
+ 4da:	70 91 7f 00 	lds	r23, 0x007F	; 0x80007f <__data_end+0x1>
+ 4de:	cb 01       	movw	r24, r22
+ 4e0:	01 97       	sbiw	r24, 0x01	; 1
+ 4e2:	8f 3f       	cpi	r24, 0xFF	; 255
+ 4e4:	99 41       	sbci	r25, 0x19	; 25
+ 4e6:	48 f0       	brcs	.+18     	; 0x4fa <__EEPROM_REGION_LENGTH__+0xfa>
+        ENC28J60_Write(ERXRDPTL,(RXSTOP_INIT)&0xFF);
+ 4e8:	6e ef       	ldi	r22, 0xFE	; 254
+ 4ea:	8c e0       	ldi	r24, 0x0C	; 12
+ 4ec:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+        ENC28J60_Write(ERXRDPTH,(RXSTOP_INIT)>>8);
+ 4f0:	69 e1       	ldi	r22, 0x19	; 25
+ 4f2:	8d e0       	ldi	r24, 0x0D	; 13
+ 4f4:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+ 4f8:	0d c0       	rjmp	.+26     	; 0x514 <__EEPROM_REGION_LENGTH__+0x114>
+    }
+    else {
+        ENC28J60_Write(ERXRDPTL,(gNextPacketPtr-1)&0xFF);
+ 4fa:	61 50       	subi	r22, 0x01	; 1
+ 4fc:	8c e0       	ldi	r24, 0x0C	; 12
+ 4fe:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+        ENC28J60_Write(ERXRDPTH,(gNextPacketPtr-1)>>8);
+ 502:	80 91 7e 00 	lds	r24, 0x007E	; 0x80007e <__data_end>
+ 506:	90 91 7f 00 	lds	r25, 0x007F	; 0x80007f <__data_end+0x1>
+ 50a:	01 97       	sbiw	r24, 0x01	; 1
+ 50c:	69 2f       	mov	r22, r25
+ 50e:	8d e0       	ldi	r24, 0x0D	; 13
+ 510:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    }
+    ENC28J60_WriteOp(BFS,ECON2,PKTDEC);
+ 514:	40 e4       	ldi	r20, 0x40	; 64
+ 516:	6e e1       	ldi	r22, 0x1E	; 30
+ 518:	80 e8       	ldi	r24, 0x80	; 128
+ 51a:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+    return(len);
+ 51e:	8c 2f       	mov	r24, r28
+ 520:	9d 2f       	mov	r25, r29
+ 522:	02 c0       	rjmp	.+4      	; 0x528 <__EEPROM_REGION_LENGTH__+0x128>
+}
+
+uint16_t ENC28J60_PacketReceive(uint16_t maxlen,uint8_t* packet) {
+    uint16_t rxstat;
+    uint16_t len;
+    if(ENC28J60_Read(EPKTCNT)==0) return(0);
+ 524:	80 e0       	ldi	r24, 0x00	; 0
+ 526:	90 e0       	ldi	r25, 0x00	; 0
+        ENC28J60_Write(ERXRDPTL,(gNextPacketPtr-1)&0xFF);
+        ENC28J60_Write(ERXRDPTH,(gNextPacketPtr-1)>>8);
+    }
+    ENC28J60_WriteOp(BFS,ECON2,PKTDEC);
+    return(len);
+}
+ 528:	df 91       	pop	r29
+ 52a:	cf 91       	pop	r28
+ 52c:	1f 91       	pop	r17
+ 52e:	0f 91       	pop	r16
+ 530:	ff 90       	pop	r15
+ 532:	ef 90       	pop	r14
+ 534:	df 90       	pop	r13
+ 536:	cf 90       	pop	r12
+ 538:	08 95       	ret
+
+0000053a <ENC28J60_PacketSend>:
+
+void ENC28J60_PacketSend(uint16_t len,uint8_t* packet) {
+ 53a:	0f 93       	push	r16
+ 53c:	1f 93       	push	r17
+ 53e:	cf 93       	push	r28
+ 540:	df 93       	push	r29
+ 542:	ec 01       	movw	r28, r24
+ 544:	8b 01       	movw	r16, r22
+    while (ENC28J60_ReadOp(RCR,ECON1) & TXRTS) {
+ 546:	0f c0       	rjmp	.+30     	; 0x566 <ENC28J60_PacketSend+0x2c>
+        if(ENC28J60_Read(EIR) & TXERIF) {
+ 548:	8c e1       	ldi	r24, 0x1C	; 28
+ 54a:	0e 94 15 01 	call	0x22a	; 0x22a <ENC28J60_Read>
+ 54e:	81 ff       	sbrs	r24, 1
+ 550:	0a c0       	rjmp	.+20     	; 0x566 <ENC28J60_PacketSend+0x2c>
+            ENC28J60_WriteOp(BFS,ECON1,TXRST);
+ 552:	40 e8       	ldi	r20, 0x80	; 128
+ 554:	6f e1       	ldi	r22, 0x1F	; 31
+ 556:	80 e8       	ldi	r24, 0x80	; 128
+ 558:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+            ENC28J60_WriteOp(BFC,ECON1,TXRST);
+ 55c:	40 e8       	ldi	r20, 0x80	; 128
+ 55e:	6f e1       	ldi	r22, 0x1F	; 31
+ 560:	80 ea       	ldi	r24, 0xA0	; 160
+ 562:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+    ENC28J60_WriteOp(BFS,ECON2,PKTDEC);
+    return(len);
+}
+
+void ENC28J60_PacketSend(uint16_t len,uint8_t* packet) {
+    while (ENC28J60_ReadOp(RCR,ECON1) & TXRTS) {
+ 566:	6f e1       	ldi	r22, 0x1F	; 31
+ 568:	80 e0       	ldi	r24, 0x00	; 0
+ 56a:	0e 94 81 00 	call	0x102	; 0x102 <ENC28J60_ReadOp>
+ 56e:	83 fd       	sbrc	r24, 3
+ 570:	eb cf       	rjmp	.-42     	; 0x548 <ENC28J60_PacketSend+0xe>
+        if(ENC28J60_Read(EIR) & TXERIF) {
+            ENC28J60_WriteOp(BFS,ECON1,TXRST);
+            ENC28J60_WriteOp(BFC,ECON1,TXRST);
+        }
+    }
+    ENC28J60_Write(EWRPTL,TXSTART_INIT&0xFF);
+ 572:	6f ef       	ldi	r22, 0xFF	; 255
+ 574:	82 e0       	ldi	r24, 0x02	; 2
+ 576:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_Write(EWRPTH,TXSTART_INIT>>8);
+ 57a:	69 e1       	ldi	r22, 0x19	; 25
+ 57c:	83 e0       	ldi	r24, 0x03	; 3
+ 57e:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_Write(ETXNDL,(TXSTART_INIT+len)&0xFF);
+ 582:	6c 2f       	mov	r22, r28
+ 584:	61 50       	subi	r22, 0x01	; 1
+ 586:	86 e0       	ldi	r24, 0x06	; 6
+ 588:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_Write(ETXNDH,(TXSTART_INIT+len)>>8);
+ 58c:	ce 01       	movw	r24, r28
+ 58e:	81 50       	subi	r24, 0x01	; 1
+ 590:	96 4e       	sbci	r25, 0xE6	; 230
+ 592:	69 2f       	mov	r22, r25
+ 594:	87 e0       	ldi	r24, 0x07	; 7
+ 596:	0e 94 1f 01 	call	0x23e	; 0x23e <ENC28J60_Write>
+    ENC28J60_WriteOp(WBM,0,0x00);
+ 59a:	40 e0       	ldi	r20, 0x00	; 0
+ 59c:	60 e0       	ldi	r22, 0x00	; 0
+ 59e:	8a e7       	ldi	r24, 0x7A	; 122
+ 5a0:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+    ENC28J60_WriteBuffer(len,packet);
+ 5a4:	b8 01       	movw	r22, r16
+ 5a6:	ce 01       	movw	r24, r28
+ 5a8:	0e 94 d1 00 	call	0x1a2	; 0x1a2 <ENC28J60_WriteBuffer>
+    ENC28J60_WriteOp(BFS,ECON1,TXRTS);
+ 5ac:	48 e0       	ldi	r20, 0x08	; 8
+ 5ae:	6f e1       	ldi	r22, 0x1F	; 31
+ 5b0:	80 e8       	ldi	r24, 0x80	; 128
+ 5b2:	0e 94 9b 00 	call	0x136	; 0x136 <ENC28J60_WriteOp>
+}
+ 5b6:	df 91       	pop	r29
+ 5b8:	cf 91       	pop	r28
+ 5ba:	1f 91       	pop	r17
+ 5bc:	0f 91       	pop	r16
+ 5be:	08 95       	ret
+
+000005c0 <testpage>:
+#define BUFFER_SIZE 900
+uint8_t buf[BUFFER_SIZE+1],browser;
+uint16_t plen;
+
+void testpage(void) {
+	plen=make_tcp_data_pos(buf,0,PSTR("HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n"));
+ 5c0:	41 e8       	ldi	r20, 0x81	; 129
+ 5c2:	50 e0       	ldi	r21, 0x00	; 0
+ 5c4:	60 e0       	ldi	r22, 0x00	; 0
+ 5c6:	70 e0       	ldi	r23, 0x00	; 0
+ 5c8:	83 e9       	ldi	r24, 0x93	; 147
+ 5ca:	90 e0       	ldi	r25, 0x00	; 0
+ 5cc:	0e 94 cc 05 	call	0xb98	; 0xb98 <make_tcp_data_pos>
+ 5d0:	90 93 92 00 	sts	0x0092, r25	; 0x800092 <plen+0x1>
+ 5d4:	80 93 91 00 	sts	0x0091, r24	; 0x800091 <plen>
+	plen=make_tcp_data_pos(buf,plen,PSTR("<html><body><h1>It Works!</h1></body></html>"));
+ 5d8:	44 e5       	ldi	r20, 0x54	; 84
+ 5da:	50 e0       	ldi	r21, 0x00	; 0
+ 5dc:	bc 01       	movw	r22, r24
+ 5de:	83 e9       	ldi	r24, 0x93	; 147
+ 5e0:	90 e0       	ldi	r25, 0x00	; 0
+ 5e2:	0e 94 cc 05 	call	0xb98	; 0xb98 <make_tcp_data_pos>
+ 5e6:	90 93 92 00 	sts	0x0092, r25	; 0x800092 <plen+0x1>
+ 5ea:	80 93 91 00 	sts	0x0091, r24	; 0x800091 <plen>
+ 5ee:	08 95       	ret
+
+000005f0 <sendpage>:
+}
+
+void sendpage(void) {
+	tcp_ack(buf);
+ 5f0:	83 e9       	ldi	r24, 0x93	; 147
+ 5f2:	90 e0       	ldi	r25, 0x00	; 0
+ 5f4:	0e 94 de 05 	call	0xbbc	; 0xbbc <tcp_ack>
+	tcp_ack_with_data(buf,plen);
+ 5f8:	60 91 91 00 	lds	r22, 0x0091	; 0x800091 <plen>
+ 5fc:	70 91 92 00 	lds	r23, 0x0092	; 0x800092 <plen+0x1>
+ 600:	83 e9       	ldi	r24, 0x93	; 147
+ 602:	90 e0       	ldi	r25, 0x00	; 0
+ 604:	0e 94 10 06 	call	0xc20	; 0xc20 <tcp_ack_with_data>
+ 608:	08 95       	ret
+
+0000060a <main>:
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+ 60a:	c2 e3       	ldi	r28, 0x32	; 50
+ 60c:	8c 2f       	mov	r24, r28
+ 60e:	8a 95       	dec	r24
+ 610:	f1 f7       	brne	.-4      	; 0x60e <main+0x4>
+}
+
+int main(void) {
+	uint16_t dat_p;
+	_delay_loop_1(50);
+	ENC28J60_Init(mymac);
+ 612:	84 e6       	ldi	r24, 0x64	; 100
+ 614:	90 e0       	ldi	r25, 0x00	; 0
+ 616:	0e 94 4f 01 	call	0x29e	; 0x29e <ENC28J60_Init>
+	ENC28J60_ClkOut(2);
+ 61a:	82 e0       	ldi	r24, 0x02	; 2
+ 61c:	0e 94 49 01 	call	0x292	; 0x292 <ENC28J60_ClkOut>
+ 620:	8c 2f       	mov	r24, r28
+ 622:	8a 95       	dec	r24
+ 624:	f1 f7       	brne	.-4      	; 0x622 <main+0x18>
+	_delay_loop_1(50);
+	ENC28J60_PhyWrite(PHLCON,0x0476);
+ 626:	66 e7       	ldi	r22, 0x76	; 118
+ 628:	74 e0       	ldi	r23, 0x04	; 4
+ 62a:	84 e1       	ldi	r24, 0x14	; 20
+ 62c:	0e 94 2d 01 	call	0x25a	; 0x25a <ENC28J60_PhyWrite>
+ 630:	ca 95       	dec	r28
+ 632:	f1 f7       	brne	.-4      	; 0x630 <main+0x26>
+	_delay_loop_1(50);
+	init_network(mymac,myip,mywwwport);
+ 634:	40 e5       	ldi	r20, 0x50	; 80
+ 636:	50 e0       	ldi	r21, 0x00	; 0
+ 638:	60 e6       	ldi	r22, 0x60	; 96
+ 63a:	70 e0       	ldi	r23, 0x00	; 0
+ 63c:	84 e6       	ldi	r24, 0x64	; 100
+ 63e:	90 e0       	ldi	r25, 0x00	; 0
+ 640:	0e 94 a8 03 	call	0x750	; 0x750 <init_network>
+	while(1) {
+		plen = ENC28J60_PacketReceive(BUFFER_SIZE,buf);
+ 644:	63 e9       	ldi	r22, 0x93	; 147
+ 646:	70 e0       	ldi	r23, 0x00	; 0
+ 648:	84 e8       	ldi	r24, 0x84	; 132
+ 64a:	93 e0       	ldi	r25, 0x03	; 3
+ 64c:	0e 94 fe 01 	call	0x3fc	; 0x3fc <ENC28J60_PacketReceive>
+ 650:	90 93 92 00 	sts	0x0092, r25	; 0x800092 <plen+0x1>
+ 654:	80 93 91 00 	sts	0x0091, r24	; 0x800091 <plen>
+		if(plen==0) continue;
+ 658:	00 97       	sbiw	r24, 0x00	; 0
+ 65a:	a1 f3       	breq	.-24     	; 0x644 <main+0x3a>
+		if(eth_is_arp(buf,plen)) {
+ 65c:	bc 01       	movw	r22, r24
+ 65e:	83 e9       	ldi	r24, 0x93	; 147
+ 660:	90 e0       	ldi	r25, 0x00	; 0
+ 662:	0e 94 1e 04 	call	0x83c	; 0x83c <eth_is_arp>
+ 666:	88 23       	and	r24, r24
+ 668:	29 f0       	breq	.+10     	; 0x674 <main+0x6a>
+			arp_reply(buf);
+ 66a:	83 e9       	ldi	r24, 0x93	; 147
+ 66c:	90 e0       	ldi	r25, 0x00	; 0
+ 66e:	0e 94 1a 05 	call	0xa34	; 0xa34 <arp_reply>
+			continue;
+ 672:	e8 cf       	rjmp	.-48     	; 0x644 <main+0x3a>
+		}
+		if(eth_is_ip(buf,plen)==0) continue;
+ 674:	60 91 91 00 	lds	r22, 0x0091	; 0x800091 <plen>
+ 678:	70 91 92 00 	lds	r23, 0x0092	; 0x800092 <plen+0x1>
+ 67c:	83 e9       	ldi	r24, 0x93	; 147
+ 67e:	90 e0       	ldi	r25, 0x00	; 0
+ 680:	0e 94 44 04 	call	0x888	; 0x888 <eth_is_ip>
+ 684:	88 23       	and	r24, r24
+ 686:	f1 f2       	breq	.-68     	; 0x644 <main+0x3a>
+		if(buf[IP_PROTO]==IP_ICMP && buf[ICMP_TYPE]==ICMP_REQUEST) {
+ 688:	80 91 aa 00 	lds	r24, 0x00AA	; 0x8000aa <buf+0x17>
+ 68c:	81 30       	cpi	r24, 0x01	; 1
+ 68e:	69 f4       	brne	.+26     	; 0x6aa <main+0xa0>
+ 690:	90 91 b5 00 	lds	r25, 0x00B5	; 0x8000b5 <buf+0x22>
+ 694:	98 30       	cpi	r25, 0x08	; 8
+ 696:	49 f4       	brne	.+18     	; 0x6aa <main+0xa0>
+			icmp_reply(buf,plen);
+ 698:	60 91 91 00 	lds	r22, 0x0091	; 0x800091 <plen>
+ 69c:	70 91 92 00 	lds	r23, 0x0092	; 0x800092 <plen+0x1>
+ 6a0:	83 e9       	ldi	r24, 0x93	; 147
+ 6a2:	90 e0       	ldi	r25, 0x00	; 0
+ 6a4:	0e 94 56 05 	call	0xaac	; 0xaac <icmp_reply>
+			continue;
+ 6a8:	cd cf       	rjmp	.-102    	; 0x644 <main+0x3a>
+		}
+		if(buf[IP_PROTO]==IP_TCP && buf[TCP_DST_PORT]==0 && buf[TCP_DST_PORT+1]==mywwwport) {
+ 6aa:	86 30       	cpi	r24, 0x06	; 6
+ 6ac:	59 f6       	brne	.-106    	; 0x644 <main+0x3a>
+ 6ae:	80 91 b7 00 	lds	r24, 0x00B7	; 0x8000b7 <buf+0x24>
+ 6b2:	81 11       	cpse	r24, r1
+ 6b4:	c7 cf       	rjmp	.-114    	; 0x644 <main+0x3a>
+ 6b6:	80 91 b8 00 	lds	r24, 0x00B8	; 0x8000b8 <buf+0x25>
+ 6ba:	80 35       	cpi	r24, 0x50	; 80
+ 6bc:	19 f6       	brne	.-122    	; 0x644 <main+0x3a>
+			if(buf[TCP_FLAGS] & TCP_SYN) {
+ 6be:	80 91 c2 00 	lds	r24, 0x00C2	; 0x8000c2 <buf+0x2f>
+ 6c2:	81 ff       	sbrs	r24, 1
+ 6c4:	05 c0       	rjmp	.+10     	; 0x6d0 <main+0xc6>
+				tcp_synack(buf);
+ 6c6:	83 e9       	ldi	r24, 0x93	; 147
+ 6c8:	90 e0       	ldi	r25, 0x00	; 0
+ 6ca:	0e 94 73 05 	call	0xae6	; 0xae6 <tcp_synack>
+				continue;
+ 6ce:	ba cf       	rjmp	.-140    	; 0x644 <main+0x3a>
+			}
+			if(buf[TCP_FLAGS] & TCP_ACK) {
+ 6d0:	84 ff       	sbrs	r24, 4
+ 6d2:	b8 cf       	rjmp	.-144    	; 0x644 <main+0x3a>
+				init_len_info(buf);
+ 6d4:	83 e9       	ldi	r24, 0x93	; 147
+ 6d6:	90 e0       	ldi	r25, 0x00	; 0
+ 6d8:	0e 94 98 05 	call	0xb30	; 0xb30 <init_len_info>
+				dat_p = get_tcp_data_ptr();
+ 6dc:	0e 94 bd 05 	call	0xb7a	; 0xb7a <get_tcp_data_ptr>
+ 6e0:	ec 01       	movw	r28, r24
+				if(dat_p==0) {
+ 6e2:	00 97       	sbiw	r24, 0x00	; 0
+ 6e4:	49 f4       	brne	.+18     	; 0x6f8 <main+0xee>
+					if(buf[TCP_FLAGS] & TCP_FIN) tcp_ack(buf);
+ 6e6:	80 91 c2 00 	lds	r24, 0x00C2	; 0x8000c2 <buf+0x2f>
+ 6ea:	80 ff       	sbrs	r24, 0
+ 6ec:	ab cf       	rjmp	.-170    	; 0x644 <main+0x3a>
+ 6ee:	83 e9       	ldi	r24, 0x93	; 147
+ 6f0:	90 e0       	ldi	r25, 0x00	; 0
+ 6f2:	0e 94 de 05 	call	0xbbc	; 0xbbc <tcp_ack>
+					continue;
+ 6f6:	a6 cf       	rjmp	.-180    	; 0x644 <main+0x3a>
+				}
+				
+				if(strstr((char*)&(buf[dat_p]),"User Agent")) browser=0;
+ 6f8:	8c 01       	movw	r16, r24
+ 6fa:	0d 56       	subi	r16, 0x6D	; 109
+ 6fc:	1f 4f       	sbci	r17, 0xFF	; 255
+ 6fe:	6b e6       	ldi	r22, 0x6B	; 107
+ 700:	70 e0       	ldi	r23, 0x00	; 0
+ 702:	c8 01       	movw	r24, r16
+ 704:	0e 94 43 06 	call	0xc86	; 0xc86 <strstr>
+ 708:	89 2b       	or	r24, r25
+ 70a:	19 f0       	breq	.+6      	; 0x712 <main+0x108>
+ 70c:	10 92 18 04 	sts	0x0418, r1	; 0x800418 <browser>
+ 710:	0e c0       	rjmp	.+28     	; 0x72e <main+0x124>
+				else if(strstr((char*)&(buf[dat_p]),"MSIE")) browser=1;
+ 712:	66 e7       	ldi	r22, 0x76	; 118
+ 714:	70 e0       	ldi	r23, 0x00	; 0
+ 716:	c8 01       	movw	r24, r16
+ 718:	0e 94 43 06 	call	0xc86	; 0xc86 <strstr>
+ 71c:	89 2b       	or	r24, r25
+ 71e:	21 f0       	breq	.+8      	; 0x728 <main+0x11e>
+ 720:	81 e0       	ldi	r24, 0x01	; 1
+ 722:	80 93 18 04 	sts	0x0418, r24	; 0x800418 <browser>
+ 726:	03 c0       	rjmp	.+6      	; 0x72e <main+0x124>
+				else browser=2;
+ 728:	82 e0       	ldi	r24, 0x02	; 2
+ 72a:	80 93 18 04 	sts	0x0418, r24	; 0x800418 <browser>
+				
+				if(strncmp("/ ",(char*)&(buf[dat_p+4]),2)==0){
+ 72e:	be 01       	movw	r22, r28
+ 730:	69 56       	subi	r22, 0x69	; 105
+ 732:	7f 4f       	sbci	r23, 0xFF	; 255
+ 734:	42 e0       	ldi	r20, 0x02	; 2
+ 736:	50 e0       	ldi	r21, 0x00	; 0
+ 738:	8b e7       	ldi	r24, 0x7B	; 123
+ 73a:	90 e0       	ldi	r25, 0x00	; 0
+ 73c:	0e 94 35 06 	call	0xc6a	; 0xc6a <strncmp>
+ 740:	89 2b       	or	r24, r25
+ 742:	09 f0       	breq	.+2      	; 0x746 <main+0x13c>
+ 744:	7f cf       	rjmp	.-258    	; 0x644 <main+0x3a>
+					testpage();
+ 746:	0e 94 e0 02 	call	0x5c0	; 0x5c0 <testpage>
+					sendpage();
+ 74a:	0e 94 f8 02 	call	0x5f0	; 0x5f0 <sendpage>
+					continue;
+ 74e:	7a cf       	rjmp	.-268    	; 0x644 <main+0x3a>
+
+00000750 <init_network>:
+        buf[TCP_CHECKSUM+4+pos]=*s;
+        pos++;
+        s++;
+    }
+    return(pos);
+}
+ 750:	dc 01       	movw	r26, r24
+ 752:	50 93 86 00 	sts	0x0086, r21	; 0x800086 <wwwport+0x1>
+ 756:	40 93 85 00 	sts	0x0085, r20	; 0x800085 <wwwport>
+ 75a:	90 e0       	ldi	r25, 0x00	; 0
+ 75c:	0b c0       	rjmp	.+22     	; 0x774 <init_network+0x24>
+ 75e:	29 2f       	mov	r18, r25
+ 760:	30 e0       	ldi	r19, 0x00	; 0
+ 762:	fb 01       	movw	r30, r22
+ 764:	e2 0f       	add	r30, r18
+ 766:	f3 1f       	adc	r31, r19
+ 768:	40 81       	ld	r20, Z
+ 76a:	f9 01       	movw	r30, r18
+ 76c:	e9 57       	subi	r30, 0x79	; 121
+ 76e:	ff 4f       	sbci	r31, 0xFF	; 255
+ 770:	40 83       	st	Z, r20
+ 772:	9f 5f       	subi	r25, 0xFF	; 255
+ 774:	94 30       	cpi	r25, 0x04	; 4
+ 776:	98 f3       	brcs	.-26     	; 0x75e <init_network+0xe>
+ 778:	90 e0       	ldi	r25, 0x00	; 0
+ 77a:	0b c0       	rjmp	.+22     	; 0x792 <init_network+0x42>
+ 77c:	29 2f       	mov	r18, r25
+ 77e:	30 e0       	ldi	r19, 0x00	; 0
+ 780:	fd 01       	movw	r30, r26
+ 782:	e2 0f       	add	r30, r18
+ 784:	f3 1f       	adc	r31, r19
+ 786:	40 81       	ld	r20, Z
+ 788:	f9 01       	movw	r30, r18
+ 78a:	e5 57       	subi	r30, 0x75	; 117
+ 78c:	ff 4f       	sbci	r31, 0xFF	; 255
+ 78e:	40 83       	st	Z, r20
+ 790:	9f 5f       	subi	r25, 0xFF	; 255
+ 792:	96 30       	cpi	r25, 0x06	; 6
+ 794:	98 f3       	brcs	.-26     	; 0x77c <init_network+0x2c>
+ 796:	08 95       	ret
+
+00000798 <checksum>:
+ 798:	cf 93       	push	r28
+ 79a:	fc 01       	movw	r30, r24
+ 79c:	9b 01       	movw	r18, r22
+ 79e:	41 30       	cpi	r20, 0x01	; 1
+ 7a0:	41 f4       	brne	.+16     	; 0x7b2 <checksum+0x1a>
+ 7a2:	cb 01       	movw	r24, r22
+ 7a4:	08 97       	sbiw	r24, 0x08	; 8
+ 7a6:	a0 e0       	ldi	r26, 0x00	; 0
+ 7a8:	b0 e0       	ldi	r27, 0x00	; 0
+ 7aa:	41 96       	adiw	r24, 0x11	; 17
+ 7ac:	a1 1d       	adc	r26, r1
+ 7ae:	b1 1d       	adc	r27, r1
+ 7b0:	03 c0       	rjmp	.+6      	; 0x7b8 <checksum+0x20>
+ 7b2:	80 e0       	ldi	r24, 0x00	; 0
+ 7b4:	90 e0       	ldi	r25, 0x00	; 0
+ 7b6:	dc 01       	movw	r26, r24
+ 7b8:	42 30       	cpi	r20, 0x02	; 2
+ 7ba:	e1 f4       	brne	.+56     	; 0x7f4 <checksum+0x5c>
+ 7bc:	06 96       	adiw	r24, 0x06	; 6
+ 7be:	a1 1d       	adc	r26, r1
+ 7c0:	b1 1d       	adc	r27, r1
+ 7c2:	a9 01       	movw	r20, r18
+ 7c4:	48 50       	subi	r20, 0x08	; 8
+ 7c6:	51 09       	sbc	r21, r1
+ 7c8:	84 0f       	add	r24, r20
+ 7ca:	95 1f       	adc	r25, r21
+ 7cc:	a1 1d       	adc	r26, r1
+ 7ce:	b1 1d       	adc	r27, r1
+ 7d0:	11 c0       	rjmp	.+34     	; 0x7f4 <checksum+0x5c>
+ 7d2:	40 81       	ld	r20, Z
+ 7d4:	50 e0       	ldi	r21, 0x00	; 0
+ 7d6:	60 e0       	ldi	r22, 0x00	; 0
+ 7d8:	70 e0       	ldi	r23, 0x00	; 0
+ 7da:	76 2f       	mov	r23, r22
+ 7dc:	65 2f       	mov	r22, r21
+ 7de:	54 2f       	mov	r21, r20
+ 7e0:	44 27       	eor	r20, r20
+ 7e2:	c1 81       	ldd	r28, Z+1	; 0x01
+ 7e4:	4c 2b       	or	r20, r28
+ 7e6:	84 0f       	add	r24, r20
+ 7e8:	95 1f       	adc	r25, r21
+ 7ea:	a6 1f       	adc	r26, r22
+ 7ec:	b7 1f       	adc	r27, r23
+ 7ee:	32 96       	adiw	r30, 0x02	; 2
+ 7f0:	22 50       	subi	r18, 0x02	; 2
+ 7f2:	31 09       	sbc	r19, r1
+ 7f4:	22 30       	cpi	r18, 0x02	; 2
+ 7f6:	31 05       	cpc	r19, r1
+ 7f8:	60 f7       	brcc	.-40     	; 0x7d2 <checksum+0x3a>
+ 7fa:	23 2b       	or	r18, r19
+ 7fc:	99 f0       	breq	.+38     	; 0x824 <__DATA_REGION_LENGTH__+0x24>
+ 7fe:	40 81       	ld	r20, Z
+ 800:	50 e0       	ldi	r21, 0x00	; 0
+ 802:	60 e0       	ldi	r22, 0x00	; 0
+ 804:	70 e0       	ldi	r23, 0x00	; 0
+ 806:	76 2f       	mov	r23, r22
+ 808:	65 2f       	mov	r22, r21
+ 80a:	54 2f       	mov	r21, r20
+ 80c:	44 27       	eor	r20, r20
+ 80e:	84 0f       	add	r24, r20
+ 810:	95 1f       	adc	r25, r21
+ 812:	a6 1f       	adc	r26, r22
+ 814:	b7 1f       	adc	r27, r23
+ 816:	06 c0       	rjmp	.+12     	; 0x824 <__DATA_REGION_LENGTH__+0x24>
+ 818:	aa 27       	eor	r26, r26
+ 81a:	bb 27       	eor	r27, r27
+ 81c:	84 0f       	add	r24, r20
+ 81e:	95 1f       	adc	r25, r21
+ 820:	a6 1f       	adc	r26, r22
+ 822:	b7 1f       	adc	r27, r23
+ 824:	ad 01       	movw	r20, r26
+ 826:	66 27       	eor	r22, r22
+ 828:	77 27       	eor	r23, r23
+ 82a:	41 15       	cp	r20, r1
+ 82c:	51 05       	cpc	r21, r1
+ 82e:	61 05       	cpc	r22, r1
+ 830:	71 05       	cpc	r23, r1
+ 832:	91 f7       	brne	.-28     	; 0x818 <__DATA_REGION_LENGTH__+0x18>
+ 834:	80 95       	com	r24
+ 836:	90 95       	com	r25
+ 838:	cf 91       	pop	r28
+ 83a:	08 95       	ret
+
+0000083c <eth_is_arp>:
+ 83c:	69 32       	cpi	r22, 0x29	; 41
+ 83e:	71 05       	cpc	r23, r1
+ 840:	d8 f0       	brcs	.+54     	; 0x878 <__stack+0x19>
+ 842:	fc 01       	movw	r30, r24
+ 844:	24 85       	ldd	r18, Z+12	; 0x0c
+ 846:	28 30       	cpi	r18, 0x08	; 8
+ 848:	c9 f4       	brne	.+50     	; 0x87c <__stack+0x1d>
+ 84a:	25 85       	ldd	r18, Z+13	; 0x0d
+ 84c:	26 30       	cpi	r18, 0x06	; 6
+ 84e:	c1 f4       	brne	.+48     	; 0x880 <__stack+0x21>
+ 850:	40 e0       	ldi	r20, 0x00	; 0
+ 852:	0e c0       	rjmp	.+28     	; 0x870 <__stack+0x11>
+ 854:	24 2f       	mov	r18, r20
+ 856:	30 e0       	ldi	r19, 0x00	; 0
+ 858:	f9 01       	movw	r30, r18
+ 85a:	b6 96       	adiw	r30, 0x26	; 38
+ 85c:	e8 0f       	add	r30, r24
+ 85e:	f9 1f       	adc	r31, r25
+ 860:	50 81       	ld	r21, Z
+ 862:	f9 01       	movw	r30, r18
+ 864:	e9 57       	subi	r30, 0x79	; 121
+ 866:	ff 4f       	sbci	r31, 0xFF	; 255
+ 868:	20 81       	ld	r18, Z
+ 86a:	52 13       	cpse	r21, r18
+ 86c:	0b c0       	rjmp	.+22     	; 0x884 <__stack+0x25>
+ 86e:	4f 5f       	subi	r20, 0xFF	; 255
+ 870:	44 30       	cpi	r20, 0x04	; 4
+ 872:	80 f3       	brcs	.-32     	; 0x854 <eth_is_arp+0x18>
+ 874:	81 e0       	ldi	r24, 0x01	; 1
+ 876:	08 95       	ret
+ 878:	80 e0       	ldi	r24, 0x00	; 0
+ 87a:	08 95       	ret
+ 87c:	80 e0       	ldi	r24, 0x00	; 0
+ 87e:	08 95       	ret
+ 880:	80 e0       	ldi	r24, 0x00	; 0
+ 882:	08 95       	ret
+ 884:	80 e0       	ldi	r24, 0x00	; 0
+ 886:	08 95       	ret
+
+00000888 <eth_is_ip>:
+ 888:	fc 01       	movw	r30, r24
+ 88a:	6a 32       	cpi	r22, 0x2A	; 42
+ 88c:	71 05       	cpc	r23, r1
+ 88e:	e8 f0       	brcs	.+58     	; 0x8ca <eth_is_ip+0x42>
+ 890:	84 85       	ldd	r24, Z+12	; 0x0c
+ 892:	88 30       	cpi	r24, 0x08	; 8
+ 894:	e1 f4       	brne	.+56     	; 0x8ce <eth_is_ip+0x46>
+ 896:	85 85       	ldd	r24, Z+13	; 0x0d
+ 898:	81 11       	cpse	r24, r1
+ 89a:	1b c0       	rjmp	.+54     	; 0x8d2 <eth_is_ip+0x4a>
+ 89c:	96 85       	ldd	r25, Z+14	; 0x0e
+ 89e:	95 34       	cpi	r25, 0x45	; 69
+ 8a0:	c9 f4       	brne	.+50     	; 0x8d4 <eth_is_ip+0x4c>
+ 8a2:	90 e0       	ldi	r25, 0x00	; 0
+ 8a4:	0e c0       	rjmp	.+28     	; 0x8c2 <eth_is_ip+0x3a>
+ 8a6:	29 2f       	mov	r18, r25
+ 8a8:	30 e0       	ldi	r19, 0x00	; 0
+ 8aa:	d9 01       	movw	r26, r18
+ 8ac:	5e 96       	adiw	r26, 0x1e	; 30
+ 8ae:	ae 0f       	add	r26, r30
+ 8b0:	bf 1f       	adc	r27, r31
+ 8b2:	4c 91       	ld	r20, X
+ 8b4:	d9 01       	movw	r26, r18
+ 8b6:	a9 57       	subi	r26, 0x79	; 121
+ 8b8:	bf 4f       	sbci	r27, 0xFF	; 255
+ 8ba:	2c 91       	ld	r18, X
+ 8bc:	42 13       	cpse	r20, r18
+ 8be:	0a c0       	rjmp	.+20     	; 0x8d4 <eth_is_ip+0x4c>
+ 8c0:	9f 5f       	subi	r25, 0xFF	; 255
+ 8c2:	94 30       	cpi	r25, 0x04	; 4
+ 8c4:	80 f3       	brcs	.-32     	; 0x8a6 <eth_is_ip+0x1e>
+ 8c6:	81 e0       	ldi	r24, 0x01	; 1
+ 8c8:	08 95       	ret
+ 8ca:	80 e0       	ldi	r24, 0x00	; 0
+ 8cc:	08 95       	ret
+ 8ce:	80 e0       	ldi	r24, 0x00	; 0
+ 8d0:	08 95       	ret
+ 8d2:	80 e0       	ldi	r24, 0x00	; 0
+ 8d4:	08 95       	ret
+
+000008d6 <make_eth_hdr>:
+ 8d6:	ac 01       	movw	r20, r24
+ 8d8:	90 e0       	ldi	r25, 0x00	; 0
+ 8da:	11 c0       	rjmp	.+34     	; 0x8fe <make_eth_hdr+0x28>
+ 8dc:	29 2f       	mov	r18, r25
+ 8de:	30 e0       	ldi	r19, 0x00	; 0
+ 8e0:	da 01       	movw	r26, r20
+ 8e2:	a2 0f       	add	r26, r18
+ 8e4:	b3 1f       	adc	r27, r19
+ 8e6:	f9 01       	movw	r30, r18
+ 8e8:	36 96       	adiw	r30, 0x06	; 6
+ 8ea:	e4 0f       	add	r30, r20
+ 8ec:	f5 1f       	adc	r31, r21
+ 8ee:	80 81       	ld	r24, Z
+ 8f0:	8c 93       	st	X, r24
+ 8f2:	d9 01       	movw	r26, r18
+ 8f4:	a5 57       	subi	r26, 0x75	; 117
+ 8f6:	bf 4f       	sbci	r27, 0xFF	; 255
+ 8f8:	8c 91       	ld	r24, X
+ 8fa:	80 83       	st	Z, r24
+ 8fc:	9f 5f       	subi	r25, 0xFF	; 255
+ 8fe:	96 30       	cpi	r25, 0x06	; 6
+ 900:	68 f3       	brcs	.-38     	; 0x8dc <make_eth_hdr+0x6>
+ 902:	08 95       	ret
+
+00000904 <make_ip_checksum>:
+ 904:	cf 93       	push	r28
+ 906:	df 93       	push	r29
+ 908:	ec 01       	movw	r28, r24
+ 90a:	18 8e       	std	Y+24, r1	; 0x18
+ 90c:	19 8e       	std	Y+25, r1	; 0x19
+ 90e:	80 e4       	ldi	r24, 0x40	; 64
+ 910:	8c 8b       	std	Y+20, r24	; 0x14
+ 912:	1d 8a       	std	Y+21, r1	; 0x15
+ 914:	8e 8b       	std	Y+22, r24	; 0x16
+ 916:	40 e0       	ldi	r20, 0x00	; 0
+ 918:	64 e1       	ldi	r22, 0x14	; 20
+ 91a:	70 e0       	ldi	r23, 0x00	; 0
+ 91c:	ce 01       	movw	r24, r28
+ 91e:	0e 96       	adiw	r24, 0x0e	; 14
+ 920:	0e 94 cc 03 	call	0x798	; 0x798 <checksum>
+ 924:	98 8f       	std	Y+24, r25	; 0x18
+ 926:	89 8f       	std	Y+25, r24	; 0x19
+ 928:	df 91       	pop	r29
+ 92a:	cf 91       	pop	r28
+ 92c:	08 95       	ret
+
+0000092e <make_ip_hdr>:
+ 92e:	ac 01       	movw	r20, r24
+ 930:	90 e0       	ldi	r25, 0x00	; 0
+ 932:	12 c0       	rjmp	.+36     	; 0x958 <make_ip_hdr+0x2a>
+ 934:	29 2f       	mov	r18, r25
+ 936:	30 e0       	ldi	r19, 0x00	; 0
+ 938:	d9 01       	movw	r26, r18
+ 93a:	5e 96       	adiw	r26, 0x1e	; 30
+ 93c:	a4 0f       	add	r26, r20
+ 93e:	b5 1f       	adc	r27, r21
+ 940:	f9 01       	movw	r30, r18
+ 942:	7a 96       	adiw	r30, 0x1a	; 26
+ 944:	e4 0f       	add	r30, r20
+ 946:	f5 1f       	adc	r31, r21
+ 948:	80 81       	ld	r24, Z
+ 94a:	8c 93       	st	X, r24
+ 94c:	d9 01       	movw	r26, r18
+ 94e:	a9 57       	subi	r26, 0x79	; 121
+ 950:	bf 4f       	sbci	r27, 0xFF	; 255
+ 952:	8c 91       	ld	r24, X
+ 954:	80 83       	st	Z, r24
+ 956:	9f 5f       	subi	r25, 0xFF	; 255
+ 958:	94 30       	cpi	r25, 0x04	; 4
+ 95a:	60 f3       	brcs	.-40     	; 0x934 <make_ip_hdr+0x6>
+ 95c:	ca 01       	movw	r24, r20
+ 95e:	0e 94 82 04 	call	0x904	; 0x904 <make_ip_checksum>
+ 962:	08 95       	ret
+
+00000964 <make_tcp_hdr>:
+ 964:	cf 93       	push	r28
+ 966:	df 93       	push	r29
+ 968:	dc 01       	movw	r26, r24
+ 96a:	92 96       	adiw	r26, 0x22	; 34
+ 96c:	8c 91       	ld	r24, X
+ 96e:	92 97       	sbiw	r26, 0x22	; 34
+ 970:	94 96       	adiw	r26, 0x24	; 36
+ 972:	8c 93       	st	X, r24
+ 974:	94 97       	sbiw	r26, 0x24	; 36
+ 976:	93 96       	adiw	r26, 0x23	; 35
+ 978:	8c 91       	ld	r24, X
+ 97a:	93 97       	sbiw	r26, 0x23	; 35
+ 97c:	95 96       	adiw	r26, 0x25	; 37
+ 97e:	8c 93       	st	X, r24
+ 980:	95 97       	sbiw	r26, 0x25	; 37
+ 982:	80 91 85 00 	lds	r24, 0x0085	; 0x800085 <wwwport>
+ 986:	90 91 86 00 	lds	r25, 0x0086	; 0x800086 <wwwport+0x1>
+ 98a:	92 96       	adiw	r26, 0x22	; 34
+ 98c:	9c 93       	st	X, r25
+ 98e:	92 97       	sbiw	r26, 0x22	; 34
+ 990:	93 96       	adiw	r26, 0x23	; 35
+ 992:	8c 93       	st	X, r24
+ 994:	93 97       	sbiw	r26, 0x23	; 35
+ 996:	84 e0       	ldi	r24, 0x04	; 4
+ 998:	16 c0       	rjmp	.+44     	; 0x9c6 <make_tcp_hdr+0x62>
+ 99a:	e8 2f       	mov	r30, r24
+ 99c:	f0 e0       	ldi	r31, 0x00	; 0
+ 99e:	ef 01       	movw	r28, r30
+ 9a0:	a5 96       	adiw	r28, 0x25	; 37
+ 9a2:	ca 0f       	add	r28, r26
+ 9a4:	db 1f       	adc	r29, r27
+ 9a6:	98 81       	ld	r25, Y
+ 9a8:	69 0f       	add	r22, r25
+ 9aa:	71 1d       	adc	r23, r1
+ 9ac:	b9 96       	adiw	r30, 0x29	; 41
+ 9ae:	ea 0f       	add	r30, r26
+ 9b0:	fb 1f       	adc	r31, r27
+ 9b2:	90 81       	ld	r25, Z
+ 9b4:	60 83       	st	Z, r22
+ 9b6:	22 23       	and	r18, r18
+ 9b8:	11 f0       	breq	.+4      	; 0x9be <make_tcp_hdr+0x5a>
+ 9ba:	98 83       	st	Y, r25
+ 9bc:	01 c0       	rjmp	.+2      	; 0x9c0 <make_tcp_hdr+0x5c>
+ 9be:	18 82       	st	Y, r1
+ 9c0:	67 2f       	mov	r22, r23
+ 9c2:	77 27       	eor	r23, r23
+ 9c4:	81 50       	subi	r24, 0x01	; 1
+ 9c6:	81 11       	cpse	r24, r1
+ 9c8:	e8 cf       	rjmp	.-48     	; 0x99a <make_tcp_hdr+0x36>
+ 9ca:	21 11       	cpse	r18, r1
+ 9cc:	11 c0       	rjmp	.+34     	; 0x9f0 <make_tcp_hdr+0x8c>
+ 9ce:	96 96       	adiw	r26, 0x26	; 38
+ 9d0:	1c 92       	st	X, r1
+ 9d2:	96 97       	sbiw	r26, 0x26	; 38
+ 9d4:	97 96       	adiw	r26, 0x27	; 39
+ 9d6:	1c 92       	st	X, r1
+ 9d8:	97 97       	sbiw	r26, 0x27	; 39
+ 9da:	80 91 6a 00 	lds	r24, 0x006A	; 0x80006a <seqnum>
+ 9de:	98 96       	adiw	r26, 0x28	; 40
+ 9e0:	8c 93       	st	X, r24
+ 9e2:	98 97       	sbiw	r26, 0x28	; 40
+ 9e4:	99 96       	adiw	r26, 0x29	; 41
+ 9e6:	1c 92       	st	X, r1
+ 9e8:	99 97       	sbiw	r26, 0x29	; 41
+ 9ea:	8e 5f       	subi	r24, 0xFE	; 254
+ 9ec:	80 93 6a 00 	sts	0x006A, r24	; 0x80006a <seqnum>
+ 9f0:	d2 96       	adiw	r26, 0x32	; 50
+ 9f2:	1c 92       	st	X, r1
+ 9f4:	d2 97       	sbiw	r26, 0x32	; 50
+ 9f6:	d3 96       	adiw	r26, 0x33	; 51
+ 9f8:	1c 92       	st	X, r1
+ 9fa:	d3 97       	sbiw	r26, 0x33	; 51
+ 9fc:	44 23       	and	r20, r20
+ 9fe:	a1 f0       	breq	.+40     	; 0xa28 <make_tcp_hdr+0xc4>
+ a00:	82 e0       	ldi	r24, 0x02	; 2
+ a02:	d6 96       	adiw	r26, 0x36	; 54
+ a04:	8c 93       	st	X, r24
+ a06:	d6 97       	sbiw	r26, 0x36	; 54
+ a08:	84 e0       	ldi	r24, 0x04	; 4
+ a0a:	d7 96       	adiw	r26, 0x37	; 55
+ a0c:	8c 93       	st	X, r24
+ a0e:	d7 97       	sbiw	r26, 0x37	; 55
+ a10:	85 e0       	ldi	r24, 0x05	; 5
+ a12:	d8 96       	adiw	r26, 0x38	; 56
+ a14:	8c 93       	st	X, r24
+ a16:	d8 97       	sbiw	r26, 0x38	; 56
+ a18:	80 e8       	ldi	r24, 0x80	; 128
+ a1a:	d9 96       	adiw	r26, 0x39	; 57
+ a1c:	8c 93       	st	X, r24
+ a1e:	d9 97       	sbiw	r26, 0x39	; 57
+ a20:	80 e6       	ldi	r24, 0x60	; 96
+ a22:	9e 96       	adiw	r26, 0x2e	; 46
+ a24:	8c 93       	st	X, r24
+ a26:	03 c0       	rjmp	.+6      	; 0xa2e <make_tcp_hdr+0xca>
+ a28:	80 e5       	ldi	r24, 0x50	; 80
+ a2a:	9e 96       	adiw	r26, 0x2e	; 46
+ a2c:	8c 93       	st	X, r24
+ a2e:	df 91       	pop	r29
+ a30:	cf 91       	pop	r28
+ a32:	08 95       	ret
+
+00000a34 <arp_reply>:
+ a34:	cf 93       	push	r28
+ a36:	df 93       	push	r29
+ a38:	ec 01       	movw	r28, r24
+ a3a:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <make_eth_hdr>
+ a3e:	1c 8a       	std	Y+20, r1	; 0x14
+ a40:	82 e0       	ldi	r24, 0x02	; 2
+ a42:	8d 8b       	std	Y+21, r24	; 0x15
+ a44:	20 e0       	ldi	r18, 0x00	; 0
+ a46:	12 c0       	rjmp	.+36     	; 0xa6c <arp_reply+0x38>
+ a48:	82 2f       	mov	r24, r18
+ a4a:	90 e0       	ldi	r25, 0x00	; 0
+ a4c:	dc 01       	movw	r26, r24
+ a4e:	90 96       	adiw	r26, 0x20	; 32
+ a50:	ac 0f       	add	r26, r28
+ a52:	bd 1f       	adc	r27, r29
+ a54:	fc 01       	movw	r30, r24
+ a56:	76 96       	adiw	r30, 0x16	; 22
+ a58:	ec 0f       	add	r30, r28
+ a5a:	fd 1f       	adc	r31, r29
+ a5c:	30 81       	ld	r19, Z
+ a5e:	3c 93       	st	X, r19
+ a60:	dc 01       	movw	r26, r24
+ a62:	a5 57       	subi	r26, 0x75	; 117
+ a64:	bf 4f       	sbci	r27, 0xFF	; 255
+ a66:	8c 91       	ld	r24, X
+ a68:	80 83       	st	Z, r24
+ a6a:	2f 5f       	subi	r18, 0xFF	; 255
+ a6c:	26 30       	cpi	r18, 0x06	; 6
+ a6e:	60 f3       	brcs	.-40     	; 0xa48 <arp_reply+0x14>
+ a70:	20 e0       	ldi	r18, 0x00	; 0
+ a72:	12 c0       	rjmp	.+36     	; 0xa98 <arp_reply+0x64>
+ a74:	82 2f       	mov	r24, r18
+ a76:	90 e0       	ldi	r25, 0x00	; 0
+ a78:	dc 01       	movw	r26, r24
+ a7a:	96 96       	adiw	r26, 0x26	; 38
+ a7c:	ac 0f       	add	r26, r28
+ a7e:	bd 1f       	adc	r27, r29
+ a80:	fc 01       	movw	r30, r24
+ a82:	7c 96       	adiw	r30, 0x1c	; 28
+ a84:	ec 0f       	add	r30, r28
+ a86:	fd 1f       	adc	r31, r29
+ a88:	30 81       	ld	r19, Z
+ a8a:	3c 93       	st	X, r19
+ a8c:	dc 01       	movw	r26, r24
+ a8e:	a9 57       	subi	r26, 0x79	; 121
+ a90:	bf 4f       	sbci	r27, 0xFF	; 255
+ a92:	8c 91       	ld	r24, X
+ a94:	80 83       	st	Z, r24
+ a96:	2f 5f       	subi	r18, 0xFF	; 255
+ a98:	24 30       	cpi	r18, 0x04	; 4
+ a9a:	60 f3       	brcs	.-40     	; 0xa74 <arp_reply+0x40>
+ a9c:	be 01       	movw	r22, r28
+ a9e:	8a e2       	ldi	r24, 0x2A	; 42
+ aa0:	90 e0       	ldi	r25, 0x00	; 0
+ aa2:	0e 94 9d 02 	call	0x53a	; 0x53a <ENC28J60_PacketSend>
+ aa6:	df 91       	pop	r29
+ aa8:	cf 91       	pop	r28
+ aaa:	08 95       	ret
+
+00000aac <icmp_reply>:
+ aac:	0f 93       	push	r16
+ aae:	1f 93       	push	r17
+ ab0:	cf 93       	push	r28
+ ab2:	df 93       	push	r29
+ ab4:	ec 01       	movw	r28, r24
+ ab6:	8b 01       	movw	r16, r22
+ ab8:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <make_eth_hdr>
+ abc:	ce 01       	movw	r24, r28
+ abe:	0e 94 97 04 	call	0x92e	; 0x92e <make_ip_hdr>
+ ac2:	1a a2       	std	Y+34, r1	; 0x22
+ ac4:	8c a1       	ldd	r24, Y+36	; 0x24
+ ac6:	88 3f       	cpi	r24, 0xF8	; 248
+ ac8:	18 f0       	brcs	.+6      	; 0xad0 <icmp_reply+0x24>
+ aca:	9d a1       	ldd	r25, Y+37	; 0x25
+ acc:	9f 5f       	subi	r25, 0xFF	; 255
+ ace:	9d a3       	std	Y+37, r25	; 0x25
+ ad0:	88 5f       	subi	r24, 0xF8	; 248
+ ad2:	8c a3       	std	Y+36, r24	; 0x24
+ ad4:	be 01       	movw	r22, r28
+ ad6:	c8 01       	movw	r24, r16
+ ad8:	0e 94 9d 02 	call	0x53a	; 0x53a <ENC28J60_PacketSend>
+ adc:	df 91       	pop	r29
+ ade:	cf 91       	pop	r28
+ ae0:	1f 91       	pop	r17
+ ae2:	0f 91       	pop	r16
+ ae4:	08 95       	ret
+
+00000ae6 <tcp_synack>:
+ ae6:	cf 93       	push	r28
+ ae8:	df 93       	push	r29
+ aea:	ec 01       	movw	r28, r24
+ aec:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <make_eth_hdr>
+ af0:	18 8a       	std	Y+16, r1	; 0x10
+ af2:	8c e2       	ldi	r24, 0x2C	; 44
+ af4:	89 8b       	std	Y+17, r24	; 0x11
+ af6:	ce 01       	movw	r24, r28
+ af8:	0e 94 97 04 	call	0x92e	; 0x92e <make_ip_hdr>
+ afc:	82 e1       	ldi	r24, 0x12	; 18
+ afe:	8f a7       	std	Y+47, r24	; 0x2f
+ b00:	20 e0       	ldi	r18, 0x00	; 0
+ b02:	41 e0       	ldi	r20, 0x01	; 1
+ b04:	61 e0       	ldi	r22, 0x01	; 1
+ b06:	70 e0       	ldi	r23, 0x00	; 0
+ b08:	ce 01       	movw	r24, r28
+ b0a:	0e 94 b2 04 	call	0x964	; 0x964 <make_tcp_hdr>
+ b0e:	42 e0       	ldi	r20, 0x02	; 2
+ b10:	60 e2       	ldi	r22, 0x20	; 32
+ b12:	70 e0       	ldi	r23, 0x00	; 0
+ b14:	ce 01       	movw	r24, r28
+ b16:	4a 96       	adiw	r24, 0x1a	; 26
+ b18:	0e 94 cc 03 	call	0x798	; 0x798 <checksum>
+ b1c:	9a ab       	std	Y+50, r25	; 0x32
+ b1e:	8b ab       	std	Y+51, r24	; 0x33
+ b20:	be 01       	movw	r22, r28
+ b22:	8a e3       	ldi	r24, 0x3A	; 58
+ b24:	90 e0       	ldi	r25, 0x00	; 0
+ b26:	0e 94 9d 02 	call	0x53a	; 0x53a <ENC28J60_PacketSend>
+ b2a:	df 91       	pop	r29
+ b2c:	cf 91       	pop	r28
+ b2e:	08 95       	ret
+
+00000b30 <init_len_info>:
+ b30:	fc 01       	movw	r30, r24
+ b32:	20 89       	ldd	r18, Z+16	; 0x10
+ b34:	30 e0       	ldi	r19, 0x00	; 0
+ b36:	32 2f       	mov	r19, r18
+ b38:	22 27       	eor	r18, r18
+ b3a:	81 89       	ldd	r24, Z+17	; 0x11
+ b3c:	28 2b       	or	r18, r24
+ b3e:	24 51       	subi	r18, 0x14	; 20
+ b40:	31 09       	sbc	r19, r1
+ b42:	86 a5       	ldd	r24, Z+46	; 0x2e
+ b44:	82 95       	swap	r24
+ b46:	8f 70       	andi	r24, 0x0F	; 15
+ b48:	90 e0       	ldi	r25, 0x00	; 0
+ b4a:	88 0f       	add	r24, r24
+ b4c:	99 1f       	adc	r25, r25
+ b4e:	88 0f       	add	r24, r24
+ b50:	99 1f       	adc	r25, r25
+ b52:	90 93 84 00 	sts	0x0084, r25	; 0x800084 <info_hdr_len+0x1>
+ b56:	80 93 83 00 	sts	0x0083, r24	; 0x800083 <info_hdr_len>
+ b5a:	a9 01       	movw	r20, r18
+ b5c:	48 1b       	sub	r20, r24
+ b5e:	59 0b       	sbc	r21, r25
+ b60:	ca 01       	movw	r24, r20
+ b62:	50 93 82 00 	sts	0x0082, r21	; 0x800082 <info_data_len+0x1>
+ b66:	40 93 81 00 	sts	0x0081, r20	; 0x800081 <info_data_len>
+ b6a:	18 16       	cp	r1, r24
+ b6c:	19 06       	cpc	r1, r25
+ b6e:	24 f0       	brlt	.+8      	; 0xb78 <init_len_info+0x48>
+ b70:	10 92 82 00 	sts	0x0082, r1	; 0x800082 <info_data_len+0x1>
+ b74:	10 92 81 00 	sts	0x0081, r1	; 0x800081 <info_data_len>
+ b78:	08 95       	ret
+
+00000b7a <get_tcp_data_ptr>:
+ b7a:	80 91 81 00 	lds	r24, 0x0081	; 0x800081 <info_data_len>
+ b7e:	90 91 82 00 	lds	r25, 0x0082	; 0x800082 <info_data_len+0x1>
+ b82:	89 2b       	or	r24, r25
+ b84:	31 f0       	breq	.+12     	; 0xb92 <get_tcp_data_ptr+0x18>
+ b86:	80 91 83 00 	lds	r24, 0x0083	; 0x800083 <info_hdr_len>
+ b8a:	90 91 84 00 	lds	r25, 0x0084	; 0x800084 <info_hdr_len+0x1>
+ b8e:	82 96       	adiw	r24, 0x22	; 34
+ b90:	08 95       	ret
+ b92:	80 e0       	ldi	r24, 0x00	; 0
+ b94:	90 e0       	ldi	r25, 0x00	; 0
+ b96:	08 95       	ret
+
+00000b98 <make_tcp_data_pos>:
+ b98:	fa 01       	movw	r30, r20
+ b9a:	08 c0       	rjmp	.+16     	; 0xbac <make_tcp_data_pos+0x14>
+ b9c:	db 01       	movw	r26, r22
+ b9e:	d6 96       	adiw	r26, 0x36	; 54
+ ba0:	a8 0f       	add	r26, r24
+ ba2:	b9 1f       	adc	r27, r25
+ ba4:	ec 93       	st	X, r30
+ ba6:	6f 5f       	subi	r22, 0xFF	; 255
+ ba8:	7f 4f       	sbci	r23, 0xFF	; 255
+ baa:	f9 01       	movw	r30, r18
+ bac:	9f 01       	movw	r18, r30
+ bae:	2f 5f       	subi	r18, 0xFF	; 255
+ bb0:	3f 4f       	sbci	r19, 0xFF	; 255
+ bb2:	e4 91       	lpm	r30, Z
+ bb4:	e1 11       	cpse	r30, r1
+ bb6:	f2 cf       	rjmp	.-28     	; 0xb9c <make_tcp_data_pos+0x4>
+ bb8:	cb 01       	movw	r24, r22
+ bba:	08 95       	ret
+
+00000bbc <tcp_ack>:
+
+void tcp_ack(uint8_t *buf) {
+ bbc:	cf 93       	push	r28
+ bbe:	df 93       	push	r29
+ bc0:	ec 01       	movw	r28, r24
+    uint16_t j;
+    make_eth_hdr(buf);
+ bc2:	0e 94 6b 04 	call	0x8d6	; 0x8d6 <make_eth_hdr>
+    buf[TCP_FLAGS] = TCP_ACK;
+ bc6:	80 e1       	ldi	r24, 0x10	; 16
+ bc8:	8f a7       	std	Y+47, r24	; 0x2f
+    if(info_data_len==0) make_tcp_hdr(buf,1,0,1);
+ bca:	60 91 81 00 	lds	r22, 0x0081	; 0x800081 <info_data_len>
+ bce:	70 91 82 00 	lds	r23, 0x0082	; 0x800082 <info_data_len+0x1>
+ bd2:	61 15       	cp	r22, r1
+ bd4:	71 05       	cpc	r23, r1
+ bd6:	41 f4       	brne	.+16     	; 0xbe8 <tcp_ack+0x2c>
+ bd8:	21 e0       	ldi	r18, 0x01	; 1
+ bda:	40 e0       	ldi	r20, 0x00	; 0
+ bdc:	61 e0       	ldi	r22, 0x01	; 1
+ bde:	70 e0       	ldi	r23, 0x00	; 0
+ be0:	ce 01       	movw	r24, r28
+ be2:	0e 94 b2 04 	call	0x964	; 0x964 <make_tcp_hdr>
+ be6:	05 c0       	rjmp	.+10     	; 0xbf2 <tcp_ack+0x36>
+    else make_tcp_hdr(buf,info_data_len,0,1);
+ be8:	21 e0       	ldi	r18, 0x01	; 1
+ bea:	40 e0       	ldi	r20, 0x00	; 0
+ bec:	ce 01       	movw	r24, r28
+ bee:	0e 94 b2 04 	call	0x964	; 0x964 <make_tcp_hdr>
+    j = IP_HEADER_LEN+TCP_LEN_PLAIN;
+    buf[IP_TOTLEN] = j >> 8;
+ bf2:	18 8a       	std	Y+16, r1	; 0x10
+    buf[IP_TOTLEN+1] = j & 0xFF;
+ bf4:	88 e2       	ldi	r24, 0x28	; 40
+ bf6:	89 8b       	std	Y+17, r24	; 0x11
+    make_ip_hdr(buf);
+ bf8:	ce 01       	movw	r24, r28
+ bfa:	0e 94 97 04 	call	0x92e	; 0x92e <make_ip_hdr>
+    j = checksum(&buf[IP_SRC],8+TCP_LEN_PLAIN,2);
+ bfe:	42 e0       	ldi	r20, 0x02	; 2
+ c00:	6c e1       	ldi	r22, 0x1C	; 28
+ c02:	70 e0       	ldi	r23, 0x00	; 0
+ c04:	ce 01       	movw	r24, r28
+ c06:	4a 96       	adiw	r24, 0x1a	; 26
+ c08:	0e 94 cc 03 	call	0x798	; 0x798 <checksum>
+    buf[TCP_CHECKSUM] = j >> 8;
+ c0c:	9a ab       	std	Y+50, r25	; 0x32
+    buf[TCP_CHECKSUM+1] = j & 0xFF;
+ c0e:	8b ab       	std	Y+51, r24	; 0x33
+    ENC28J60_PacketSend(IP_HEADER_LEN+TCP_LEN_PLAIN+ETH_HEADER_LEN,buf);
+ c10:	be 01       	movw	r22, r28
+ c12:	86 e3       	ldi	r24, 0x36	; 54
+ c14:	90 e0       	ldi	r25, 0x00	; 0
+ c16:	0e 94 9d 02 	call	0x53a	; 0x53a <ENC28J60_PacketSend>
+}
+ c1a:	df 91       	pop	r29
+ c1c:	cf 91       	pop	r28
+ c1e:	08 95       	ret
+
+00000c20 <tcp_ack_with_data>:
+
+void tcp_ack_with_data(uint8_t *buf,uint16_t dlen) {
+ c20:	0f 93       	push	r16
+ c22:	1f 93       	push	r17
+ c24:	cf 93       	push	r28
+ c26:	df 93       	push	r29
+ c28:	ec 01       	movw	r28, r24
+ c2a:	8b 01       	movw	r16, r22
+    uint16_t j;
+    buf[TCP_FLAGS] = TCP_ACK|TCP_PSH|TCP_FIN;
+ c2c:	89 e1       	ldi	r24, 0x19	; 25
+ c2e:	8f a7       	std	Y+47, r24	; 0x2f
+    j = IP_HEADER_LEN+TCP_LEN_PLAIN+dlen;
+ c30:	cb 01       	movw	r24, r22
+ c32:	88 96       	adiw	r24, 0x28	; 40
+    buf[IP_TOTLEN] = j >> 8;
+ c34:	98 8b       	std	Y+16, r25	; 0x10
+    buf[IP_TOTLEN+1] = j & 0xFF;
+ c36:	89 8b       	std	Y+17, r24	; 0x11
+    make_ip_checksum(buf);
+ c38:	ce 01       	movw	r24, r28
+ c3a:	0e 94 82 04 	call	0x904	; 0x904 <make_ip_checksum>
+    buf[TCP_CHECKSUM] = 0;
+ c3e:	1a aa       	std	Y+50, r1	; 0x32
+    buf[TCP_CHECKSUM+1] = 0;
+ c40:	1b aa       	std	Y+51, r1	; 0x33
+    j = checksum(&buf[IP_SRC],8+TCP_LEN_PLAIN+dlen,2);
+ c42:	b8 01       	movw	r22, r16
+ c44:	64 5e       	subi	r22, 0xE4	; 228
+ c46:	7f 4f       	sbci	r23, 0xFF	; 255
+ c48:	42 e0       	ldi	r20, 0x02	; 2
+ c4a:	ce 01       	movw	r24, r28
+ c4c:	4a 96       	adiw	r24, 0x1a	; 26
+ c4e:	0e 94 cc 03 	call	0x798	; 0x798 <checksum>
+    buf[TCP_CHECKSUM] = j>>8;
+ c52:	9a ab       	std	Y+50, r25	; 0x32
+    buf[TCP_CHECKSUM+1] = j& 0xFF;
+ c54:	8b ab       	std	Y+51, r24	; 0x33
+    ENC28J60_PacketSend(IP_HEADER_LEN+TCP_LEN_PLAIN+dlen+ETH_HEADER_LEN,buf);
+ c56:	be 01       	movw	r22, r28
+ c58:	c8 01       	movw	r24, r16
+ c5a:	c6 96       	adiw	r24, 0x36	; 54
+ c5c:	0e 94 9d 02 	call	0x53a	; 0x53a <ENC28J60_PacketSend>
+}
+ c60:	df 91       	pop	r29
+ c62:	cf 91       	pop	r28
+ c64:	1f 91       	pop	r17
+ c66:	0f 91       	pop	r16
+ c68:	08 95       	ret
+
+00000c6a <strncmp>:
+ c6a:	fb 01       	movw	r30, r22
+ c6c:	dc 01       	movw	r26, r24
+ c6e:	41 50       	subi	r20, 0x01	; 1
+ c70:	50 40       	sbci	r21, 0x00	; 0
+ c72:	30 f0       	brcs	.+12     	; 0xc80 <strncmp+0x16>
+ c74:	8d 91       	ld	r24, X+
+ c76:	01 90       	ld	r0, Z+
+ c78:	80 19       	sub	r24, r0
+ c7a:	19 f4       	brne	.+6      	; 0xc82 <strncmp+0x18>
+ c7c:	00 20       	and	r0, r0
+ c7e:	b9 f7       	brne	.-18     	; 0xc6e <strncmp+0x4>
+ c80:	88 1b       	sub	r24, r24
+ c82:	99 0b       	sbc	r25, r25
+ c84:	08 95       	ret
+
+00000c86 <strstr>:
+ c86:	fb 01       	movw	r30, r22
+ c88:	51 91       	ld	r21, Z+
+ c8a:	55 23       	and	r21, r21
+ c8c:	a9 f0       	breq	.+42     	; 0xcb8 <strstr+0x32>
+ c8e:	bf 01       	movw	r22, r30
+ c90:	dc 01       	movw	r26, r24
+ c92:	4d 91       	ld	r20, X+
+ c94:	45 17       	cp	r20, r21
+ c96:	41 11       	cpse	r20, r1
+ c98:	e1 f7       	brne	.-8      	; 0xc92 <strstr+0xc>
+ c9a:	59 f4       	brne	.+22     	; 0xcb2 <strstr+0x2c>
+ c9c:	cd 01       	movw	r24, r26
+ c9e:	01 90       	ld	r0, Z+
+ ca0:	00 20       	and	r0, r0
+ ca2:	49 f0       	breq	.+18     	; 0xcb6 <strstr+0x30>
+ ca4:	4d 91       	ld	r20, X+
+ ca6:	40 15       	cp	r20, r0
+ ca8:	41 11       	cpse	r20, r1
+ caa:	c9 f3       	breq	.-14     	; 0xc9e <strstr+0x18>
+ cac:	fb 01       	movw	r30, r22
+ cae:	41 11       	cpse	r20, r1
+ cb0:	ef cf       	rjmp	.-34     	; 0xc90 <strstr+0xa>
+ cb2:	81 e0       	ldi	r24, 0x01	; 1
+ cb4:	90 e0       	ldi	r25, 0x00	; 0
+ cb6:	01 97       	sbiw	r24, 0x01	; 1
+ cb8:	08 95       	ret
+
+00000cba <_exit>:
+ cba:	f8 94       	cli
+
+00000cbc <__stop_program>:
+ cbc:	ff cf       	rjmp	.-2      	; 0xcbc <__stop_program>
