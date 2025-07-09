@@ -4,434 +4,232 @@
  * Created: 4/4/2025 11:40:17 PM
  *  Author: rasor
  */ 
-#include <avr/io.h>
-#include "I2C_Module.h"
 #include "RTC_Module.h"
+#include "i2c_async.h"
 #include "LCD_Module.h"
+#include <util/delay.h>
+#include <string.h>
 
-unsigned char rtc_register[7];
-unsigned char time[10]; 		//xx:xx:xx;
-unsigned char date[12];			//xx/xx/xxxx;
-unsigned char day;
+uint8_t rtc_register[7];
+char    time_str[9];
+char    date_str[11];
 
-//******************************************************************
-//Function to initialize the DS1307 memory address.
-//******************************************************************
-void RTC_setStartAddress(void)
+/** Puntero al registro inicial (00h) */
+static uint8_t ptr_reg = 0x00;
+
+/** Prototipos de callbacks internos */
+static void rtc_addr_cb(I2C_Result_t res, uint8_t *data, uint8_t len);
+static void rtc_read_cb (I2C_Result_t res, uint8_t *data, uint8_t len);
+static const char *day_names[8] = {
+	"",         // índice 0 no usado
+	"Sunday",   // 1
+	"Monday",   // 2
+	"Tuesday",  // 3
+	"Wednesday",// 4
+	"Thursday", // 5
+	"Friday",   // 6
+	"Saturday"  // 7
+};
+
+void RTC_init(void)
 {
-   unsigned char errorStatus;
-   
-   errorStatus = i2c_start();
-   if(errorStatus == 1)
-   {
-   	 i2c_stop();
-	 return;
-   } 
-   
-   errorStatus = i2c_sendAddress(DS1307_W);
-   
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return;
-   } 
-   
-   errorStatus = i2c_sendData(0x00);
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return;
-   } 
-
-   i2c_stop();
+	i2c_async_init();
+	// el LCD debe inicializarlo el main antes de llamar a RTC_read_async()
 }
 
-//******************************************************************
-//Function to read RTC data.
-//******************************************************************    
-void RTC_read(void)
+/** Secuencia write(ptr=0x00) ? read(7) */
+void RTC_read_async(void)
 {
+	i2c_async_write(DS3232_W, &ptr_reg, 1, rtc_addr_cb);
+}
 
-  unsigned char errorStatus, i, data;
-  
-  errorStatus = i2c_start();
-   if(errorStatus == 1)
-   {
-   	 i2c_stop();
-	 return;
-   } 
-   
-   errorStatus = i2c_sendAddress(DS1307_W);
-   
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return;
-   } 
-   
-   errorStatus = i2c_sendData(0x00);
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return;
-   } 
-
-    errorStatus = i2c_repeatStart();
-   if(errorStatus == 1)
-   {
-   	 i2c_stop();
-	 return;
-   } 
-   
-    errorStatus = i2c_sendAddress(DS1307_R);
-   
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return;
-   } 
- 
-    for(i=0;i<7;i++)
-   {
-      if(i == 6)  	 //no Acknowledge after receiving the last byte
-	   	  data = i2c_receiveData_NACK();
-	  else
-	  	  data = i2c_receiveData_ACK();
-		  
-   	  if(data == ERROR_CODE)
-   	  {
-			i2c_stop();
-	   		return;
-   	  }
-	  
-	  rtc_register[i] = data;
+static void rtc_addr_cb(I2C_Result_t res, uint8_t *data, uint8_t len)
+{
+	if (res == I2C_OK) {
+		i2c_async_read(DS3232_R, rtc_register, 7, rtc_read_cb);
 	}
-	
-	i2c_stop();
-}	  
+}
 
-//******************************************************************
-//Function to read time data.
-//****************************************************************** 
+static void rtc_read_cb(I2C_Result_t res, uint8_t *data, uint8_t len)
+{
+	if (res != I2C_OK || len != 7) return;
+
+	/** BCD ? ASCII en cadenas */
+	time_str[0] = ((rtc_register[2] >> 4)&0x03) + '0';
+	time_str[1] = ( rtc_register[2]       &0x0F) + '0';
+	time_str[2] = ':';
+	time_str[3] = ((rtc_register[1] >> 4)&0x07) + '0';
+	time_str[4] = ( rtc_register[1]       &0x0F) + '0';
+	time_str[5] = ':';
+	time_str[6] = ((rtc_register[0] >> 4)&0x07) + '0';
+	time_str[7] = ( rtc_register[0]       &0x0F) + '0';
+	time_str[8] = '\0';
+
+	date_str[0]  = ((rtc_register[4] >> 4)&0x03) + '0';
+	date_str[1]  = ( rtc_register[4]       &0x0F) + '0';
+	date_str[2]  = '/';
+	date_str[3]  = ((rtc_register[5] >> 4)&0x01) + '0';
+	date_str[4]  = ( rtc_register[5]       &0x0F) + '0';
+	date_str[5]  = '/';
+	date_str[6]  = '2';
+	date_str[7]  = '0';
+	date_str[8]  = ((rtc_register[6] >> 4)&0x0F) + '0';
+	date_str[9]  = ( rtc_register[6]       &0x0F) + '0';
+	date_str[10] = '\0';
+
+
+	// 3) Limpiar y pintar fecha en fila 0
+	LCD_Command(LCD_CLEAR);
+	LCD_SetCursor(0, 0);
+	LCD_Write_String("--------------------------");
+	LCD_SetCursor(0, 1);
+	LCD_Write_String(date_str);
+
+	// 4) Pintar nombre del día en fila 1
+	{
+		uint8_t dow = rtc_register[3];
+		if (dow >= 1 && dow <= 7) {
+			
+			LCD_Write_String(" ");
+			LCD_Write_String(day_names[dow]);
+		}
+	}
+
+	// 5) Pintar hora en fila 2
+	LCD_SetCursor(0, 2);
+	LCD_Write_String(time_str);
+	LCD_SetCursor(0, 3);
+	LCD_Write_String("--------------------------");
+}
+
+/** Escribe los bytes 0–2 (hora) */
+uint8_t RTC_writeTime(void)
+{
+	uint8_t buf[4] = {
+		0x00,
+		rtc_register[0],
+		rtc_register[1],
+		rtc_register[2]
+	};
+	return i2c_async_write(DS3232_W, buf, 4, NULL) != I2C_OK;
+}
+
+/** Escribe los bytes 3–6 (fecha) */
+uint8_t RTC_writeDate(void)
+{
+	uint8_t buf[5] = {
+		0x03,
+		rtc_register[3],
+		rtc_register[4],
+		rtc_register[5],
+		rtc_register[6]
+	};
+	return i2c_async_write(DS3232_W, buf, 5, NULL) != I2C_OK;
+}
+
+/** Formatea BCD?ASCII en time_str */
 void RTC_getTime(void)
 {
-   RTC_read();
-   time[9] = 0x00;	  //NIL
-   time[8] = ' ';
-   time[7] = (SECONDS & 0x0f) | 0x30;		//seconds(1's)
-   time[6] = ((SECONDS & 0x70) >> 4) | 0x30;		//seconds(10's)
-   time[5] = ':';
-   
-   time[4] = (MINUTES & 0x0f) | 0x30;
-   time[3] = ((MINUTES & 0x70) >> 4) | 0x30;
-   time[2] = ':'; 
-   
-   time[1] = (HOURS & 0x0f) | 0x30;	
-   time[0] = ((HOURS & 0x30) >> 4) | 0x30;
+	time_str[0] = ((rtc_register[2] >> 4)&0x03) + '0';
+	time_str[1] = ( rtc_register[2]       &0x0F) + '0';
+	time_str[2] = ':';
+	time_str[3] = ((rtc_register[1] >> 4)&0x07) + '0';
+	time_str[4] = ( rtc_register[1]       &0x0F) + '0';
+	time_str[5] = ':';
+	time_str[6] = ((rtc_register[0] >> 4)&0x07) + '0';
+	time_str[7] = ( rtc_register[0]       &0x0F) + '0';
+	time_str[8] = '\0';
 }
 
-//******************************************************************
-//Function to read date data
-//****************************************************************** 
+/** Formatea BCD?ASCII en date_str */
 void RTC_getDate(void)
 {
-  RTC_read();
-  date[11] = 0x00;  //NIL
-  date[11] = ' ';
-  date[9] = (YEAR & 0x0f) | 0x30;
-  date[8] = ((YEAR & 0xf0) >> 4) | 0x30;
-  date[7] = '0';
-  date[6] = '2';
-  date[5] = '/';
-  date[4] = (MONTH & 0x0f) | 0x30;
-  date[3] = ((MONTH & 0x10) >> 4) | 0x30;
-  date[2] = '/';
-  date[1] = (DATE & 0x0f) | 0x30;
-  date[0] = ((DATE & 0x30) >> 4) | 0x30;
-}  
-  
-//******************************************************************
-//Function to display time. 
-//****************************************************************** 
-void RTC_displayTime(void)
-{
-  RTC_getTime();
-  
-  LCD_Write_String(time);
+	date_str[0]  = ((rtc_register[4] >> 4)&0x03) + '0';
+	date_str[1]  = ( rtc_register[4]       &0x0F) + '0';
+	date_str[2]  = '/';
+	date_str[3]  = ((rtc_register[5] >> 4)&0x01) + '0';
+	date_str[4]  = ( rtc_register[5]       &0x0F) + '0';
+	date_str[5]  = '/';
+	date_str[6]  = '2';
+	date_str[7]  = '0';
+	date_str[8]  = ((rtc_register[6] >> 4)&0x0F) + '0';
+	date_str[9]  = ( rtc_register[6]       &0x0F) + '0';
+	date_str[10] = '\0';
 }
 
-//******************************************************************
-//Function to display date
-//****************************************************************** 
+/** Muestra en LCD sin cambiar cursor */
+void RTC_displayTime(void)
+{
+	RTC_getTime();
+	LCD_Write_String(time_str);
+}
+
 void RTC_displayDate(void)
 {
 	RTC_getDate();
-	LCD_Write_String(date);
+	LCD_Write_String(date_str);
 }
 
 void RTC_displayDay(void)
 {
-  switch(DAY)
-  {
-   case 1:
-		  LCD_Write_String("Sunday ");
-          break; 
-   case 2:
-		  LCD_Write_String("Monday ");
-          break; 
-   case 3:
-		  LCD_Write_String("Tuesday ");
-          break; 
-   case 4:
-		  LCD_Write_String("Wednesday ");
-          break; 
-   case 5:
-		  LCD_Write_String("Thursday ");
-          break; 		  
-   case 6:
-		  LCD_Write_String("Friday  ");
-          break; 		  
-   case 7:
-		  LCD_Write_String("Saturday ");
-          break; 
-   default:
-		  LCD_Write_String("Unknown ");
-  }
-}	
+	uint8_t d = rtc_register[3];
+	switch(d) {
+		case 1: LCD_Write_String("Sunday ");   break;
+		case 2: LCD_Write_String("Monday ");   break;
+		case 3: LCD_Write_String("Tuesday ");  break;
+		case 4: LCD_Write_String("Wednesday ");break;
+		case 5: LCD_Write_String("Thursday "); break;
+		case 6: LCD_Write_String("Friday  ");  break;
+		case 7: LCD_Write_String("Saturday ");break;
+		default: LCD_Write_String("Unknown "); break;
+	}
+}
+
 void RTC_display_data(void)
 {
 	LCD_Command(LCD_CLEAR);
 	LCD_SetCursor(0,0);
-	LCD_Write_String(" --------------------------------------");
-	LCD_SetCursor(1,1);
+	LCD_Write_String("----------------");
+	LCD_SetCursor(1,0);
 	RTC_displayDate();
 	LCD_SetCursor(11,1);
 	LCD_Write_String(" ");
 	RTC_displayDay();
 	LCD_SetCursor(0,2);
-	LCD_Write_String(" ");
 	RTC_displayTime();
 	LCD_SetCursor(0,3);
-	LCD_Write_String("--------------------");
+	LCD_Write_String("----------------");
 	_delay_ms(100);
 }
-		  		     	  
-//******************************************************************
-//Function to format registers 
-//****************************************************************** 
+
+/** Convierte time_str/date_str ? rtc_register (BCD) */
 void RTC_updateRegisters(void)
 {
-  SECONDS = ((time[6] & 0x07) << 4) | (time[7] & 0x0f);
-  MINUTES = ((time[3] & 0x07) << 4) | (time[4] & 0x0f);
-  HOURS = ((time[0] & 0x03) << 4) | (time[1] & 0x0f);  
-  DAY = date[10];
-  DATE = ((date[0]& 0x03) << 4) | (date[1] & 0x0f);
-  MONTH = ((date[3] & 0x01) << 4) | (date[4] & 0x0f);
-  YEAR = ((date[8] & 0x0f) << 4) | (date[9] & 0x0f);
-}  
+	rtc_register[0] = ((time_str[6]-'0')<<4) | (time_str[7]-'0'); // seg
+	rtc_register[1] = ((time_str[3]-'0')<<4) | (time_str[4]-'0'); // min
+	rtc_register[2] = ((time_str[0]-'0')<<4) | (time_str[1]-'0'); // hr
 
-
-//******************************************************************
-//Function to write time into the DS1307 
-//******************************************************************   
-unsigned char RTC_writeTime(void)
-{
-  unsigned char errorStatus, i;
-  
-   errorStatus = i2c_start();
-   if(errorStatus == 1)
-   {
-   	 i2c_stop();
-	 return(1);
-   } 
-   
-   errorStatus = i2c_sendAddress(DS1307_W);
-   
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return(1);
-   } 
-   
-   errorStatus = i2c_sendData(0x00);
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return(1);
-   } 
-
-    for(i=0;i<3;i++)
-    {
-	  errorStatus = i2c_sendData(rtc_register[i]);  
-   	  if(errorStatus == 1)
-   	  {
-			i2c_stop();
-	   		return(1);
-   	  }
-    }
-	
-	i2c_stop();
-	return(0);
+	// día_sem no lo cubre time_str
+	rtc_register[4] = ((date_str[0]-'0')<<4) | (date_str[1]-'0'); // date
+	rtc_register[5] = ((date_str[3]-'0')<<4) | (date_str[4]-'0'); // month
+	rtc_register[6] = ((date_str[8]-'0')<<4) | (date_str[9]-'0'); // year
 }
 
-
-//******************************************************************
-//Function to write date into the DS1307 
-//******************************************************************   
-unsigned char RTC_writeDate(void)
+/** Recibe "hh:mm:ss". Actualiza RTC. */
+void RTC_updateTime(const char *strTime)
 {
-  unsigned char errorStatus, i;
-  
-   errorStatus = i2c_start();
-   if(errorStatus == 1)
-   {
-   	 i2c_stop();
-	 return(1);
-   } 
-   
-   errorStatus = i2c_sendAddress(DS1307_W);
-   
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return(1);
-   } 
-   
-   errorStatus = i2c_sendData(0x03);
-   if(errorStatus == 1)
-   {
-	 i2c_stop();
-	 return(1);
-   } 
-
-    for(i=3;i<7;i++)
-    {
-	  errorStatus = i2c_sendData(rtc_register[i]);  
-   	  if(errorStatus == 1)
-   	  {
-			i2c_stop();
-	   		return(1);
-   	  }
-    }
-	
-	i2c_stop();
-	return(0);
+	memcpy(time_str, strTime, 8);
+	time_str[8]='\0';
+	RTC_updateRegisters();
+	RTC_writeTime();
 }
-  
-//******************************************************************
-//Function to update time into the DS1307 
-// Format (24h): hh:mm:ss
-//******************************************************************   
-void RTC_updateTime(unsigned char *strTime)
-{
-  unsigned char i, data;
-  int timeError = 0;
-  
-  time[2] = ':';
-  time[5] = ':';
-  data = 0x31;
-  if(data < 0x30 || data > 0x32)	//Hours.
-	timeError = 1;
-  else
-    time[0] = *strTime;
-	
-  if(data < 0x30 || data > 0x39)
-	timeError = 1;
-  else
-    time[1] = *(strTime + 1);
-  
-  if(data < 0x30 || data > 0x35)	//Minutes
-	timeError = 1;
-  else
-    time[3] = *(strTime + 3);
-	
-  if(data < 0x30 || data > 0x39)
-	timeError = 1;
-  else
-    time[4] = *(strTime + 4);
-  
-  if(data < 0x30 || data > 0x35)	//Seconds
-	timeError = 1;
-  else
-    time[6] = *(strTime + 6);
-	
-  if(data < 0x30 || data > 0x39)
-	timeError = 1;
-  else
-    time[7] = *(strTime + 7);
-  
-  if (timeError)
-  {
-	  return;
-  }	  
-  else
-  {
-	  RTC_updateRegisters();
-	  data = RTC_writeTime();
-  }	  
-	
-  return;
-}  
-//******************************************************************
-//Function to update date into the DS1307
-// Format: dd/mm/yy-WeekDay
-//******************************************************************   
-//RTC_updateDate(unsigned char *strDate);
-void RTC_updateDate(unsigned char *strDate)
-{
-  unsigned char  data;
-  int dateError = 0;
-  data = 0x31;
-  date[2] = '/';
-  date[5] = '/';
-  
-  if(data < 0x30 || data > 0x33)	// Day.
-	dateError =1;
-  else
-    date[0] = *strDate;
-	
-  if(data < 0x30 || data > 0x39)
-	dateError =1;
-  else
-    date[1] = *(strDate + 1);
-  
-  if(data < 0x30 || data > 0x31)	// Month
-	dateError =1;
-  else
-    date[3] = *(strDate + 3);
-	
-  if(data < 0x30 || data > 0x39)
-	dateError =1;
-  else
-    date[4] = *(strDate + 4);
-  
-  date[6] = '2';					// Year
-  date[7] = '0';
-  
-  if(data < 0x30 || data > 0x39)
-	dateError =1;
-  else
-    date[8] = *(strDate + 8);
-	
-  if(data < 0x30 || data > 0x39)
-	dateError =1;
-  else
-    date[9] = *(strDate + 9);
 
-  if(data < 0x30 || data > 0x36)
-	dateError =1;
-  else
-	date[10] = *(strDate + 11);
-  
-  if (dateError)
-  {
-		return;  
-  }
-  else
-  {
-	  RTC_updateRegisters();
-	  data = RTC_writeDate();
-  }
-  
-  return;
-}  
+/** Recibe "dd/mm/yyyy". Actualiza RTC. */
+void RTC_updateDate(const char *strDate)
+{
+	memcpy(date_str, strDate, 10);
+	date_str[10]='\0';
+	RTC_updateRegisters();
+	RTC_writeDate();
+}
+
