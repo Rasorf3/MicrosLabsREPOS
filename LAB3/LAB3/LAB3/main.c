@@ -12,6 +12,8 @@
 #include <avr/interrupt.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "UltraSonicModule.h"
 #include "ROLL_Module.h"
@@ -40,7 +42,8 @@ int main(void)
     uint8_t  idx = 0;
     uint8_t  c;
 	// Ejemplo TX
-	//const char msg[] = "Hola mundo!\r\n";
+	//const char msg[] = "AT+NAMETRASH BIN MICROS";
+
 	//USART_SendBuffer((const uint8_t*)msg, sizeof(msg)-1);
 	LCD_Command(LCD_CLEAR);
 	unsigned char flag_check = 0;
@@ -54,8 +57,8 @@ int main(void)
 	unsigned char DHTreadCheck = 0;
 	unsigned char buffer[20];
 	unsigned char result = 0;
-	unsigned char bufferUSART[6];
-
+	unsigned char bufferUSART[11];
+	char floatBuffer[10];
 	// 3) Primera lectura asíncrona del RTC
 	RTC_read_async();
 	Timer2_reset();
@@ -114,6 +117,7 @@ int main(void)
 			RTC_read_async();
 			if(Timer0_milis(TIME_CONSTANT_MS))
 			{
+				
 				Timer0_reset();
 				if(ReadRollPin())
 				{
@@ -167,9 +171,11 @@ int main(void)
 				AverageUltraSonicData = AverageUltraSonicData / 10;
 				UltraSonic_Display_Data(AverageUltraSonicData);
 				/////////////////////////////////////////////////////////////////
-				dtostrf(AverageUltraSonicData, 5, 2, bufferUSART);
+				
 				/////////////////////////////////////////////////////////////////
 				DHT_Display_Data(AverageTemp,AverageHum);
+				dtostrf(AverageUltraSonicData, 5, 2, floatBuffer);
+				sprintf(bufferUSART,"%u_%u_%s",AverageHum,AverageTemp,floatBuffer);
 				USART_SendBuffer(bufferUSART, sizeof(bufferUSART)-1);
 			}
 			if(current_state == STATE_READY)
