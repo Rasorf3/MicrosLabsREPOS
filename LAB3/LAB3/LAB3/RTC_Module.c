@@ -233,3 +233,21 @@ void RTC_updateDate(const char *strDate)
 	RTC_writeDate();
 }
 
+//extern char time_str[9];   // "hh:mm:ss\0"
+
+char getHu()
+{
+	return time_str[1];
+}
+char getHd()
+{
+	return time_str[0];
+}
+char getMd()
+{
+	return time_str[3];
+}
+char getMu()
+{
+	return time_str[4];
+}

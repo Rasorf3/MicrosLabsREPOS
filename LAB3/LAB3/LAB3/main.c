@@ -57,8 +57,12 @@ int main(void)
 	unsigned char DHTreadCheck = 0;
 	unsigned char buffer[20];
 	unsigned char result = 0;
-	unsigned char bufferUSART[11];
+	unsigned char bufferUSART[21];
 	char floatBuffer[10];
+	char Hd = "";
+	char Hu = "";
+	char Md = "";
+	char Mu = "";
 	// 3) Primera lectura asíncrona del RTC
 	RTC_read_async();
 	Timer2_reset();
@@ -70,7 +74,6 @@ int main(void)
 
 	while (1) {
 		
-        // Lee bytes entrantes sin bloquear
         if (USART_ReceiveByte(&c)) 
 		{
 	        // Si llega CR o LF, procesamos la línea completa
@@ -78,13 +81,10 @@ int main(void)
 			 {
 		        if (idx > 0)
 				{
-			        // Termina la cadena
 			        line[idx] = '\0';
-			        // Aquí tienes todo el mensaje en "line"
-			        // Por ejemplo, lo vuelves a enviar:
+			        
 			        //USART_SendBuffer((uint8_t*)line, idx);
 			        //USART_SendBuffer((uint8_t*)"\r\n", 2);
-			        // Reinicia índice para la siguiente línea
 			        idx = 0;
 					LCD_Command(LCD_CLEAR);
 					LCD_SetCursor(0,0);
@@ -100,7 +100,7 @@ int main(void)
 			}
 	        else 
 			{
-		        // Si no es delimitador y hay espacio, lo acumulas
+		        
 		        if (idx < LINE_BUF_SIZE-1) 
 				{
 			        line[idx++] = c;
@@ -115,6 +115,13 @@ int main(void)
 		else
 		{
 			RTC_read_async();
+			_delay_ms(30);
+			
+			Hu= getHu();
+			Hd = getHd();
+			Md = getMd();
+			Mu = getMu();
+			
 			if(Timer0_milis(TIME_CONSTANT_MS))
 			{
 				
@@ -169,13 +176,18 @@ int main(void)
 					AverageUltraSonicData+= UltraSonicData[i];
 				}
 				AverageUltraSonicData = AverageUltraSonicData / 10;
+				//AverageUltraSonicData = 20.21;
 				UltraSonic_Display_Data(AverageUltraSonicData);
 				/////////////////////////////////////////////////////////////////
 				
 				/////////////////////////////////////////////////////////////////
+				
 				DHT_Display_Data(AverageTemp,AverageHum);
+				
+
+				
 				dtostrf(AverageUltraSonicData, 5, 2, floatBuffer);
-				sprintf(bufferUSART,"%u_%u_%s",AverageHum,AverageTemp,floatBuffer);
+				sprintf(bufferUSART,"%u_%u_%s_%c_%c%c_%c%c",AverageHum,AverageTemp,floatBuffer,'0',Hd,Hu,Md,Mu);
 				USART_SendBuffer(bufferUSART, sizeof(bufferUSART)-1);
 			}
 			if(current_state == STATE_READY)

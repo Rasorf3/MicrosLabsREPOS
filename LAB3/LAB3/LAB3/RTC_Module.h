@@ -27,6 +27,11 @@ extern char date_str[11];  // "dd/mm/yyyy\0"
  * Llama internamente a i2c_async_init() y en el callback
  * actualiza lcd con date_str/time_str.
  */
+char getHu();
+char getHd();
+char getMd();
+char getMu();
+
 void RTC_init(void);
 
 /**
