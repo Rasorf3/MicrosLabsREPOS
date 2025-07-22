@@ -1,49 +1,29 @@
 /*
- * main.c
+ * templateFRTOS.c
  *
- *  Created on: Feb 4, 2015
- *      Author: jcobb
- */
-#include <avr/io.h>
+ * Created: 14/05/2013 20:10:58
+ *  Author: eBlady
+ */ 
+
+
+//FreeRTOS include files
 #include "FreeRTOS.h"
 #include "task.h"
-#include "apptasks.h"
-
-#define mainLED_TASK_PRIORITY			(tskIDLE_PRIORITY)
-#define mainLED_TASK_PRIORITY 			(tskIDLE_PRIORITY+1)
-// #define mainNEXT_TASK_2				(tskIDLE_PRIORITY+2)
-// #define mainNEXT_TASK_3				(tskIDLE_PRIORITY+3)
 
 
-// TODO: Research moving vLEDFlashTask method to apptasks.c
-void vLEDFlashTask(void *pvParms)
+//////////////////////////////////////////////////////////////////////////////////
+// Funci?n PRINCIPAL
+int main(void)
 {
-	vLEDInit();
-	portTickType xLastWakeTime;
-	const portTickType xFrequency = 1000;
-	xLastWakeTime = xTaskGetTickCount();
+	// Inicializar el micro
+	vInit();
 
-	for(;;) {
-		vLEDToggle();
-		vTaskDelayUntil(&xLastWakeTime, xFrequency);
-	}
-}
+	// Arrancar las tareas con un nivel de prioridad dado.
+	vStartLEDFlashTask(tskIDLE_PRIORITY+1);
 
-void init(void);
-
-void vApplicationIdleHook( void );
-
-portSHORT main(void)
-{
-	xTaskCreate(vLEDFlashTask, (int8_t*) "LED", configMINIMAL_STACK_SIZE, NULL, mainLED_TASK_PRIORITY, NULL);
-
+	// Arrancar, el planificador de tareas.
 	vTaskStartScheduler();
 
 	return 0;
-}
-
-void vApplicationIdleHook( void )
-{
-	//vCoRoutineSchedule();
 }
 
