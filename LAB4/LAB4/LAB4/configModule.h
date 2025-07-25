@@ -9,8 +9,13 @@
 #ifndef CONFIGMODULE_H_
 #define CONFIGMODULE_H_
 
-void vInit();
+#include <avr/io.h>
+#include "FreeRTOS.h"
+#include "task.h"
 
-
+/* Prototipos */
+void vInit(void);
+void vCreatingTasks(UBaseType_t uxPriority);
 
 #endif /* CONFIGMODULE_H_ */
+
