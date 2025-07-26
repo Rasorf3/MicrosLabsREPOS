@@ -6,16 +6,20 @@
  */ 
 
 
-#ifndef CONFIGMODULE_H_
-#define CONFIGMODULE_H_
 
-#include <avr/io.h>
+#ifndef CONFIG_MODULE_H
+#define CONFIG_MODULE_H
+
+#include <stdint.h>
 #include "FreeRTOS.h"
 #include "task.h"
 
-/* Prototipos */
+// Inicialización de pines para LCD (sin interrupciones)
 void vInit(void);
-void vCreatingTasks(UBaseType_t uxPriority);
 
-#endif /* CONFIGMODULE_H_ */
+// Creación de la tarea que maneja el LCD
+void vCreatingTasks(UBaseType_t uxBasePriority);
+
+#endif // CONFIG_MODULE_H
+
 
