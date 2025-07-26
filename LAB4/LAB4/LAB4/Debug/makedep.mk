@@ -10,8 +10,6 @@ event_groups.c
 
 heap_1.c
 
-lcd.c
-
 list.c
 
 main.c

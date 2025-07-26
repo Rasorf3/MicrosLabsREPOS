@@ -111,36 +111,6 @@ Discarded input sections
                 0x00000000        0xa heap_1.o
  .text.xPortGetFreeHeapSize
                 0x00000000       0x12 heap_1.o
- .text          0x00000000        0x0 lcd.o
- .data          0x00000000        0x0 lcd.o
- .bss           0x00000000        0x0 lcd.o
- .text.lcdPulseEnable
-                0x00000000       0x2c lcd.o
- .text.lcdWrite8
-                0x00000000       0x3a lcd.o
- .text.lcdSendCommand
-                0x00000000       0x1e lcd.o
- .text.lcdSendData
-                0x00000000       0x1e lcd.o
- .text.lcdSetCursor
-                0x00000000       0x1c lcd.o
- .text.lcdInit  0x00000000       0x50 lcd.o
- .text.vTaskLCD
-                0x00000000       0x70 lcd.o
- .rodata.rowAddr.1905
-                0x00000000        0x4 lcd.o
- .bss.xLCDQueue
-                0x00000000        0x2 lcd.o
- .debug_info    0x00000000      0x551 lcd.o
- .debug_abbrev  0x00000000      0x228 lcd.o
- .debug_loc     0x00000000      0x303 lcd.o
- .debug_aranges
-                0x00000000       0x50 lcd.o
- .debug_ranges  0x00000000       0x40 lcd.o
- .debug_line    0x00000000      0x311 lcd.o
- .debug_str     0x00000000      0x2df lcd.o
- .comment       0x00000000       0x31 lcd.o
- .debug_frame   0x00000000       0x94 lcd.o
  .text          0x00000000        0x0 list.o
  .data          0x00000000        0x0 list.o
  .bss           0x00000000        0x0 list.o
@@ -348,7 +318,6 @@ LOAD configModule.o
 LOAD croutine.o
 LOAD event_groups.o
 LOAD heap_1.o
-LOAD lcd.o
 LOAD list.o
 LOAD main.o
 LOAD port.o
@@ -868,15 +837,15 @@ END GROUP
  .debug_abbrev  0x00000abd      0x150 port.o
  .debug_abbrev  0x00000c0d      0x2a3 tasks.o
 
-.debug_line     0x00000000     0x19f4
+.debug_line     0x00000000     0x19f7
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x134 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000134      0x3c1 configModule.o
- .debug_line    0x000004f5      0x1bc heap_1.o
- .debug_line    0x000006b1      0x214 list.o
- .debug_line    0x000008c5       0xc5 main.o
- .debug_line    0x0000098a      0x2e6 port.o
- .debug_line    0x00000c70      0xd84 tasks.o
+ .debug_line    0x00000134      0x3c4 configModule.o
+ .debug_line    0x000004f8      0x1bc heap_1.o
+ .debug_line    0x000006b4      0x214 list.o
+ .debug_line    0x000008c8       0xc5 main.o
+ .debug_line    0x0000098d      0x2e6 port.o
+ .debug_line    0x00000c73      0xd84 tasks.o
 
 .debug_frame    0x00000000      0x6f0
  *(.debug_frame)

@@ -19,7 +19,7 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 00000eb0  00000000  00000000  00003fed  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000019f4  00000000  00000000  00004e9d  2**0
+  8 .debug_line   000019f7  00000000  00000000  00004e9d  2**0
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  000006f0  00000000  00000000  00006894  2**2
                   CONTENTS, READONLY, DEBUGGING
@@ -102,7 +102,7 @@ Disassembly of section .text:
 
 000000a6 <lcdPulseEnable>:
 
-// ——— Rutinas de LCD ———
+
 
 static void lcdPulseEnable(void)
 {
@@ -320,7 +320,7 @@ static void vTaskLCDControl(void *pvParameters)
 		uint8_t last = TCNT2, now;
  18e:	90 91 b2 00 	lds	r25, 0x00B2	; 0x8000b2 <__TEXT_REGION_LENGTH__+0x7f80b2>
 
-		// 1) TRIG 10µs
+		
 		PORTC |=  (1 << PC2);
  192:	88 b1       	in	r24, 0x08	; 8
  194:	84 60       	ori	r24, 0x04	; 4
@@ -340,7 +340,6 @@ static void vTaskLCDControl(void *pvParameters)
  1a0:	8b 7f       	andi	r24, 0xFB	; 251
  1a2:	88 b9       	out	0x08, r24	; 8
 
-		// 2) Esperar subida
 		while (!(PINC & (1 << PC3)));
  1a4:	33 9b       	sbis	0x06, 3	; 6
  1a6:	fe cf       	rjmp	.-4      	; 0x1a4 <vTaskLCDControl+0x24>
@@ -349,7 +348,6 @@ static void vTaskLCDControl(void *pvParameters)
  1ac:	98 01       	movw	r18, r16
  1ae:	20 c0       	rjmp	.+64     	; 0x1f0 <vTaskLCDControl+0x70>
 
-		// 3) Medir ancho de pulso
 		while (PINC & (1 << PC3))
 		{
 			now = TCNT2;
@@ -388,11 +386,11 @@ static void vTaskLCDControl(void *pvParameters)
  1ea:	26 1f       	adc	r18, r22
  1ec:	37 1f       	adc	r19, r23
  1ee:	98 2f       	mov	r25, r24
+		_delay_us(15);
+		PORTC &= ~(1 << PC2);
 
-		// 2) Esperar subida
 		while (!(PINC & (1 << PC3)));
 
-		// 3) Medir ancho de pulso
 		while (PINC & (1 << PC3))
  1f0:	33 99       	sbic	0x06, 3	; 6
  1f2:	de cf       	rjmp	.-68     	; 0x1b0 <vTaskLCDControl+0x30>
@@ -453,7 +451,6 @@ static void vTaskLCDControl(void *pvParameters)
  244:	91 e0       	ldi	r25, 0x01	; 1
  246:	0e 94 a9 00 	call	0x152	; 0x152 <lcdPrint>
 		dist_cm = 0;
-		// 6) Retraso sencillo de 200 ms
 		vTaskDelay(2000);
  24a:	80 ed       	ldi	r24, 0xD0	; 208
  24c:	97 e0       	ldi	r25, 0x07	; 7
@@ -467,15 +464,15 @@ static void vTaskLCDControl(void *pvParameters)
 void vInit(void)
 {
     // LCD
-    DDRB |=  0x3F;                     // PB0–PB5
+    DDRB |=  0x3F;                     
  254:	84 b1       	in	r24, 0x04	; 4
  256:	8f 63       	ori	r24, 0x3F	; 63
  258:	84 b9       	out	0x04, r24	; 4
-    DDRD |= (1<<PD2)|(1<<PD3);         // PD2–PD3
+    DDRD |= (1<<PD2)|(1<<PD3);         
  25a:	8a b1       	in	r24, 0x0a	; 10
  25c:	8c 60       	ori	r24, 0x0C	; 12
  25e:	8a b9       	out	0x0a, r24	; 10
-    DDRC |= (1<<PC0)|(1<<PC1);         // RS, EN
+    DDRC |= (1<<PC0)|(1<<PC1);        
  260:	87 b1       	in	r24, 0x07	; 7
  262:	83 60       	ori	r24, 0x03	; 3
  264:	87 b9       	out	0x07, r24	; 7

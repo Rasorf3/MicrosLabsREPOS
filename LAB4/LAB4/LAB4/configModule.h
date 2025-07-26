@@ -13,11 +13,8 @@
 #include <stdint.h>
 #include "FreeRTOS.h"
 #include "task.h"
-
-// Inicialización de pines para LCD (sin interrupciones)
 void vInit(void);
 
-// Creación de la tarea que maneja el LCD
 void vCreatingTasks(UBaseType_t uxBasePriority);
 
 #endif // CONFIG_MODULE_H

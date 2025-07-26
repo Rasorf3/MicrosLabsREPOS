@@ -41,7 +41,6 @@ C_SRCS +=  \
 ../croutine.c \
 ../event_groups.c \
 ../heap_1.c \
-../lcd.c \
 ../list.c \
 ../main.c \
 ../port.c \
@@ -61,7 +60,6 @@ configModule.o \
 croutine.o \
 event_groups.o \
 heap_1.o \
-lcd.o \
 list.o \
 main.o \
 port.o \
@@ -74,7 +72,6 @@ configModule.o \
 croutine.o \
 event_groups.o \
 heap_1.o \
-lcd.o \
 list.o \
 main.o \
 port.o \
@@ -87,7 +84,6 @@ configModule.d \
 croutine.d \
 event_groups.d \
 heap_1.d \
-lcd.d \
 list.d \
 main.d \
 port.d \
@@ -100,7 +96,6 @@ configModule.d \
 croutine.d \
 event_groups.d \
 heap_1.d \
-lcd.d \
 list.d \
 main.d \
 port.d \
@@ -144,13 +139,6 @@ LINKER_SCRIPT_DEP+=
 	
 
 ./heap_1.o: .././heap_1.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 5.4.0
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../../SourceFreeRTOS" -I"../../SourceFreeRTOS/include" -I"../../SourceFreeRTOS/portable/GCC/ATMega328" -I".." -I"../../SourceFreeRTOS/portable/MemMang"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./lcd.o: .././lcd.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include" -I"../../SourceFreeRTOS" -I"../../SourceFreeRTOS/include" -I"../../SourceFreeRTOS/portable/GCC/ATMega328" -I".." -I"../../SourceFreeRTOS/portable/MemMang"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega328p -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega328p" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -10,22 +10,10 @@
 
 #include <avr/io.h>
 #include <util/delay.h>
-#include <stdlib.h>        // para utoa
+#include <stdlib.h>        
 #include "configModule.h"
 
-/*
-  LCD 20×4:
-    D0–D5 → PB0–PB5
-    D6–D7 → PD2–PD3
-    RS    → PC0
-    EN    → PC1
 
-  HC-SR04:
-    TRIG → PC2 (salida)
-    ECHO → PC3 (entrada)
-*/
-
-// ——— Rutinas de LCD ———
 
 static void lcdPulseEnable(void)
 {
@@ -83,15 +71,13 @@ static void vTaskLCDControl(void *pvParameters)
 		uint32_t ticks = 0;
 		uint8_t last = TCNT2, now;
 
-		// 1) TRIG 10µs
+		
 		PORTC |=  (1 << PC2);
 		_delay_us(15);
 		PORTC &= ~(1 << PC2);
 
-		// 2) Esperar subida
 		while (!(PINC & (1 << PC3)));
 
-		// 3) Medir ancho de pulso
 		while (PINC & (1 << PC3))
 		{
 			now = TCNT2;
@@ -115,7 +101,6 @@ static void vTaskLCDControl(void *pvParameters)
 		lcdPrint(str_cm);
 		lcdPrint(" cm");
 		dist_cm = 0;
-		// 6) Retraso sencillo de 200 ms
 		vTaskDelay(2000);
 	}
 }
@@ -124,9 +109,9 @@ static void vTaskLCDControl(void *pvParameters)
 void vInit(void)
 {
     // LCD
-    DDRB |=  0x3F;                     // PB0–PB5
-    DDRD |= (1<<PD2)|(1<<PD3);         // PD2–PD3
-    DDRC |= (1<<PC0)|(1<<PC1);         // RS, EN
+    DDRB |=  0x3F;                     
+    DDRD |= (1<<PD2)|(1<<PD3);         
+    DDRC |= (1<<PC0)|(1<<PC1);        
 
     _delay_ms(20);
     lcdCommand(0x38);  _delay_ms(5);
